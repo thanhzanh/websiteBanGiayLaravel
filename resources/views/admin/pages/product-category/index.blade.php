@@ -64,7 +64,13 @@
                 <td class="h-20">
                     <a href="{{ route('admin.productCategory.detail', ['id' => $item->product_category_id]) }}" title="Sửa" class="px-3 py-2 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-eye"></i></a>
                     <a href="{{ route('admin.productCategory.edit', ['id' => $item->product_category_id]) }}" title="Sửa" class="px-3 py-2 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-pen-to-square"></i></a>
-                    <a href="" title="Xóa" class="px-3 py-2 bg-red-500 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-minus"></i></a>
+                    <div class="inline-block">
+                    <form action="{{ route('admin.productCategory.delete', ['id' => $item->product_category_id]) }}" method="post">
+                        @csrf
+                        @method('DELETE') 
+                        <button title="Xóa" class="px-3 py-[0.68rem] bg-red-500 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-minus"></i></button>
+                    </form>
+                    </div>
                 </td>
             </tr>
             @endforeach

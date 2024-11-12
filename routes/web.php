@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\dashboardController;
 use App\Http\Controllers\Admin\loginController;
 use App\Http\Controllers\Admin\productCategoryController;
 use App\Http\Controllers\Admin\productController;
+use App\Http\Controllers\Client\product;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,8 @@ function setActive($route) {
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/product', [product::class, 'index'])->name('product');
 
 
 
@@ -52,7 +55,7 @@ Route::get('/admin/product-category/edit/{id}', [productCategoryController::clas
 
 Route::patch('/admin/product-category/edit/{id}', [productCategoryController::class, 'editPatch'])->name('admin.productCategory.edit');
 
-
+Route::delete('/admin/product-category/delete/{id}', [productCategoryController::class, 'delete'])->name('admin.productCategory.delete');
 
 
 
