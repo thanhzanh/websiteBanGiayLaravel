@@ -133,6 +133,12 @@ class productCategoryController extends Controller
                 toastr()->success('Xóa danh mục sản phẩm thành công!');
 
                 return redirect()->route('admin.productCategory');
+<<<<<<< HEAD
+=======
+            } else {
+                toastr()->error('Không thể xóa danh mục sản phẩm!');
+                return redirect()->route('admin.productCategory');
+>>>>>>> c45304e73d79b8510466e23ebbe1ad5357e552f2
             }
 
         } catch (Exception $exceptions) {
