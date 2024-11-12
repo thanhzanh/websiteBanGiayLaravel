@@ -22,8 +22,8 @@
         <div>
             <select name="" id="" class="w-72 pt-2 pb-2 outline-none rounded-xl bg-green-400 text-white text-center">
                 <option value="" class="selected">-- Lựa chọn --</option>
-                <option value="">Giá giảm dần</option>
-                <option value="">Giá tăng dần</option>
+                <option value="">Tiêu đề từ A-Z</option>
+                <option value="">Tiêu đề từ Z-A</option>
             </select>
         </div>
     </div>
@@ -47,31 +47,27 @@
             </tr>
         </thead>
         <tbody class="bg-cyan-400">
+            @foreach ($productCategory as $index => $item)
             <tr class="text-center text-black border-b-2 duration-300">
-                <td>1</td>
-                <td>MLB</td>
-                <td>Hoạt động</td>
-                <td>10/11/2024</td>
-                <td>10/11/2024</td>
-                <td class="h-20">
-                    <a href="" title="Sửa" class="p-4 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-eye"></i></a>
-                    <a href="" title="Sửa" class="p-4 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-pen-to-square"></i></a>
-                    <a href="" title="Xóa" class="p-4 bg-red-500 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-minus"></i></a>
+                <td>{{$index + 1}}</td>
+                <td>{{$item->product_category_name}}</td>
+                <td>
+                    <?php if ($item->status === "active") {?>
+                            <button class="p-2 bg-green-500 rounded-xl text-white" type="button">{{$item->status}}</button>
+                    <?php } elseif ($item->status === "inactive") { ?>
+                                <button class="p-2 bg-red-500 rounded-xl text-white" type="button">{{$item->status}}</button>
+                    <?php } ?>
                 </td>
-            </tr>
-            <tr class="text-center text-black border-b-2 duration-300">
-                <td>2</td>
-                <td>NIKE</td>
-                <td>Hoạt động</td>
-                <td>10/11/2024</td>
-                <td>10/11/2024</td>
-                <td class="h-20">
-                    <a href="" title="Sửa" class="p-4 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-eye"></i></a>
-                    <a href="" title="Sửa" class="p-4 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-pen-to-square"></i></a>
-                    <a href="" title="Xóa" class="p-4 bg-red-500 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-minus"></i></a>
-                </td>
-            </tr>
 
+                <td>{{$item->created_at}}</td>
+                <td>{{$item->updated_at}}</td>
+                <td class="h-20">
+                    <a href="" title="Sửa" class="px-3 py-2 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-eye"></i></a>
+                    <a href="" title="Sửa" class="px-3 py-2 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <a href="" title="Xóa" class="px-3 py-2 bg-red-500 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-minus"></i></a>
+                </td>
+            </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

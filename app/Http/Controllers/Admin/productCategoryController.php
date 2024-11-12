@@ -9,16 +9,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\InvalidOrderException;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\View;
 
 class productCategoryController extends Controller
 {
     // [GET] /admin/pages/product-category/index
     public function index() {
-        return view('admin.pages.product-category.index');
+
+        // get data from database
+        $productCategory = DB::table('product_category')->get();
+        // print_r($category);
+
+        // return View('admin.pages.product-category.index',compact('productCategory', $productCategory));
+        return View::make('admin.pages.product-category.index')->with('productCategory', $productCategory);
     }
 
      // [GET] /admin/pages/product-category/create
-    public function create() {
+    public function create(Request $request) {
+
         return view('admin.pages.product-category.create');
     }
 
