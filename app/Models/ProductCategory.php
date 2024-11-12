@@ -16,7 +16,9 @@ class ProductCategory extends Model
         'product_category_name',
         'parent_id',
         'description',
-        'status'
+        'status',
+        'created_at',
+        'updated_at'
     ];
 
 }

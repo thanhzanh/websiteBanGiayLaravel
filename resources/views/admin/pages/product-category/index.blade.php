@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="mt-[20px] items-center align-middle">
-        <h2 class="font-bold italic mb-6">Thêm sản phẩm mới</h2>
+        <h2 class="font-bold italic mb-6">Thêm danh mục sản phẩm mới</h2>
         <a href="{{ route('admin.productCategory.create') }}" title="Thêm" class="p-4 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl ml-16 hover:bg-black"><i class="fa-solid fa-plus"></i></a>
     </div>
 </div>
@@ -63,7 +63,7 @@
                 <td>{{$item->updated_at}}</td>
                 <td class="h-20">
                     <a href="{{ route('admin.productCategory.detail', ['id' => $item->product_category_id]) }}" title="Sửa" class="px-3 py-2 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-eye"></i></a>
-                    <a href="" title="Sửa" class="px-3 py-2 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <a href="{{ route('admin.productCategory.edit', ['id' => $item->product_category_id]) }}" title="Sửa" class="px-3 py-2 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-pen-to-square"></i></a>
                     <a href="" title="Xóa" class="px-3 py-2 bg-red-500 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-minus"></i></a>
                 </td>
             </tr>
