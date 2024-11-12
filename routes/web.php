@@ -15,14 +15,15 @@ function setActive($route) {
     return Request::path()  == $route ? 'active' : '';
 }
 
-// frontend
+// ==================================== FONTEND ==========================================
+
 Route::get('/', function () {
     return view('welcome');
 });
 
 
 
-// backend
+// ==================================== BACKEND ==========================================
 Route::get('/admin', [loginController::class, 'login'])->name('admin');
 
 Route::get('/admin/logout', [loginController::class, 'logout'])->name('admin.logout');
@@ -44,6 +45,11 @@ Route::get('/admin/product-category', [productCategoryController::class, 'index'
 Route::get('/admin/product-category/create', [productCategoryController::class, 'create'])->name('admin.productCategory.create');
 
 Route::post('/admin/product-category/create', [productCategoryController::class, 'createPost'])->name('admin.productCategory.createPost');
+
+Route::get('/admin/product-category/detail/{id}', [productCategoryController::class, 'detail'])->name('admin.productCategory.detail');
+
+
+
 
 
 

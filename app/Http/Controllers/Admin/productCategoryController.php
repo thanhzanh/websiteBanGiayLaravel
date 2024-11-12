@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ProductCategory;
+
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Exceptions\InvalidOrderException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
+
+use function Laravel\Prompts\error;
 
 class productCategoryController extends Controller
 {
@@ -18,14 +20,12 @@ class productCategoryController extends Controller
 
         // get data from database
         $productCategory = DB::table('product_category')->get();
-        // print_r($category);
 
-        // return View('admin.pages.product-category.index',compact('productCategory', $productCategory));
         return View::make('admin.pages.product-category.index')->with('productCategory', $productCategory);
     }
 
      // [GET] /admin/pages/product-category/create
-    public function create(Request $request) {
+    public function create() {
 
         return view('admin.pages.product-category.create');
     }
@@ -46,5 +46,28 @@ class productCategoryController extends Controller
             return back();
         }
         
+    }
+
+    // [GET] /admin/pages/product-category/create
+    public function detail($id) {
+
+        try {
+
+            $productCategoryId = strval($id);
+
+            // lấy danh mục đúng với id gửi lên
+            $productCategory = DB::table('product_category')->where('product_category_id', $productCategoryId)->first();
+
+            if(!$productCategory) {
+                toastr()->error('Danh mục không tồn tại!');
+            }
+
+            return view('admin.pages.product-category.detail', compact('productCategory'));
+        } catch (Exception $exceptions) {
+            Log::error($exceptions->getMessage());
+
+            return redirect()->route('admin.productCategory');
+        }
+    
     }
 }
