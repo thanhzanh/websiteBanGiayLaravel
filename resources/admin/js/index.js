@@ -13,3 +13,13 @@
 // }
 
 // end sidebar menu
+
+
+// delete form product category
+const deleteCategory = document.querySelector('#delete-form');
+console.log(deleteCategory);
+
+deleteCategory.addEventListener('click', (e) => {
+    e.preventDefault();
+    deleteCategory.submit();
+});

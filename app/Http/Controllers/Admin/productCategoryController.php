@@ -119,4 +119,29 @@ class productCategoryController extends Controller
             return redirect()->route('admin.productCategory');
         }
     }
+
+    // [PATCH] /admin/pages/product-category/edit/{id}
+    public function delete($id)
+    {
+        try {
+            // lấy id gửi lên
+            $productCategory = ProductCategory::find($id);
+
+            if ($productCategory) {
+                $productCategory->delete();
+
+                toastr()->success('Xóa danh mục sản phẩm thành công!');
+
+                return redirect()->route('admin.productCategory');
+            } else {
+                toastr()->error('Không thể xóa danh mục sản phẩm!');
+                return redirect()->route('admin.productCategory');
+            }
+
+        } catch (Exception $exceptions) {
+            Log::error($exceptions->getMessage());
+
+            return redirect()->route('admin.productCategory');
+        }
+    }
 }

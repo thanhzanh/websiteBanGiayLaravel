@@ -34,4 +34,5 @@
         </div>
     </div>
 </body>
+@vite('resources/admin/js/index.js')
 </html>
