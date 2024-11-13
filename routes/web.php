@@ -21,17 +21,21 @@ function setActive($route)
 
 // ==================================== FONTEND ==========================================
 
-// Route::get('/', function () {
-//     return view('client.pages.home.index');
-// });
-
+// Trang Home
 Route::get('/', [homeClientController::class, 'index'])->name('home');
 
+//Trang Product
 Route::get('/product', [productClientController::class, 'index'])->name('product');
 
+//Trang chi tiết sản phẩm
 Route::get('/product/detail', [productClientController::class, 'detail'])->name('product.detail');
 
+// Route::get('/product/detail/{id}', [productClientController::class, 'detail'])->name('product.detail');
 
+// Trang Bài Viết
+Route::get('article', function () {
+    return view('client.pages.article.index');
+});
 
 // ==================================== BACKEND ==========================================
 Route::get('/admin', [loginController::class, 'login'])->name('admin');

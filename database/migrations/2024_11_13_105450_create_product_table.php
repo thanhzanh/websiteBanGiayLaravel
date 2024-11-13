@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('product_id'); // Khóa chính
             $table->string('product_name', 50); // Tên sản phẩm với giới hạn 50 ký tự
             $table->text('description')->nullable(); // Mô tả sản phẩm
-            $table->decimal('price', 10, 2); // Giá sản phẩm
+            $table->text('price'); // Giá sản phẩm
             $table->decimal('discount', 5, 2)->default(0); // Chiết khấu
             $table->integer('quantity')->default(0); // Số lượng sản phẩm
             $table->text('image')->nullable(); // Đường dẫn ảnh sản phẩm

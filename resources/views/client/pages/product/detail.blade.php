@@ -1,6 +1,7 @@
 @extends('client.layouts.detail')
 
 @section('main')
+    {{-- @foreach ($sp as $item) --}}
     <div class="content">
         <div class="pl-[150px] pt-[30px]">
             <a href="">Trang chủ /</a> <a href="">Sản Phẩm /</a> <a href="">Sản Phẩm /</a> <a
@@ -119,4 +120,5 @@
 
         </div>
     </div>
+    {{-- @endforeach --}}
 @endsection
