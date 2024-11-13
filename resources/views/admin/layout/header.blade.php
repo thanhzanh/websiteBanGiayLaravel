@@ -5,8 +5,10 @@
     </div>
 
     <div class="search-wrapper border-gray border h-[50px] rounded-[30px] flex items-center overflow-x-hidden">
-        <span class="inline-block text-[1.6rem] pl-4 pr-4"><i class="fa-solid fa-magnifying-glass"></i></span>
-        <input class="h-[100%] border-none outline-none p-[.5rem]" type="search" name="" placeholder="Search here">
+        <form action="{{ route('admin.productCategory.search') }}" method="get">
+            <button type="button" id="btn-search" class="inline-block text-[1.6rem] pl-4 pr-4"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <input class="h-[100%] border-none outline-none p-[.5rem]" type="search" id="search-product-category" name="product_category_name" placeholder="Search here">
+        </form>
     </div>
 
     <div class="user-wrapper flex items-center">

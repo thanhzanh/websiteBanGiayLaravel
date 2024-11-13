@@ -57,6 +57,9 @@ Route::patch('/admin/product-category/edit/{id}', [productCategoryController::cl
 
 Route::delete('/admin/product-category/delete/{id}', [productCategoryController::class, 'delete'])->name('admin.productCategory.delete');
 
+Route::get('/admin/product-category/search', [productCategoryController::class, 'search'])->name('admin.productCategory.search');
+
+
 
 
 

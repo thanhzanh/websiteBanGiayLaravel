@@ -43,9 +43,9 @@ class productCategoryController extends Controller
     public function create()
     {
 
-        $categorys = ProductCategory::all();
 
-        
+        $categorys = ProductCategory::all(); // lấy tất cả từ model ProductCategory để ngoài giao diện đổ ra select
+
         return view('admin.pages.product-category.create', compact('categorys'));
     }
 
@@ -156,5 +156,21 @@ class productCategoryController extends Controller
 
             return redirect()->route('admin.productCategory');
         }
+    }
+
+    // [GET] /admin/pages/product-category/search
+    public function search(Request $request)
+    {
+        $search = $request->input('product_category_name');
+        // print_r($search);
+
+        if($search) {
+            $results = ProductCategory::where('product_category_name', 'like','%'. $search .'%')->get();
+        } else {
+            toastr()->error('Không có kết quả mà bạn tìm kiếm!');
+            // return redirect()->route('admin.productCategory');
+        }
+
+        return view('admin.pages.product-category.search', compact('results'));
     }
 }

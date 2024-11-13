@@ -1,10 +1,11 @@
 @extends('admin.layout.layout');
 
-@section('title', 'Danh mục sản phẩm')
+@section('title', 'Kết quả tìm kiếm')
 
 @section('content')
-<h1 class="font-bold text-blue-800 text-2xl border-b-2 border-b-blue-800 uppercase text-center pb-3">Product Category</h1>
+<h1 class="font-bold text-blue-800 text-2xl border-b-2 border-b-blue-800 uppercase text-center pb-3">Kết quả tìm kiếm danh mục sản phẩm</h1>
 
+@if ($results->isNotEmpty())
 <div class="mt-[20px]">
     <h2 class="font-bold italic ">Trạng thái</h2>
     <div>
@@ -47,7 +48,7 @@
             </tr>
         </thead>
         <tbody class="bg-cyan-400">
-            @foreach ($productCategory as $index => $item)
+            @foreach ($results as $index => $item)
             <tr class="text-center text-black border-b-2 duration-300">
                 <td>{{$index + 1}}</td>
                 <td>{{$item->product_category_name}}</td>
@@ -62,7 +63,7 @@
                 <td>{{$item->created_at}}</td>
                 <td>{{$item->updated_at}}</td>
                 <td class="h-20">
-                    <a href="{{ route('admin.productCategory.detail', ['id' => $item->product_category_id]) }}" title="Chi tiết" class="px-3 py-2 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-eye"></i></a>
+                    <a href="{{ route('admin.productCategory.detail', ['id' => $item->product_category_id]) }}" title="Sửa" class="px-3 py-2 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-eye"></i></a>
                     <a href="{{ route('admin.productCategory.edit', ['id' => $item->product_category_id]) }}" title="Sửa" class="px-3 py-2 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-pen-to-square"></i></a>
                     <div class="inline-block">
                     <form action="{{ route('admin.productCategory.delete', ['id' => $item->product_category_id]) }}" method="post">
@@ -105,5 +106,11 @@
     </ul>
 </nav>
 <!-- end navigation -->
+@else
+<div class="text-center mt-10">
+    <p class="text-red-500 font-bold italic text-xl">Không tìm thấy danh mục sản phẩm. Vui lòng nhập lại!</p>
+</div>
+@endif
+
 
 @endsection
