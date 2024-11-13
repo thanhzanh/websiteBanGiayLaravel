@@ -14,3 +14,10 @@
 
 // end sidebar menu
 
+// search product category
+// const searchProductCategory = document.getElementById('search-product-category');
+// const btnSearch = document.getElementById('btn-search');
+
+// btnSearch.addEventListener('click', () => {
+
+// });
