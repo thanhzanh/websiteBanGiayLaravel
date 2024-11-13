@@ -35,10 +35,10 @@
         <div class="header-nav bg-slate-700 h-14 mt-3 flex items-center justify-center">
             <nav>
                 <ul class="flex space-x-8">
-                    <li><a href="#"
+                    <li><a href="{{ route('home') }}"
                             class="nav-item text-white font-semibold text-base py-2 px-4 rounded-lg hover:bg-green-500 hover:-translate-y-1 transition duration-300">Trang
                             Chủ</a></li>
-                    <li><a href="#"
+                    <li><a href="{{ 'product' }}"
                             class="nav-item text-white font-semibold text-base py-2 px-4 rounded-lg hover:bg-green-500 hover:-translate-y-1 transition duration-300">Sản
                             Phẩm</a></li>
                     <li><a href="#"

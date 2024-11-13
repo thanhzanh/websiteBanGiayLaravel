@@ -1,6 +1,8 @@
 {{-- {{ dd($sp) } --}}
 @extends('client.layouts.default')
 
+@section('title','Trang Sản Phẩm')
+
 @section('content')
     <div class="container pt-[20px]">
         <div class="align-middle text-[30px] text-blue-900 font-bold flex justify-center">Sản Phẩm</div>
@@ -152,7 +154,7 @@
 
                 <br>
 
-                {{-- <div>
+                <div>
                     <div class="flex justify-evenly pb-[20px]">
                         <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
                             <div
@@ -525,9 +527,9 @@
                             </p>
                         </div>
                     </div>
-                </div> --}}
+                </div>
 
-                <div>
+                {{-- <div>
                     @foreach ($sp as $item)
                         <table>
                             <tr>
@@ -618,7 +620,7 @@
                             </tr>
                         </table>
                     @endforeach
-                </div>
+                </div> --}}
 
             </div>
         </div>
