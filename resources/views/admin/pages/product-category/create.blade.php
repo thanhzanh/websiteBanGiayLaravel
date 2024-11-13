@@ -13,17 +13,18 @@
                 <input class="w-full py-3 outline-none pl-5 border-collapse border-indigo-300 border mt-4" type="text" name="product_category_id">
             </div>
             <div class="">
-                <label class="text-xl font-bold" for="">Tiêu đề</label> <br>
+                <label class="text-xl font-bold" for="">Tên danh mục</label> <br>
                 <input class="w-full py-3 outline-none pl-5 border-collapse border-indigo-300 border mt-4" type="text" name="product_category_name">
             </div>
             <div class="mt-6">
                 <label class="text-xl font-bold" for="">Danh mục cha</label> <br>
                 <select class="parent_id w-full py-2 outline-none border-indigo-300 border pl-4 mt-4" name="parent_id">
                     <option selected value="">-- Chọn danh mục --</option>
-                    <option value="">MLB</option>
-                    <option value="">NIKE</option>
-                    <option value="">ADIDAS</option>
-                    <option value="">CONVERSE</option>
+                    @foreach ($categorys as $category)
+                        <option value=" {{ $category->product_category_name }} ">
+                            {{ $category->product_category_name }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
             <div class="mt-6">

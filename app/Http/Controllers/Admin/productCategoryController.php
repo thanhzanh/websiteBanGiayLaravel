@@ -27,11 +27,26 @@ class productCategoryController extends Controller
         return View::make('admin.pages.product-category.index')->with('productCategory', $productCategory);
     }
 
+    // getCategory lấy category cha con
+    // public function getCategory($parentID) {
+    //     $categorys = ProductCategory::where('product_category_id', $parentID)->where('status', 'active')->get();
+
+    //     foreach($categorys as $category) {
+    //         $category->children = $category->getCategory($category->product_category_id);
+    //     }
+
+    //     return $category
+
+    // }
+
     // [GET] /admin/pages/product-category/create
     public function create()
     {
 
-        return view('admin.pages.product-category.create');
+        $categorys = ProductCategory::all();
+
+        
+        return view('admin.pages.product-category.create', compact('categorys'));
     }
 
     // [POST] /admin/pages/product-category/create
@@ -105,6 +120,7 @@ class productCategoryController extends Controller
             $affected = DB::Table('product_category')->where('product_category_id', $id)->update([
                 'product_category_name' => $request->input('product_category_name'),
                 'description' => $request->input('description'),
+                'parent_id' => $request->input('parent_id'),
                 'status' => $request->input('status'),
                 'updated_at' => Carbon::now()
             ]);
@@ -133,12 +149,6 @@ class productCategoryController extends Controller
                 toastr()->success('Xóa danh mục sản phẩm thành công!');
 
                 return redirect()->route('admin.productCategory');
-<<<<<<< HEAD
-=======
-            } else {
-                toastr()->error('Không thể xóa danh mục sản phẩm!');
-                return redirect()->route('admin.productCategory');
->>>>>>> c45304e73d79b8510466e23ebbe1ad5357e552f2
             }
 
         } catch (Exception $exceptions) {
