@@ -32,8 +32,35 @@
                 </div>
             </div>
         </div>
-        <div class="header-nav ">
-            
+        <div class="header-nav bg-slate-700 h-14 mt-3 flex items-center justify-center">
+            <nav>
+                <ul class="flex space-x-8">
+                    <li><a href="#"
+                            class="nav-item text-white font-semibold text-base py-2 px-4 rounded-lg hover:bg-green-500 hover:-translate-y-1 transition duration-300">Trang
+                            Chủ</a></li>
+                    <li><a href="#"
+                            class="nav-item text-white font-semibold text-base py-2 px-4 rounded-lg hover:bg-green-500 hover:-translate-y-1 transition duration-300">Sản
+                            Phẩm</a></li>
+                    <li><a href="#"
+                            class="nav-item text-white font-semibold text-base py-2 px-4 rounded-lg hover:bg-green-500 hover:-translate-y-1 transition duration-300">Bài
+                            Viết</a></li>
+                    <li><a href="#"
+                            class="nav-item text-white font-semibold text-base py-2 px-4 rounded-lg hover:bg-green-500 hover:-translate-y-1 transition duration-300">Hỗ
+                            Trợ</a></li>
+                    <li><a href="#"
+                            class="nav-item text-white font-semibold text-base py-2 px-4 rounded-lg hover:bg-green-500 hover:-translate-y-1 transition duration-300">Liên
+                            Hệ</a></li>
+                    <li><a href="#"
+                            class="nav-item text-white font-semibold text-base py-2 px-4 rounded-lg hover:bg-green-500 hover:-translate-y-1 transition duration-300">Giới
+                            Thiệu</a></li>
+                    <li><a href="#"
+                            class="nav-item text-white font-semibold text-base py-2 px-4 rounded-lg hover:bg-green-500 hover:-translate-y-1 transition duration-300">Khuyến
+                            Mãi</a></li>
+                    <li><a href="#"
+                            class="nav-item text-white font-semibold text-base py-2 px-4 rounded-lg hover:bg-green-500 hover:-translate-y-1 transition duration-300">Tin
+                            Tức</a></li>
+                </ul>
+            </nav>
         </div>
     </div>
 </header>

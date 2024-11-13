@@ -19,7 +19,7 @@ function setActive($route) {
 // ==================================== FONTEND ==========================================
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('client.pages.home.index');
 });
 
 Route::get('/product', [product::class, 'index'])->name('product');

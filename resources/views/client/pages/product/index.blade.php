@@ -1,5 +1,5 @@
+{{-- {{ dd($sp) } --}}
 @extends('client.layouts.default')
-
 
 @section('content')
     <div class="container pt-[20px]">
@@ -152,7 +152,7 @@
 
                 <br>
 
-                <div>
+                {{-- <div>
                     <div class="flex justify-evenly pb-[20px]">
                         <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
                             <div
@@ -525,20 +525,100 @@
                             </p>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
-                {{-- <div>
-                    @foreach ($product as $item)
+                <div>
+                    @foreach ($sp as $item)
                         <table>
                             <tr>
-                                <td>$item->tensp</td>
-                                <td>$item->tensp</td>
-                                <td>$item->tensp</td>
-                                <td>$item->tensp</td>
+                                <td>
+                                    <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
+                                        <div
+                                            class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
+                                            NEW
+                                        </div>
+                                        <a href="" class="flex justify-center "><img
+                                                src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
+                                                alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
+                                        <a href=""
+                                            class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                                            {{ $item->product_name }} <br>
+                                        </a>
+                                        <a href="" class="text-gray-500 text-xs font-bold uppercase ">
+                                            New Balance
+                                        </a>
+                                        <p class="text-gray-900 font-bold text-base">
+                                            {{ $item->price }}
+                                        </p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
+                                        <div
+                                            class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
+                                            NEW
+                                        </div>
+                                        <a href="" class="flex justify-center "><img
+                                                src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
+                                                alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
+                                        <a href=""
+                                            class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                                            {{ $item->product_name }}<br>
+                                        </a>
+                                        <a href="" class="text-gray-500 text-xs font-bold uppercase ">
+                                            New Balance
+                                        </a>
+                                        <p class="text-gray-900 font-bold text-base">
+                                            {{ $item->price }}
+                                        </p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
+                                        <div
+                                            class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
+                                            NEW
+                                        </div>
+                                        <a href="" class="flex justify-center "><img
+                                                src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
+                                                alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
+                                        <a href=""
+                                            class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                                            {{ $item->product_name }} <br>
+                                        </a>
+                                        <a href="" class="text-gray-500 text-xs font-bold uppercase ">
+                                            New Balance
+                                        </a>
+                                        <p class="text-gray-900 font-bold text-base">
+                                            {{ $item->price }}
+                                        </p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
+                                        <div
+                                            class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
+                                            NEW
+                                        </div>
+                                        <a href="" class="flex justify-center "><img
+                                                src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
+                                                alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
+                                        <a href=""
+                                            class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                                            {{ $item->product_name }} <br>
+                                        </a>
+                                        <a href="" class="text-gray-500 text-xs font-bold uppercase ">
+                                            New Balance
+                                        </a>
+                                        <p class="text-gray-900 font-bold text-base">
+                                            {{ $item->price }}
+                                        </p>
+                                    </div>
+                                </td>
                             </tr>
                         </table>
                     @endforeach
-                </div> --}}
+                </div>
 
             </div>
         </div>
