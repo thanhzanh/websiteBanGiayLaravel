@@ -22,3 +22,5 @@ class ProductCategory extends Model
     ];
 
 }
+
+
