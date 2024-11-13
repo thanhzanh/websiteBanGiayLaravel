@@ -63,13 +63,7 @@ Route::get('/admin/product-category/edit/{id}', [productCategoryController::clas
 Route::patch('/admin/product-category/edit/{id}', [productCategoryController::class, 'editPatch'])->name('admin.productCategory.edit');
 
 Route::delete('/admin/product-category/delete/{id}', [productCategoryController::class, 'delete'])->name('admin.productCategory.delete');
-<<<<<<< HEAD
 
 Route::get('/admin/product-category/search', [productCategoryController::class, 'search'])->name('admin.productCategory.search');
 
-
-
-
-
-=======
->>>>>>> 7fa9fac444fcdc0d1f9f518fce224d56e2913ceb
+Route::patch('/admin/product-category/change-status/{id}', [productCategoryController::class, 'changeStatus'])->name('admin.productCategory.changeStatus');

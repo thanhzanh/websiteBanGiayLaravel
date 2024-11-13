@@ -167,9 +167,35 @@ class productCategoryController extends Controller
             $results = ProductCategory::where('product_category_name', 'like','%'. $search .'%')->get();
         } else {
             toastr()->error('Không có kết quả mà bạn tìm kiếm!');
-            // return redirect()->route('admin.productCategory');
+            return redirect()->route('admin.productCategory');
         }
 
         return view('admin.pages.product-category.search', compact('results'));
+    }
+
+    // [GET] /admin/pages/product-category/search
+    public function changeStatus($id)
+    {
+        try {
+            $productCategory = ProductCategory::find($id);
+
+            if(!$productCategory) {
+                toastr()->error('Xảy ra lỗi. Không tìm thấy danh mục!');
+
+                return redirect()->route('admin.productCategory');
+            }
+
+            $productCategory->status = $productCategory->status === "active" ? "inactive" : "active";
+
+            $productCategory->save();
+
+            toastr()->success('Đã cập nhật trạng thái danh mục!');
+
+            return redirect()->route('admin.productCategory');
+        } catch (Exception $exceptions) {
+            Log::error($exceptions->getMessage());
+
+            return redirect()->route('admin.productCategory');
+        }
     }
 }

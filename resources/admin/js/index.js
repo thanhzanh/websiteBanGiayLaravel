@@ -14,10 +14,27 @@
 
 // end sidebar menu
 
-// search product category
-// const searchProductCategory = document.getElementById('search-product-category');
-// const btnSearch = document.getElementById('btn-search');
+// changeStatus
+const buttonChangeStatus = document.querySelectorAll('.button-change-status');
+if (buttonChangeStatus.length > 0) {
 
-// btnSearch.addEventListener('click', () => {
+    buttonChangeStatus.forEach(button => {
+        
+        button.addEventListener('click', () => {
+            const statusCurrent = button.getAttribute('data-status');
+            const idCurrent = button.getAttribute('data-id');
 
-// });
+            let statusChange = statusCurrent === "active" ? "inactive" : "active";
+
+            const formChangeStatus = button.closest('.form-change-status');
+
+            let action = formChangeStatus.getAttribute('action');
+            action = action.replace(statusChange, idCurrent, `${statusChange}/${idCurrent}`);
+
+            formChangeStatus.action = action;
+
+            formChangeStatus.submit();
+        });       
+    });
+}
+

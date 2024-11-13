@@ -6,7 +6,7 @@
     <h1 class="font-bold text-blue-800 text-2xl border-b-2 border-b-blue-800 uppercase text-center pb-3">Chỉnh sửa danh mục sản phẩm</h1>
     <div class="mt-8">
         <form action="{{ route('admin.productCategory.edit', ['id' => $productCategory->product_category_id]) }}" method="POST">
-            @csrf
+            
             @method('PATCH')
             <div class="">
                 <label class="text-xl font-bold" for="">Tiêu đề</label> <br>

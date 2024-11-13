@@ -52,24 +52,28 @@
                 <td>{{$index + 1}}</td>
                 <td>{{$item->product_category_name}}</td>
                 <td>
-                    <?php if ($item->status === "active") {?>
-                            <button class="p-2 bg-green-500 rounded-xl text-white" type="button">{{$item->status}}</button>
-                    <?php } elseif ($item->status === "inactive") { ?>
-                                <button class="p-2 bg-red-500 rounded-xl text-white" type="button">{{$item->status}}</button>
-                    <?php } ?>
-                </td>
+                    <form class="form-change-status" action="{{ route('admin.productCategory.changeStatus',['id' => $item->product_category_id]) }}" method="post">
+                        @csrf
+                        @method('PATCH')
+                        <?php if ($item->status === "active") { ?>
+                            <button  class="button-change-status p-2 bg-green-500 rounded-xl text-white" type="submit">{{$item->status}}</button>
+                        <?php } elseif ($item->status === "inactive") { ?>
+                            <button data-id="{{ $item->product_category_id }}" data-status="{{ $item->status }}" class="button-change-status p-2 bg-red-500 rounded-xl text-white" type="submit">{{$item->status}}</button>
+                        <?php } ?>
+                    </form>
 
+                </td>
                 <td>{{$item->created_at}}</td>
                 <td>{{$item->updated_at}}</td>
                 <td class="h-20">
                     <a href="{{ route('admin.productCategory.detail', ['id' => $item->product_category_id]) }}" title="Chi tiết" class="px-3 py-2 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-eye"></i></a>
                     <a href="{{ route('admin.productCategory.edit', ['id' => $item->product_category_id]) }}" title="Sửa" class="px-3 py-2 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-pen-to-square"></i></a>
                     <div class="inline-block">
-                    <form action="{{ route('admin.productCategory.delete', ['id' => $item->product_category_id]) }}" method="post">
-                        @csrf
-                        @method('DELETE') 
-                        <button title="Xóa" class="px-3 py-[0.68rem] bg-red-500 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-minus"></i></button>
-                    </form>
+                        <form action="{{ route('admin.productCategory.delete', ['id' => $item->product_category_id]) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button title="Xóa" class="px-3 py-[0.68rem] bg-red-500 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-minus"></i></button>
+                        </form>
                     </div>
                 </td>
             </tr>
