@@ -4,13 +4,16 @@ use App\Http\Controllers\Admin\dashboardController;
 use App\Http\Controllers\Admin\loginController;
 use App\Http\Controllers\Admin\productCategoryController;
 use App\Http\Controllers\Admin\productController;
-use App\Http\Controllers\Client\product;
+use App\Http\Controllers\Client\homeClientController;
+use App\Http\Controllers\Client\productClientController;
+use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 // sidebar
-function setActive($route) {
-    if(is_array($route)) { 
+function setActive($route)
+{
+    if (is_array($route)) {
         return in_array(Request(), $route) ? 'active' : '';
     }
     return Request::path()  == $route ? 'active' : '';
@@ -18,11 +21,15 @@ function setActive($route) {
 
 // ==================================== FONTEND ==========================================
 
-Route::get('/', function () {
-    return view('client.pages.home.index');
-});
+// Route::get('/', function () {
+//     return view('client.pages.home.index');
+// });
 
-Route::get('/product', [product::class, 'index'])->name('product');
+Route::get('/', [homeClientController::class, 'index'])->name('home');
+
+Route::get('/product', [productClientController::class, 'index'])->name('product');
+
+Route::get('/product/detail', [productClientController::class, 'detail'])->name('product.detail');
 
 
 
@@ -56,6 +63,7 @@ Route::get('/admin/product-category/edit/{id}', [productCategoryController::clas
 Route::patch('/admin/product-category/edit/{id}', [productCategoryController::class, 'editPatch'])->name('admin.productCategory.edit');
 
 Route::delete('/admin/product-category/delete/{id}', [productCategoryController::class, 'delete'])->name('admin.productCategory.delete');
+<<<<<<< HEAD
 
 Route::get('/admin/product-category/search', [productCategoryController::class, 'search'])->name('admin.productCategory.search');
 
@@ -63,3 +71,5 @@ Route::get('/admin/product-category/search', [productCategoryController::class, 
 
 
 
+=======
+>>>>>>> 7fa9fac444fcdc0d1f9f518fce224d56e2913ceb

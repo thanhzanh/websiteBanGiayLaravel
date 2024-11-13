@@ -128,7 +128,6 @@ class productCategoryController extends Controller
             toastr()->success('Chỉnh sửa danh mục sản phẩm thành công!');
 
             return redirect()->route('admin.productCategory');
-
         } catch (Exception $exceptions) {
             Log::error($exceptions->getMessage());
 
@@ -149,8 +148,8 @@ class productCategoryController extends Controller
                 toastr()->success('Xóa danh mục sản phẩm thành công!');
 
                 return redirect()->route('admin.productCategory');
-            }
-
+            
+            } 
         } catch (Exception $exceptions) {
             Log::error($exceptions->getMessage());
 
