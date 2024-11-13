@@ -70,7 +70,6 @@ class productCategoryController extends Controller
     // [GET] /admin/pages/product-category/create/{id}
     public function detail($id)
     {
-
         try {
 
             $productCategoryId = strval($id);
@@ -148,8 +147,12 @@ class productCategoryController extends Controller
                 toastr()->success('Xóa danh mục sản phẩm thành công!');
 
                 return redirect()->route('admin.productCategory');
+
+            } else {
+                toastr()->error('Không thể xóa danh mục sản phẩm!');
+                return redirect()->route('admin.productCategory');
+            }
             
-            } 
         } catch (Exception $exceptions) {
             Log::error($exceptions->getMessage());
 

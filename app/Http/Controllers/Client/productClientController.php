@@ -11,13 +11,16 @@ class productClientController extends Controller
     /**
      * Display a listing of the resource.
      */
+    // [GET] /product
     public function index()
     {
         return view('client.pages.product.index', ['sp' => Product::all()]);
     }
 
+    // [GET] /product/detail/{id}
     public function detail()
     {
+        
         return view('client.pages.product.detail', ['sp' => Product::all()]);
     }
 

@@ -1,7 +1,7 @@
 {{-- {{ dd($sp) } --}}
 @extends('client.layouts.default')
 
-@section('title','Trang Sản Phẩm')
+@section('title', 'Trang Sản Phẩm')
 
 @section('content')
     <div class="container pt-[20px]">
@@ -136,8 +136,8 @@
             <div class="w-2/3 p-4 ">
                 <div class="flex">
                     <div class="w-1/2 px-4 ">
-                        <a href="">Trang Chủ /</a>
-                        <a href="">Sản Phẩm</a>
+                        <a href="{{ route('home') }}">Trang Chủ /</a>
+                        <a href="{{ route('product') }}">Sản Phẩm</a>
                     </div>
                     <div class="w-1/2 justify-end flex pr-[90px]">
                         <div class="relative inline-block">
@@ -154,20 +154,21 @@
 
                 <br>
 
-                <div>
+                {{-- <div>
                     <div class="flex justify-evenly pb-[20px]">
                         <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
                             <div
                                 class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
                                 NEW
                             </div>
-                            <a href="" class="flex justify-center "><img
+                            <a href="{{ route('product.detail') }}" class="flex justify-center "><img
                                     src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
                                     alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
-                            <a href="" class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                            <a href="{{ route('product.detail') }}"
+                                class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
                                 New Balance 574 Rain Cloud Maple <br>
                             </a>
-                            <a href="" class="text-gray-500 text-xs font-bold uppercase ">
+                            <a href="{{ route('product.detail') }}" class="text-gray-500 text-xs font-bold uppercase ">
                                 New Balance
                             </a>
                             <p class="text-gray-900 font-bold text-base">
@@ -179,13 +180,14 @@
                                 class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
                                 NEW
                             </div>
-                            <a href="" class="flex justify-center "><img
+                            <a href="{{ route('product.detail') }}" class="flex justify-center "><img
                                     src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
                                     alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
-                            <a href="" class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                            <a href="{{ route('product.detail') }}"
+                                class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
                                 New Balance 574 Rain Cloud Maple <br>
                             </a>
-                            <a href="" class="text-gray-500 text-xs font-bold uppercase ">
+                            <a href="{{ route('product.detail') }}" class="text-gray-500 text-xs font-bold uppercase ">
                                 New Balance
                             </a>
                             <p class="text-gray-900 font-bold text-base">
@@ -197,13 +199,14 @@
                                 class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
                                 NEW
                             </div>
-                            <a href="" class="flex justify-center "><img
+                            <a href="{{ route('product.detail') }}" class="flex justify-center "><img
                                     src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
                                     alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
-                            <a href="" class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                            <a href="{{ route('product.detail') }}"
+                                class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
                                 New Balance 574 Rain Cloud Maple <br>
                             </a>
-                            <a href="" class="text-gray-500 text-xs font-bold uppercase ">
+                            <a href="{{ route('product.detail') }}" class="text-gray-500 text-xs font-bold uppercase ">
                                 New Balance
                             </a>
                             <p class="text-gray-900 font-bold text-base">
@@ -215,13 +218,14 @@
                                 class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
                                 NEW
                             </div>
-                            <a href="" class="flex justify-center "><img
+                            <a href="{{ route('product.detail') }}" class="flex justify-center "><img
                                     src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
                                     alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
-                            <a href="" class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                            <a href="{{ route('product.detail') }}"
+                                class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
                                 New Balance 574 Rain Cloud Maple <br>
                             </a>
-                            <a href="" class="text-gray-500 text-xs font-bold uppercase ">
+                            <a href="{{ route('product.detail') }}" class="text-gray-500 text-xs font-bold uppercase ">
                                 New Balance
                             </a>
                             <p class="text-gray-900 font-bold text-base">
@@ -235,13 +239,14 @@
                                 class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
                                 NEW
                             </div>
-                            <a href="" class="flex justify-center "><img
+                            <a href="{{ route('product.detail') }}" class="flex justify-center "><img
                                     src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
                                     alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
-                            <a href="" class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                            <a href="{{ route('product.detail') }}"
+                                class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
                                 New Balance 574 Rain Cloud Maple <br>
                             </a>
-                            <a href="" class="text-gray-500 text-xs font-bold uppercase ">
+                            <a href="{{ route('product.detail') }}" class="text-gray-500 text-xs font-bold uppercase ">
                                 New Balance
                             </a>
                             <p class="text-gray-900 font-bold text-base">
@@ -253,13 +258,14 @@
                                 class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
                                 NEW
                             </div>
-                            <a href="" class="flex justify-center "><img
+                            <a href="{{ route('product.detail') }}" class="flex justify-center "><img
                                     src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
                                     alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
-                            <a href="" class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                            <a href="{{ route('product.detail') }}"
+                                class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
                                 New Balance 574 Rain Cloud Maple <br>
                             </a>
-                            <a href="" class="text-gray-500 text-xs font-bold uppercase ">
+                            <a href="{{ route('product.detail') }}" class="text-gray-500 text-xs font-bold uppercase ">
                                 New Balance
                             </a>
                             <p class="text-gray-900 font-bold text-base">
@@ -271,13 +277,14 @@
                                 class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
                                 NEW
                             </div>
-                            <a href="" class="flex justify-center "><img
+                            <a href="{{ route('product.detail') }}" class="flex justify-center "><img
                                     src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
                                     alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
-                            <a href="" class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                            <a href="{{ route('product.detail') }}"
+                                class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
                                 New Balance 574 Rain Cloud Maple <br>
                             </a>
-                            <a href="" class="text-gray-500 text-xs font-bold uppercase ">
+                            <a href="{{ route('product.detail') }}" class="text-gray-500 text-xs font-bold uppercase ">
                                 New Balance
                             </a>
                             <p class="text-gray-900 font-bold text-base">
@@ -289,87 +296,14 @@
                                 class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
                                 NEW
                             </div>
-                            <a href="" class="flex justify-center "><img
+                            <a href="{{ route('product.detail') }}" class="flex justify-center "><img
                                     src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
                                     alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
-                            <a href="" class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                            <a href="{{ route('product.detail') }}"
+                                class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
                                 New Balance 574 Rain Cloud Maple <br>
                             </a>
-                            <a href="" class="text-gray-500 text-xs font-bold uppercase ">
-                                New Balance
-                            </a>
-                            <p class="text-gray-900 font-bold text-base">
-                                1,895,000₫
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex justify-evenly pb-[20px]">
-                        <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
-                            <div
-                                class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
-                                NEW
-                            </div>
-                            <a href="" class="flex justify-center "><img
-                                    src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
-                                    alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
-                            <a href="" class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
-                                New Balance 574 Rain Cloud Maple <br>
-                            </a>
-                            <a href="" class="text-gray-500 text-xs font-bold uppercase ">
-                                New Balance
-                            </a>
-                            <p class="text-gray-900 font-bold text-base">
-                                1,895,000₫
-                            </p>
-                        </div>
-                        <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
-                            <div
-                                class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
-                                NEW
-                            </div>
-                            <a href="" class="flex justify-center "><img
-                                    src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
-                                    alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
-                            <a href="" class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
-                                New Balance 574 Rain Cloud Maple <br>
-                            </a>
-                            <a href="" class="text-gray-500 text-xs font-bold uppercase ">
-                                New Balance
-                            </a>
-                            <p class="text-gray-900 font-bold text-base">
-                                1,895,000₫
-                            </p>
-                        </div>
-                        <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
-                            <div
-                                class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
-                                NEW
-                            </div>
-                            <a href="" class="flex justify-center "><img
-                                    src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
-                                    alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
-                            <a href="" class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
-                                New Balance 574 Rain Cloud Maple <br>
-                            </a>
-                            <a href="" class="text-gray-500 text-xs font-bold uppercase ">
-                                New Balance
-                            </a>
-                            <p class="text-gray-900 font-bold text-base">
-                                1,895,000₫
-                            </p>
-                        </div>
-                        <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
-                            <div
-                                class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
-                                NEW
-                            </div>
-                            <a href="" class="flex justify-center "><img
-                                    src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
-                                    alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
-                            <a href="" class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
-                                New Balance 574 Rain Cloud Maple <br>
-                            </a>
-                            <a href="" class="text-gray-500 text-xs font-bold uppercase ">
+                            <a href="{{ route('product.detail') }}" class="text-gray-500 text-xs font-bold uppercase ">
                                 New Balance
                             </a>
                             <p class="text-gray-900 font-bold text-base">
@@ -383,13 +317,14 @@
                                 class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
                                 NEW
                             </div>
-                            <a href="" class="flex justify-center "><img
+                            <a href="{{ route('product.detail') }}" class="flex justify-center "><img
                                     src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
                                     alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
-                            <a href="" class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                            <a href="{{ route('product.detail') }}"
+                                class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
                                 New Balance 574 Rain Cloud Maple <br>
                             </a>
-                            <a href="" class="text-gray-500 text-xs font-bold uppercase ">
+                            <a href="{{ route('product.detail') }}" class="text-gray-500 text-xs font-bold uppercase ">
                                 New Balance
                             </a>
                             <p class="text-gray-900 font-bold text-base">
@@ -401,13 +336,14 @@
                                 class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
                                 NEW
                             </div>
-                            <a href="" class="flex justify-center "><img
+                            <a href="{{ route('product.detail') }}" class="flex justify-center "><img
                                     src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
                                     alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
-                            <a href="" class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                            <a href="{{ route('product.detail') }}"
+                                class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
                                 New Balance 574 Rain Cloud Maple <br>
                             </a>
-                            <a href="" class="text-gray-500 text-xs font-bold uppercase ">
+                            <a href="{{ route('product.detail') }}" class="text-gray-500 text-xs font-bold uppercase ">
                                 New Balance
                             </a>
                             <p class="text-gray-900 font-bold text-base">
@@ -419,13 +355,14 @@
                                 class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
                                 NEW
                             </div>
-                            <a href="" class="flex justify-center "><img
+                            <a href="{{ route('product.detail') }}" class="flex justify-center "><img
                                     src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
                                     alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
-                            <a href="" class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                            <a href="{{ route('product.detail') }}"
+                                class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
                                 New Balance 574 Rain Cloud Maple <br>
                             </a>
-                            <a href="" class="text-gray-500 text-xs font-bold uppercase ">
+                            <a href="{{ route('product.detail') }}" class="text-gray-500 text-xs font-bold uppercase ">
                                 New Balance
                             </a>
                             <p class="text-gray-900 font-bold text-base">
@@ -437,13 +374,92 @@
                                 class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
                                 NEW
                             </div>
-                            <a href="" class="flex justify-center "><img
+                            <a href="{{ route('product.detail') }}" class="flex justify-center "><img
                                     src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
                                     alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
-                            <a href="" class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                            <a href="{{ route('product.detail') }}"
+                                class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
                                 New Balance 574 Rain Cloud Maple <br>
                             </a>
-                            <a href="" class="text-gray-500 text-xs font-bold uppercase ">
+                            <a href="{{ route('product.detail') }}" class="text-gray-500 text-xs font-bold uppercase ">
+                                New Balance
+                            </a>
+                            <p class="text-gray-900 font-bold text-base">
+                                1,895,000₫
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex justify-evenly pb-[20px]">
+                        <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
+                            <div
+                                class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
+                                NEW
+                            </div>
+                            <a href="{{ route('product.detail') }}" class="flex justify-center "><img
+                                    src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
+                                    alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
+                            <a href="{{ route('product.detail') }}"
+                                class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                                New Balance 574 Rain Cloud Maple <br>
+                            </a>
+                            <a href="{{ route('product.detail') }}" class="text-gray-500 text-xs font-bold uppercase ">
+                                New Balance
+                            </a>
+                            <p class="text-gray-900 font-bold text-base">
+                                1,895,000₫
+                            </p>
+                        </div>
+                        <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
+                            <div
+                                class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
+                                NEW
+                            </div>
+                            <a href="{{ route('product.detail') }}" class="flex justify-center "><img
+                                    src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
+                                    alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
+                            <a href="{{ route('product.detail') }}"
+                                class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                                New Balance 574 Rain Cloud Maple <br>
+                            </a>
+                            <a href="{{ route('product.detail') }}" class="text-gray-500 text-xs font-bold uppercase ">
+                                New Balance
+                            </a>
+                            <p class="text-gray-900 font-bold text-base">
+                                1,895,000₫
+                            </p>
+                        </div>
+                        <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
+                            <div
+                                class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
+                                NEW
+                            </div>
+                            <a href="{{ route('product.detail') }}" class="flex justify-center "><img
+                                    src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
+                                    alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
+                            <a href="{{ route('product.detail') }}"
+                                class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                                New Balance 574 Rain Cloud Maple <br>
+                            </a>
+                            <a href="{{ route('product.detail') }}" class="text-gray-500 text-xs font-bold uppercase ">
+                                New Balance
+                            </a>
+                            <p class="text-gray-900 font-bold text-base">
+                                1,895,000₫
+                            </p>
+                        </div>
+                        <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
+                            <div
+                                class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
+                                NEW
+                            </div>
+                            <a href="{{ route('product.detail') }}" class="flex justify-center "><img
+                                    src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
+                                    alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
+                            <a href="{{ route('product.detail') }}"
+                                class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                                New Balance 574 Rain Cloud Maple <br>
+                            </a>
+                            <a href="{{ route('product.detail') }}" class="text-gray-500 text-xs font-bold uppercase ">
                                 New Balance
                             </a>
                             <p class="text-gray-900 font-bold text-base">
@@ -459,13 +475,14 @@
                                 class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
                                 NEW
                             </div>
-                            <a href="" class="flex justify-center "><img
+                            <a href="{{ route('product.detail') }}" class="flex justify-center "><img
                                     src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
                                     alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
-                            <a href="" class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                            <a href="{{ route('product.detail') }}"
+                                class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
                                 New Balance 574 Rain Cloud Maple <br>
                             </a>
-                            <a href="" class="text-gray-500 text-xs font-bold uppercase ">
+                            <a href="{{ route('product.detail') }}" class="text-gray-500 text-xs font-bold uppercase ">
                                 New Balance
                             </a>
                             <p class="text-gray-900 font-bold text-base">
@@ -477,13 +494,14 @@
                                 class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
                                 NEW
                             </div>
-                            <a href="" class="flex justify-center "><img
+                            <a href="{{ route('product.detail') }}" class="flex justify-center "><img
                                     src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
                                     alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
-                            <a href="" class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                            <a href="{{ route('product.detail') }}"
+                                class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
                                 New Balance 574 Rain Cloud Maple <br>
                             </a>
-                            <a href="" class="text-gray-500 text-xs font-bold uppercase ">
+                            <a href="{{ route('product.detail') }}" class="text-gray-500 text-xs font-bold uppercase ">
                                 New Balance
                             </a>
                             <p class="text-gray-900 font-bold text-base">
@@ -495,13 +513,14 @@
                                 class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
                                 NEW
                             </div>
-                            <a href="" class="flex justify-center "><img
+                            <a href="{{ route('product.detail') }}" class="flex justify-center "><img
                                     src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
                                     alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
-                            <a href="" class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                            <a href="{{ route('product.detail') }}"
+                                class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
                                 New Balance 574 Rain Cloud Maple <br>
                             </a>
-                            <a href="" class="text-gray-500 text-xs font-bold uppercase ">
+                            <a href="{{ route('product.detail') }}" class="text-gray-500 text-xs font-bold uppercase ">
                                 New Balance
                             </a>
                             <p class="text-gray-900 font-bold text-base">
@@ -513,13 +532,14 @@
                                 class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
                                 NEW
                             </div>
-                            <a href="" class="flex justify-center "><img
+                            <a href="{{ route('product.detail') }}" class="flex justify-center "><img
                                     src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
                                     alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
-                            <a href="" class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                            <a href="{{ route('product.detail') }}"
+                                class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
                                 New Balance 574 Rain Cloud Maple <br>
                             </a>
-                            <a href="" class="text-gray-500 text-xs font-bold uppercase ">
+                            <a href="{{ route('product.detail') }}" class="text-gray-500 text-xs font-bold uppercase ">
                                 New Balance
                             </a>
                             <p class="text-gray-900 font-bold text-base">
@@ -527,101 +547,31 @@
                             </p>
                         </div>
                     </div>
-                </div>
-
-                {{-- <div>
-                    @foreach ($sp as $item)
-                        <table>
-                            <tr>
-                                <td>
-                                    <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
-                                        <div
-                                            class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
-                                            NEW
-                                        </div>
-                                        <a href="" class="flex justify-center "><img
-                                                src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
-                                                alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
-                                        <a href=""
-                                            class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
-                                            {{ $item->product_name }} <br>
-                                        </a>
-                                        <a href="" class="text-gray-500 text-xs font-bold uppercase ">
-                                            New Balance
-                                        </a>
-                                        <p class="text-gray-900 font-bold text-base">
-                                            {{ $item->price }}
-                                        </p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
-                                        <div
-                                            class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
-                                            NEW
-                                        </div>
-                                        <a href="" class="flex justify-center "><img
-                                                src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
-                                                alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
-                                        <a href=""
-                                            class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
-                                            {{ $item->product_name }}<br>
-                                        </a>
-                                        <a href="" class="text-gray-500 text-xs font-bold uppercase ">
-                                            New Balance
-                                        </a>
-                                        <p class="text-gray-900 font-bold text-base">
-                                            {{ $item->price }}
-                                        </p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
-                                        <div
-                                            class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
-                                            NEW
-                                        </div>
-                                        <a href="" class="flex justify-center "><img
-                                                src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
-                                                alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
-                                        <a href=""
-                                            class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
-                                            {{ $item->product_name }} <br>
-                                        </a>
-                                        <a href="" class="text-gray-500 text-xs font-bold uppercase ">
-                                            New Balance
-                                        </a>
-                                        <p class="text-gray-900 font-bold text-base">
-                                            {{ $item->price }}
-                                        </p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
-                                        <div
-                                            class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
-                                            NEW
-                                        </div>
-                                        <a href="" class="flex justify-center "><img
-                                                src="https://saigonsneaker.com/wp-content/uploads/2024/11/4-430x430.jpg"
-                                                alt="New Balance 574 Rain Cloud Maple" class="w-[70%]"></a>
-                                        <a href=""
-                                            class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
-                                            {{ $item->product_name }} <br>
-                                        </a>
-                                        <a href="" class="text-gray-500 text-xs font-bold uppercase ">
-                                            New Balance
-                                        </a>
-                                        <p class="text-gray-900 font-bold text-base">
-                                            {{ $item->price }}
-                                        </p>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    @endforeach
                 </div> --}}
 
+                <div class="grid grid-cols-4 gap-4">
+                    @foreach ($sp as $item)
+                        <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
+                            <div
+                                class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
+                                NEW
+                            </div>
+                            <a href="{{ route('product.detail') }}" class="flex justify-center">
+                                <img src="{{ $item->image }}" alt="New Balance 574 Rain Cloud Maple" class="w-[70%]">
+                            </a>
+                            <a href="{{ route('product.detail') }}"
+                                class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                                {{ $item->product_name }} <br>
+                            </a>
+                            <a href="{{ route('product.detail') }}" class="text-gray-500 text-xs font-bold uppercase">
+                                {{ $item->product_id }}
+                            </a>
+                            <p class="text-gray-900 font-bold text-base">
+                                {{ $item->price }}
+                            </p>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
