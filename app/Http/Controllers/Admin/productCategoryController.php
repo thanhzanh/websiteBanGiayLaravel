@@ -46,7 +46,7 @@ class productCategoryController extends Controller
 
             return redirect()->route('admin.productCategory');
         } catch (Exception $exceptions) {
-            toastr()->success('Đã có lỗi xảy ra thêm danh mục sản phẩm!');
+            toastr()->error('Đã có lỗi xảy ra thêm danh mục sản phẩm!');
             Log::error($exceptions->getMessage());
             return back();
         }
@@ -133,9 +133,12 @@ class productCategoryController extends Controller
                 toastr()->success('Xóa danh mục sản phẩm thành công!');
 
                 return redirect()->route('admin.productCategory');
+<<<<<<< HEAD
+=======
             } else {
                 toastr()->error('Không thể xóa danh mục sản phẩm!');
                 return redirect()->route('admin.productCategory');
+>>>>>>> c45304e73d79b8510466e23ebbe1ad5357e552f2
             }
 
         } catch (Exception $exceptions) {
