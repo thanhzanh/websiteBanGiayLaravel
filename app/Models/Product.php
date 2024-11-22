@@ -27,6 +27,12 @@ class Product extends Model
         'updated_at'
     ];
 
+    // Mối quan hệ với bảng Category
+    public function category()
+    {
+        return $this->belongsTo(ProductCategory::class, 'product_category_id');
+    }
+
     // mối quan hệ
     public function size()
     {

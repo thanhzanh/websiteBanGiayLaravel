@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Pagination\Paginator;
 
 class productClientController extends Controller
@@ -30,15 +31,21 @@ class productClientController extends Controller
     }
 
 
-    //[GET] /product/{brand}
     public function filterByCategory($id)
     {
-        // Lấy các sản phẩm theo category_id
-        $brands = Product::where('category_id', $id)->get();
-        $currentCategory = Product::find($id); // Lấy thông tin của danh mục hiện tại nếu cần
+        // Lấy danh sách sản phẩm theo product_category_id
+        // $products = Product::where('product_category_id', $id)->get();
 
-        return view('client.pages.brand.index', compact('brands', 'currentCategory'));
+        // Lấy thông tin của danh mục hiện tại (nếu có model ProductCategory)
+        // $currentCategory = ProductCategory::find($id);
+
+        $brands = Product::where('product_category_id', $id)->get();
+
+        // Trả về view với dữ liệu
+        return view('client.pages.brand.index', compact('brands'));
     }
+
+
 
 
     //[GET] /search

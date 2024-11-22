@@ -9,79 +9,46 @@
         <div class="flex">
             <div class="w-1/3 p-4">
                 <div>
-                    {{-- <div class="align-middle flex justify-center font-bold mb-6 text-[25px]">Size</div>
-                    <div class="align-middle flex justify-center">
-                        <ul class="space-y-5">
-                            <li>
-                                <a href="#"
-                                    class="m-2 p-[0.5rem] bg-slate-200 rounded border-solid hover:text-white hover:bg-black transition duration-300">37</a>
-                                <a href="#"
-                                    class="m-2 p-[0.5rem] bg-slate-200 rounded border-solid hover:text-white hover:bg-black transition duration-300">38</a>
-                                <a href="#"
-                                    class="m-2 p-[0.5rem] bg-slate-200 rounded border-solid hover:text-white hover:bg-black transition duration-300">39</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="m-2 p-[0.5rem] bg-slate-200 rounded border-solid hover:text-white hover:bg-black transition duration-300">40</a>
-                                <a href="#"
-                                    class="m-2 p-[0.5rem] bg-slate-200 rounded border-solid hover:text-white hover:bg-black transition duration-300">41</a>
-                                <a href="#"
-                                    class="m-2 p-[0.5rem] bg-slate-200 rounded border-solid hover:text-white hover:bg-black transition duration-300">42</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="m-2 p-[0.5rem] bg-slate-200 rounded border-solid hover:text-white hover:bg-black transition duration-300">43</a>
-                                <a href="#"
-                                    class="m-2 p-[0.5rem] bg-slate-200 rounded border-solid hover:text-white hover:bg-black transition duration-300">44</a>
-                                <a href="#"
-                                    class="m-2 p-[0.5rem] bg-slate-200 rounded border-solid hover:text-white hover:bg-black transition duration-300">45</a>
-                            </li>
-                        </ul>
-                    </div> --}}
-                </div>
-
-                <br> <br>
-                <hr class="mx-auto pb-5 w-1/2 border-t border-gray-300">
-
-                <div>
                     <div class="align-middle flex justify-center font-bold mb-4 text-[25px]">Thương Hiệu</div>
                     <div class="img">
                         <div class="align-middle flex justify-center">
-                            <a href=""
-                                class="w-[100px]  bg-slate-200 rounded border-solid m-3 hover:bg-slate-700 transition duration-300">
+                            <a href="{{ route('products.filterByCategory', ['id' => 1]) }}"
+                                class="bg-white rounded-lg m-1 m-1 shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
                                 <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/Adidas-Saigon-Sneaker.png"
-                                    alt="Adidas">
+                                    alt="Adidas" class="max-w-[70px] h-auto">
                             </a>
-
-                            <a href=""
-                                class="w-[100px]  bg-slate-200 rounded border-solid m-3 hover:bg-slate-700 transition duration-300"><img
-                                    src="https://saigonsneaker.com/wp-content/uploads/2020/05/Nike-Saigon-Sneaker.png"
-                                    alt="Nike"></a>
+                            <a href="{{ route('products.filterByCategory', ['id' => 4]) }}"
+                                class="bg-white rounded-lg m-1 shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
+                                <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/Nike-Saigon-Sneaker.png"
+                                    alt="Nike" class="max-w-[70px] h-auto">
+                            </a>
                         </div>
                         <div class="align-middle flex justify-center">
-                            <a href=""
-                                class="w-[100px]  bg-slate-200 rounded border-solid m-3 hover:bg-slate-700 transition duration-300"><img
-                                    src="https://saigonsneaker.com/wp-content/uploads/2020/05/Vans-Saigon-Sneaker.png.webp"
-                                    alt="Vans"></a>
-                            <a href=""
-                                class="w-[100px]  bg-slate-200 rounded border-solid m-3 hover:bg-slate-700 transition duration-300"><img
-                                    src="https://saigonsneaker.com/wp-content/uploads/2020/05/Converse-Saigon-Sneaker.png.webp"
-                                    alt="Converse"></a>
+                            <a href="{{ route('products.filterByCategory', ['id' => 5]) }}"
+                                class="bg-white rounded-lg m-1 shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
+                                <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/Vans-Saigon-Sneaker.png.webp"
+                                    alt="Vans" class="max-w-[70px] h-auto">
+                            </a>
+                            <a href="{{ route('products.filterByCategory', ['id' => 7]) }}"
+                                class="bg-white rounded-lg m-1 shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
+                                <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/Converse-Saigon-Sneaker.png.webp"
+                                    alt="Converse" class="max-w-[70px] h-auto">
+                            </a>
                         </div>
                         <div class="align-middle flex justify-center">
-                            <a href=""
-                                class="w-[100px]  bg-slate-200 rounded border-solid m-3 hover:bg-slate-700 transition duration-300"><img
-                                    src="https://saigonsneaker.com/wp-content/uploads/2020/05/McQueen-Saigon-Sneaker.png.webp"
-                                    alt="McQueen"></a>
-
-                            <a href=""
-                                class="w-[100px]  bg-slate-200 rounded border-solid m-3 hover:bg-slate-700 transition duration-300"><img
-                                    src="https://saigonsneaker.com/wp-content/uploads/2020/05/Balenciaga-Saigon-Sneaker.png.webp"
-                                    alt="Balenciaga"></a>
+                            <a href="{{ route('products.filterByCategory', ['id' => 6]) }}"
+                                class="bg-white rounded-lg m-1 shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
+                                <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/McQueen-Saigon-Sneaker.png.webp"
+                                    alt="McQueen" class="max-w-[70px] h-auto">
+                            </a>
+                            <a href="{{ route('products.filterByCategory', ['id' => 1]) }}"
+                                class="bg-white rounded-lg m-1 shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
+                                <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/Balenciaga-Saigon-Sneaker.png.webp"
+                                    alt="Balenciaga" class="max-w-[70px] h-auto">
+                            </a>
                         </div>
                     </div>
                 </div>
-
                 <br>
                 <hr class="mx-auto pb-5 w-1/2 border-t border-gray-300">
 
@@ -155,30 +122,6 @@
                 </div>
 
                 <br>
-
-                {{-- <div class="grid grid-cols-4 gap-4">
-                    @foreach ($sp as $item)
-                        <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
-                            <div
-                                class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
-                                NEW
-                            </div>
-                            <a href="{{ route('product.detail') }}" class="flex justify-center">
-                                <img src="{{ $item->image }}" alt="New Balance 574 Rain Cloud Maple" class="w-[70%]">
-                            </a>
-                            <a href="{{ route('product.detail') }}"
-                                class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
-                                {{ $item->product_name }} <br>
-                            </a>
-                            <a href="{{ route('product.detail') }}" class="text-gray-500 text-xs font-bold uppercase">
-                                {{ $item->product_id }}
-                            </a>
-                            <p class="text-gray-900 font-bold text-base">
-                                {{ $item->price }}
-                            </p>
-                        </div>
-                    @endforeach
-                </div> --}}
 
                 @if ($brands->count() > 0)
                     <div class="grid grid-cols-4 gap-4">

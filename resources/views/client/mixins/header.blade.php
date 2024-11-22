@@ -50,27 +50,27 @@
                         <ul
                             class="absolute left-0 mt-2 w-[150px] bg-gray-800 shadow-lg rounded-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity duration-300 z-10">
                             <li><a href="{{ route('products.filterByCategory', ['id' => 'nike']) }}"
-                                    class="block px-4 py-2 text-white hover:bg-green-500 hover:text-white rounded-t-lg transition">
+                                    class="block px-4 py-4 text-white hover:bg-green-500 hover:text-white rounded-t-lg transition">
                                     Nike
                                 </a></li>
                             <li><a href="{{ route('products.filterByCategory', ['id' => 'vans']) }}"
-                                    class="block px-4 py-2 text-white hover:bg-green-500 hover:text-white transition">
+                                    class="block px-4 py-4 text-white hover:bg-green-500 hover:text-white transition">
                                     Vans
                                 </a></li>
                             <li><a href="{{ route('products.filterByCategory', ['id' => 'adidas']) }}"
-                                    class="block px-4 py-2 text-white hover:bg-green-500 hover:text-white transition">
+                                    class="block px-4 py-4 text-white hover:bg-green-500 hover:text-white transition">
                                     Adidas
                                 </a></li>
                             <li><a href="{{ route('products.filterByCategory', ['id' => 'converse']) }}"
-                                    class="block px-4 py-2 text-white hover:bg-green-500 hover:text-white transition">
+                                    class="block px-4 py-4 text-white hover:bg-green-500 hover:text-white transition">
                                     Converse
                                 </a></li>
                             <li><a href="{{ route('products.filterByCategory', ['id' => 'mcqueen']) }}"
-                                    class="block px-4 py-2 text-white hover:bg-green-500 hover:text-white transition">
+                                    class="block px-4 py-4 text-white hover:bg-green-500 hover:text-white transition">
                                     McQueen
                                 </a></li>
                             <li><a href="{{ route('products.filterByCategory', ['id' => 'balenciaga']) }}"
-                                    class="block px-4 py-2 text-white hover:bg-green-500 hover:text-white rounded-b-lg transition">
+                                    class="block px-4 py-4 text-white hover:bg-green-500 hover:text-white rounded-b-lg transition">
                                     Balenciaga
                                 </a></li>
                         </ul>
@@ -95,8 +95,6 @@
                             Tức</a></li>
                 </ul>
             </nav>
-
-
         </div>
     </div>
 </header>
