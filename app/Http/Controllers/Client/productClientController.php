@@ -30,22 +30,14 @@ class productClientController extends Controller
         return view('client.pages.product.detail', compact('product'));
     }
 
-
+    //[GET] /product/brand/{id}
     public function filterByCategory($id)
     {
-        // Lấy danh sách sản phẩm theo product_category_id
-        // $products = Product::where('product_category_id', $id)->get();
-
-        // Lấy thông tin của danh mục hiện tại (nếu có model ProductCategory)
-        // $currentCategory = ProductCategory::find($id);
-
         $brands = Product::where('product_category_id', $id)->get();
 
         // Trả về view với dữ liệu
         return view('client.pages.brand.index', compact('brands'));
     }
-
-
 
 
     //[GET] /search
@@ -55,4 +47,13 @@ class productClientController extends Controller
         $data = Product::where('product_name', 'like', "%$tensanpham%")->get();
         return view('client.pages.product.search', ['product' => $data, 'tensanpham' =>  $r->tensanpham]);
     }
+
+
+    //[GET] /products/price/{id}
+    public function filterByPrice($min, $max)
+    {
+        $data = Product::whereBetween('price', [(int)$min * 1000, (int)$max * 1000])->paginate(24);
+        return view('client.pages.product.index', compact('data'));
+    }
+
 }

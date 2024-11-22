@@ -48,7 +48,7 @@
                     </a>
                 </div>
             @endforeach
-F
+            F
         </div>
         {{-- {{ dd($spp) }} --}}
 
@@ -125,22 +125,22 @@ F
         </div>
         <div class="brand">
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                <a href="{{ route('products.filterByCategory', ['id' => 3]) }}"
+                <a href="{{ route('products.filterByCategory', ['id' => 1]) }}"
                     class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
                     <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/Adidas-Saigon-Sneaker.png" alt="Adidas"
                         class="max-w-[150px] h-auto">
                 </a>
-                <a href="{{ route('products.filterByCategory', ['id' => 2]) }}"
+                <a href="{{ route('products.filterByCategory', ['id' => 4]) }}"
                     class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
                     <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/Nike-Saigon-Sneaker.png" alt="Nike"
                         class="max-w-[150px] h-auto">
                 </a>
-                <a href="{{ route('products.filterByCategory', ['id' => 4]) }}"
+                <a href="{{ route('products.filterByCategory', ['id' => 5]) }}"
                     class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
                     <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/Vans-Saigon-Sneaker.png.webp"
                         alt="Vans" class="max-w-[150px] h-auto">
                 </a>
-                <a href="{{ route('products.filterByCategory', ['id' => 5]) }}"
+                <a href="{{ route('products.filterByCategory', ['id' => 7]) }}"
                     class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
                     <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/Converse-Saigon-Sneaker.png.webp"
                         alt="Converse" class="max-w-[150px] h-auto">

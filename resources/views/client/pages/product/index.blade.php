@@ -55,52 +55,48 @@
 
                 <div>
                     <div class="align-middle flex justify-center font-bold mb-4 text-[25px]">Nổi Bật</div>
-                    <div class="mx-auto pb-5 w-1/2 border-gray-300">
-                        <ul>
-                            <li
-                                class="flex justify-center mb-3 bg-slate-200 rounded border-solid hover:text-white hover:bg-black hover:font-bold transition duration-300">
-                                <a href="" class="m-3">Luxury Brand</a>
-                            </li>
-                            <li
-                                class="flex justify-center mb-3 bg-slate-200 rounded border-solid hover:text-white hover:bg-black hover:font-bold transition duration-300">
-                                <a href="" class="m-3 ">Phản quang</a>
-                            </li>
-                            <li
-                                class="flex justify-center mb-3 bg-slate-200 rounded border-solid hover:text-white hover:bg-black hover:font-bold transition duration-300">
-                                <a href="" class="m-3 ">Retro</a>
-                            </li>
-
-                        </ul>
+                    <div class="flex flex-col items-center gap-4">
+                        <a href=""
+                            class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center w-[50%] h-[80px]">
+                            <span class="font-bold text-center">Luxury Brand</span>
+                        </a>
+                        <a href=""
+                            class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center w-[50%] h-[80px]">
+                            <span class="font-bold text-center">Phản quang</span>
+                        </a>
+                        <a href=""
+                            class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center w-[50%] h-[80px]">
+                            <span class="font-bold text-center">Retro</span>
+                        </a>
                     </div>
                 </div>
+
+
                 <hr class="mx-auto pb-5 w-1/2 border-t border-gray-300">
+
                 <div>
                     <div class="align-middle flex justify-center font-bold mb-4 text-[25px]">Giá</div>
-                    <div class="mx-auto pb-5 w-1/2 border-gray-300">
-                        <ul>
-                            <li
-                                class="flex justify-center mb-3 bg-slate-200 rounded border-solid hover:text-white hover:bg-black hover:font-bold transition duration-300">
-                                <a href="" class="m-3">200
-                                    - 500</a>
-                            </li>
-                            <li
-                                class="flex justify-center mb-3 bg-slate-200 rounded border-solid hover:text-white hover:bg-black hover:font-bold transition duration-300">
-                                <a href="" class="m-3">500
-                                    - 1tr</a>
-                            </li>
-                            <li
-                                class="flex justify-center mb-3 bg-slate-200 rounded border-solid hover:text-white hover:bg-black hover:font-bold transition duration-300">
-                                <a href="" class="m-3">1tr
-                                    - 2tr</a>
-                            </li>
-                            <li
-                                class="flex justify-center mb-3 bg-slate-200 rounded border-solid hover:text-white hover:bg-black hover:font-bold transition duration-300">
-                                <a href="" class="m-3">2tr
-                                    trở lên</a>
-                            </li>
-                        </ul>
+                    <div class="flex flex-col items-center gap-4">
+                        <a href="{{ route('products.filterByPrice', ['min' => 200, 'max' => 500]) }}"
+                            class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center w-[50%] h-[80px]">
+                            <span class="font-bold text-center">200 - 500</span>
+                        </a>
+                        <a href="{{ route('products.filterByPrice', ['min' => 500, 'max' => 1000]) }}"
+                            class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center w-[50%] h-[80px]">
+                            <span class="font-bold text-center">500 - 1tr</span>
+                        </a>
+                        <a href="{{ route('products.filterByPrice', ['min' => 1000, 'max' => 2000]) }}"
+                            class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center w-[50%] h-[80px]">
+                            <span class="font-bold text-center">1tr - 2tr</span>
+                        </a>
+                        <a href="{{ route('products.filterByPrice', ['min' => 2000, 'max' => 2500]) }}"
+                            class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center w-[50%] h-[80px]">
+                            <span class="font-bold text-center">2tr - 2tr5</span>
+                        </a>
                     </div>
                 </div>
+
+
             </div>
 
             <div class="w-2/3 p-4 ">
@@ -151,11 +147,11 @@
                     @endforeach
                 </div>
 
-                <!-- Hiển thị phân trang -->
-                <div class="mt-4">
-                    {!! $data->links() !!}
-                </div>
+                <br>
 
+                <div class="pagination">
+
+                </div>
             </div>
         </div>
     </div>

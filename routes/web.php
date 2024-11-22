@@ -74,6 +74,10 @@ Route::get('/product/brand/{id}', [productClientController::class, 'filterByCate
 // Tìm kiếm sản phẩm
 Route::get('/search', [productClientController::class, 'searchProduct'])->name('search');
 
+//Lọc theo giá
+Route::get('/products/price/{min}/{max}', [ProductClientController::class, 'filterByPrice'])->name('products.filterByPrice');
+
+
 
 
 
