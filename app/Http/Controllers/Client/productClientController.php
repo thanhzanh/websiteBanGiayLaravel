@@ -13,13 +13,16 @@ class productClientController extends Controller
 {
 
     // [GET] /product
+    // public function index()
+    // {
+
+    //     return view('client.pages.product.index', ['sp' => Product::all()]);
+    // }
     public function index()
     {
-        $data = Product::paginate(24);
-        Paginator::useBootstrap();
-        return view('client.pages.product.index', ['sp' => Product::all(), 'data' => $data]);
+        $data = Product::paginate(24); 
+        return view('client.pages.product.index', compact('data'));
     }
-
 
 
 
@@ -28,15 +31,6 @@ class productClientController extends Controller
     {
         $product = Product::where('product_id', $id)->firstOrFail();
         return view('client.pages.product.detail', compact('product'));
-    }
-
-    //[GET] /product/brand/{id}
-    public function filterByCategory($id)
-    {
-        $brands = Product::where('product_category_id', $id)->get();
-
-        // Trả về view với dữ liệu
-        return view('client.pages.brand.index', compact('brands'));
     }
 
 
@@ -49,6 +43,14 @@ class productClientController extends Controller
     }
 
 
+    //[GET] /product/brand/{slug}
+    public function filterByCategory($id)
+    {
+        $brands = Product::where('product_category_id', $id)->get();
+        return view('client.pages.Filter.brand', compact('brands'));
+    }
+
+
     //[GET] /products/price/{id}
     public function filterByPrice($min, $max)
     {
@@ -56,4 +58,17 @@ class productClientController extends Controller
         return view('client.pages.product.index', compact('data'));
     }
 
+
+    //[GET] /product/brand/{slug}
+    public function filterByFeatured($id)
+    {
+        $featured = Product::where('featured', $id)->get();
+        return view('client.pages.Filter.featured', compact('featured'));
+    }
+
+    // public function pagination()
+    // {
+    //     $data = Product::paginate(24);
+    //     return view('client.pages.product.index', compact('data'));
+    // }
 }

@@ -1,7 +1,7 @@
 {{-- {{ dd($sp) } --}}
 @extends('client.layouts.default')
 
-@section('title', 'Trang Sản Phẩm')
+@section('title', 'Sản Phẩm')
 
 @section('content')
     <div class="container pt-[20px]">
@@ -55,15 +55,15 @@
                 <div>
                     <div class="align-middle flex justify-center font-bold mb-4 text-[25px]">Nổi Bật</div>
                     <div class="flex flex-col items-center gap-4">
-                        <a href=""
+                        <a href="{{ route('products.filterByFeatured', ['slug' => 'LuxuryBrand']) }}"
                             class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center w-[50%] h-[80px]">
                             <span class="font-bold text-center">Luxury Brand</span>
                         </a>
-                        <a href=""
+                        <a href="{{ route('products.filterByFeatured', ['slug' => 'PhanQuang']) }}"
                             class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center w-[50%] h-[80px]">
                             <span class="font-bold text-center">Phản quang</span>
                         </a>
-                        <a href=""
+                        <a href="{{ route('products.filterByFeatured', ['slug' => 'Retro']) }}"
                             class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center w-[50%] h-[80px]">
                             <span class="font-bold text-center">Retro</span>
                         </a>
@@ -118,34 +118,34 @@
 
                 <br>
 
-                @if ($brands->count() > 0)
+                @if ($featured->count() > 0)
                     <div class="grid grid-cols-4 gap-4">
-                        @foreach ($brands as $item)
-                            <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
-                                <div
-                                    class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
-                                    NEW
+                        @foreach ($featured as $item)
+                            @if ($item->status == 'active')
+                                <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
+                                    <div
+                                        class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
+                                        NEW
+                                    </div>
+                                    <a href="{{ route('product.detail', ['id' => $item->product_id]) }}"
+                                        class="flex justify-center">
+                                        <img src="{{ $item->image }}" alt="{{ $item->product_name }}" class="w-[70%]">
+                                    </a>
+                                    <a href="{{ route('product.detail', ['id' => $item->product_id]) }}"
+                                        class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
+                                        {{ $item->product_name }} <br>
+                                    </a>
+                                    <a href="{{ route('product.detail', ['id' => $item->product_id]) }}"
+                                        class="text-gray-500 text-xs font-bold uppercase">
+                                        {{ $item->product_id }}
+                                    </a>
+                                    <p class="text-gray-900 font-bold text-base">
+                                        {{ number_format($item->price, 0, ',', '.') }} VND
+                                    </p>
                                 </div>
-                                <a href="{{ route('product.detail', ['id' => $item->product_id]) }}"
-                                    class="flex justify-center">
-                                    <img src="{{ $item->image }}" alt="{{ $item->product_name }}" class="w-[70%]">
-                                </a>
-                                <a href="{{ route('product.detail', ['id' => $item->product_id]) }}"
-                                    class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
-                                    {{ $item->product_name }} <br>
-                                </a>
-                                <a href="{{ route('product.detail', ['id' => $item->product_id]) }}"
-                                    class="text-gray-500 text-xs font-bold uppercase">
-                                    {{ $item->product_id }}
-                                </a>
-                                <p class="text-gray-900 font-bold text-base">
-                                    {{ number_format($item->price, 0, ',', '.') }} VND
-                                </p>
-                            </div>
+                            @endif
                         @endforeach
                     </div>
-                @else
-                    <p class="text-center">Không có sản phẩm nào thuộc danh mục này.</p>
                 @endif
             </div>
         </div>

@@ -65,9 +65,7 @@
                 <a href="{{ route('product') }}"
                     class="bg-blue-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105">Khám
                     Phá Bộ Sưu Tập</a>
-            </div>
-
-            
+            </div>            
             <br>
         </div>
     </div>

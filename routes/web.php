@@ -68,16 +68,17 @@ Route::get('/login', [loginClientController::class, 'login'])->name('login');
 // Trang sign up 
 Route::get('/signup', [loginClientController::class, 'signup'])->name('signup');
 
-// Lọc theo Brand
-Route::get('/product/brand/{id}', [productClientController::class, 'filterByCategory'])->name('products.filterByCategory');
-
 // Tìm kiếm sản phẩm
 Route::get('/search', [productClientController::class, 'searchProduct'])->name('search');
 
 //Lọc theo giá
 Route::get('/products/price/{min}/{max}', [ProductClientController::class, 'filterByPrice'])->name('products.filterByPrice');
 
+// Lọc theo Brand
+Route::get('/product/brand/{id}', [productClientController::class, 'filterByCategory'])->name('products.filterByCategory');
 
+// Lọc theo nổi bật
+Route::get('/product/featured/{slug}', [productClientController::class, 'filterByFeatured'])->name('products.filterByFeatured');
 
 
 

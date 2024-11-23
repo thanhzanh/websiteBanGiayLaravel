@@ -13,7 +13,7 @@
                     <div class="img">
                         <div class="align-middle flex justify-center">
                             <a href="{{ route('products.filterByCategory', ['id' => 3]) }}"
-                                class="bg-white rounded-lg m-1 m-1 shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
+                                class="bg-white rounded-lg m-1 shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
                                 <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/Adidas-Saigon-Sneaker.png"
                                     alt="Adidas" class="max-w-[70px] h-auto">
                             </a>
