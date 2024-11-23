@@ -16,35 +16,21 @@
     <p class="text-red-500 font-bold italic text-xl">Không tìm thấy sản phẩm. Vui lòng nhập lại!</p>
 </div>
 @else
-<div class="mt-[20px]">
+<div class="mt-[20px] flex align-middle justify-around">
     <h2 class="font-bold italic ">Trạng thái</h2>
-    <div>
-        <ul class="flex justify-start mt-2">
-            <li class="bg-green-400 text-white rounded-xl mr-2 p-2 hover:bg-cyan-500"><a href="">Tất cả</a></li>
-            <li class="bg-green-400 text-white rounded-xl mr-2 p-2 hover:bg-cyan-500"><a href="">Hoạt động</a></li>
-            <li class="bg-green-400 text-white rounded-xl mr-2 p-2 hover:bg-cyan-500"><a href="">Dừng hoạt động</a></li>
-        </ul>
-    </div>
-</div>
+    <div class="flex-1 ml-8">
+        @foreach ($listStatus as $item)
+        <button class="rounded-xl px-2 py-2 {{ $item['class'] }}" button-status="{{ $item['status'] }}" type="button">
+            {{ $item['name'] }}
+        </button>
+        @endforeach
 
-<div class="flex justify-between">
-    <div class="mt-[20px]">
-        <h2 class="font-bold italic mb-2">Lọc</h2>
-        <div>
-            <select name="" id="" class="w-72 pt-2 pb-2 outline-none rounded-xl bg-green-400 text-white text-center">
-                <option value="" class="selected">-- Lựa chọn --</option>
-                <option value="">Giá giảm dần</option>
-                <option value="">Giá tăng dần</option>
-            </select>
-        </div>
     </div>
     <div class="mt-[20px] items-center align-middle">
         <h2 class="font-bold italic mb-6">Thêm mới sản phẩm</h2>
         <a href="{{ route('admin.product.create') }}" title="Thêm" class="py-2 px-4 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl ml-16 hover:bg-black"><i class="fa-solid fa-plus"></i></a>
     </div>
 </div>
-
-
 
 <div class="mt-[20px] ">
     <h2 class="font-bold italic mb-2">Danh sách sản phẩm</h2>
@@ -65,17 +51,20 @@
         <tbody class="bg-slate-200">
             @foreach ($products as $index => $product)
             <tr class="text-center text-black border-b-2 h-[157px] duration-300">
-                <td class="font-bold italic">{{ $index + 1 }}.</td>
+                <td class="font-bold italic">{{($products->perPage()*($products->currentPage() - 1) + ($index+1))}}</td>
                 <td class="w-52 font-bold">{{ $product->product_name }}</td>
-                <td class="items-center align-middle pt-2 pb-2 ">
-                    <!-- image -->
+                <td class="items-center align-middle pt-2 pb-2 w-40">
+                    <!-- Kiểm tra sản phẩm có hình ảnh hay không -->
+                    @if ($product->images->isNotEmpty())
+                    <img src="{{ asset('storage/' . $product->images->first()->file_image_url) }}" alt="{{ $product->product_name }}" class="w-32 h-32 object-cover">
+                    @endif
                 </td>
                 <td>
                     <input type="number" name="quantity" min="1" value="{{ $product->quantity }}" class="text-center text-xl w-[70px]">
                 </td>
-                <td class="italic font-bold">{{ $product->price }} <strong class="italic">VNĐ</strong></td>
+                <td class="italic font-bold">{{ number_format( $product->price, 0 ,'0', '.' ) }} <strong class="italic">VNĐ</strong></td>
                 <td>
-                <form class="form-change-status" action="{{ route('admin.product.changeStatus',['id' => $product->product_id]) }}" method="post">
+                    <form class="form-change-status" action="{{ route('admin.product.changeStatus',['id' => $product->product_id]) }}" method="post">
                         @csrf
                         @method('PATCH')
                         <?php if ($product->status === "active") { ?>
@@ -107,7 +96,7 @@
 <!-- navigation -->
 <nav class="mt-[30px]">
     <ul class="inline-flex text-xl font-bold italic">
-        {{ $products->links() }}
+        {{ $products->appends(['product_name' => $search, 'status' => request('status')])->links() }}
     </ul>
 </nav>
 

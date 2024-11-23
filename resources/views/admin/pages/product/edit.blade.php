@@ -10,7 +10,7 @@
         @method('PATCH')
         <div class="flex justify-between">
             <div class="mr-8">
-                <div class="">
+                <div class="w-3/4">
                     <label class="text-xl font-bold" for="product_name">Tên sản phẩm</label> <br>
                     <input class="w-full py-3 outline-none pl-5 rounded-xl border-collapse border-indigo-300 border mt-4" type="text" name="product_name" value="{{ $products->product_name }}">
                 </div>
@@ -28,7 +28,7 @@
                     <textarea id="myeditorinstance" rows="12px" cols="90px" class="rounded-sm outline-none border-indigo-300 border pl-4 pt-2 mt-4" name="description">{{ $products->description }}</textarea>
                 </div>
 
-                <div class="mt-6">
+                <div class="mt-6 w-3/4">
                     <label class="text-xl font-bold" for="size_id">Size</label> <br>
                     <select class="parent_id w-full py-2 outline-none border-indigo-300 border pl-4 mt-4" name="size_id[]" multiple>
                         @foreach ($allSizes as $size)
@@ -40,7 +40,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="mt-6">
+                <div class="mt-6 w-full">
                     <label class="text-xl font-bold" for="image_id">Hình ảnh</label> <br>
                     <input class="w-full py-3 outline-none pl-5 border-collapse border-indigo-300 border mt-4" accept="image/*" type="file" name="image_id[]" multiple>
                     @if ($imageProducts)

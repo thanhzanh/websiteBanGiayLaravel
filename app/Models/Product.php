@@ -43,6 +43,7 @@ class Product extends Model
     {
         return $this->hasMany(Image::class, 'product_id', 'product_id');
     }
+    
 
     // slug
     public function setProductNameAttribute($value)

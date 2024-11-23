@@ -11,6 +11,7 @@ use Exception;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class productController extends Controller
@@ -22,7 +23,11 @@ class productController extends Controller
         $search = $request->input('product_name');
 
         // Câu truy vấn
-        $productQuery = DB::table('product');
+        // lấy ra tất cả sản phẩm quan hệ images=> ds hình ảnh từng sản phẩm
+        $productQuery = Product::with(['images' => function ($query) {
+            $query->orderBy('created_at', 'asc'); // Lấy hình ảnh sớm nhất cho mỗi sản phẩm
+        }]);
+
 
         // tim kiem
         if ($search) {
@@ -72,7 +77,7 @@ class productController extends Controller
             }
         }
 
-        $products = $productQuery->paginate(2); // tinh nang phan trang ben san pham
+        $products = $productQuery->paginate(6); // tinh nang phan trang ben san pham
 
         return view('admin.pages.product.index', compact('products', 'search', 'listStatus'));
     }
@@ -118,7 +123,7 @@ class productController extends Controller
             if ($request->hasFile('image_id')) {
                 // duyệt qua từng ảnh trong mảng
                 foreach ($images as $image) {
-                    $path = $image->store('img', 'public'); // lưu vào public/img và lấy $path
+                    $path = $image->store('images', 'public'); // lưu vào public/images và lấy $path
 
                     // Lưu ảnh vào table image 
                     Image::create([
@@ -144,7 +149,7 @@ class productController extends Controller
         try {
 
             // lấy sản phẩm đúng với id gửi lên
-            $productInfo = Product::find($id);
+            $productInfo = Product::with('images')->find($id);
 
             // lấy ra danh mục cha để hiển thị
             $productCategory = DB::table('product_category')->where('product_category_id', $productInfo->product_category_id)->first();
@@ -191,6 +196,8 @@ class productController extends Controller
     {
         try {
 
+            $updateSlug = Str::slug($request->input('product_name')); // update lai slug
+
             // Cập nhật chỉnh sửa lại thông tin sản phẩm tu input gui len
             $updatedProduct = DB::table('product')->where('product_id', $id)->update([
                 'product_name' => $request->input('product_name'),
@@ -200,6 +207,7 @@ class productController extends Controller
                 'quantity' => $request->input('quantity'),
                 'product_category_id' => $request->input('product_category_id'),
                 'status' => $request->input('status'),
+                'slug' => $updateSlug,
                 'featured' => $request->input('featured'),
                 'updated_at' => Carbon::now()
             ]);
@@ -246,7 +254,9 @@ class productController extends Controller
 
             if ($product) {
 
-                $product->size()->delete(); // xóa size trong bảng product_size
+                $product->size()->detach(); // detach: xóa size trong bảng product_size
+
+                $product->images()->delete(); // detach: xóa size trong bảng product_size
 
                 $product->delete(); // xóa sản phẩm
 
