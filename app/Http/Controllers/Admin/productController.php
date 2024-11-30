@@ -85,13 +85,13 @@ class productController extends Controller
     // [GET] /admin/pages/product/create
     public function create()
     {
-        $productCategorys = ProductCategory::all();
+        $categories = ProductCategory::whereNull('parent_id')->with('children')->get(); 
 
         $sizes = Size::all(); // lấy tất cả size giày
 
         $products = Product::all(); // lấy tất cả từ model Product để ngoài giao diện đổ ra select
 
-        return view('admin.pages.product.create', compact('products', 'sizes', 'productCategorys'));
+        return view('admin.pages.product.create', compact('products', 'sizes', 'categories'));
     }
 
     // [POST] /admin/pages/product/create
@@ -177,13 +177,13 @@ class productController extends Controller
 
             $productSizes = DB::table('product_size')->where('product_id', $id)->pluck('size_id')->toArray(); // gộp size_id lại thành 1 mảng
 
-            // lấy tất cả danh mục
-            $allCategorys = DB::table('product_category')->get();
+            // lấy tất cả danh mục cha và con
+            $categories = ProductCategory::whereNull('parent_id')->with('children')->get(); 
 
             // lấy ra tất cả hình ảnh
             $imageProducts = DB::table('image')->where('product_id', $id)->get();
 
-            return view('admin.pages.product.edit', compact('products', 'allCategorys', 'allSizes', 'productSizes', 'imageProducts'));
+            return view('admin.pages.product.edit', compact('products', 'categories', 'allSizes', 'productSizes', 'imageProducts'));
         } catch (Exception $exceptions) {
             Log::error($exceptions->getMessage());
 

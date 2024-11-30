@@ -9,7 +9,7 @@
         @csrf
         @method('PATCH')
         <div class="flex justify-between">
-            <div class="mr-8">
+            <div class="mr-8 w-3/4">
                 <div class="w-3/4">
                     <label class="text-xl font-bold" for="product_name">Tên sản phẩm</label> <br>
                     <input class="w-full py-3 outline-none pl-5 rounded-xl border-collapse border-indigo-300 border mt-4" type="text" name="product_name" value="{{ $products->product_name }}">
@@ -68,14 +68,20 @@
                 <div class="mt-6">
                     <label class="text-xl font-bold" for="product_category_id ">Danh mục cha</label> <br>
                     <select class="parent_id w-full py-2 outline-none border-indigo-300 border pl-4 mt-4" name="product_category_id">
-                        @foreach ($allCategorys as $category)
-                            <option value="{{ $category->product_category_id }}"
-                            @if ($category->product_category_id == $products->product_category_id)
-                            selected
-                            @endif> 
-                            {{ $category->product_category_name }} 
-                            </option>   
-                        @endforeach                                        
+                        <option selected value="">-- Chọn danh mục --</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->product_category_id }}">
+                                    {{ $category->product_category_name }}
+                                </option>
+
+                                {{-- Hiển thị danh mục con nếu có --}}
+                                @if ($category->children->isNotEmpty())
+                                    @include('admin.mixin.child_categories', [
+                                        'category' => $category,
+                                        'prefix' => '--',
+                                    ])
+                                @endif
+                            @endforeach                                     
                     </select>
                 </div>
                 <div class="mt-6">

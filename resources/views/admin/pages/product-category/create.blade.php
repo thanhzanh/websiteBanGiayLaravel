@@ -15,12 +15,18 @@
             <label class="text-xl font-bold" for="">Danh mục cha</label> <br>
             <select class="parent_id w-full py-2 outline-none border-indigo-300 border pl-4 mt-4" name="parent_id">
                 <option selected value="">-- Chọn danh mục --</option>
-                @foreach ($categorys as $category)
-                <option value=" {{ $category->product_category_name }} ">
-                    {{ $category->product_category_name }}
-                </option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->product_category_id }}">
+                        {{ $category->product_category_name }}
+                    </option>
+            
+                    {{-- Hiển thị danh mục con nếu có --}}
+                    @if ($category->children->isNotEmpty())
+                        @include('admin.mixin.child_categories', ['category' => $category, 'prefix' => '--'])
+                    @endif
                 @endforeach
             </select>
+            
         </div>
         <div class="mt-6">
             <label class="text-xl font-bold" for="">Mô tả</label> <br>

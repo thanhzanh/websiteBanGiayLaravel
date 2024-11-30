@@ -31,7 +31,7 @@ class productCategoryController extends Controller
 
         // tim kiem
         if ($search) {
-            $productCategoryQuery->where('product_category_name', 'like', '%'. $search .'%');
+            $productCategoryQuery->where('product_category_name', 'like', '%' . $search . '%');
         }
 
         $listStatus = [
@@ -82,9 +82,10 @@ class productCategoryController extends Controller
     public function create()
     {
 
-        $categorys = ProductCategory::all(); // lấy tất cả từ model ProductCategory để ngoài giao diện đổ ra select
+        // Lấy tất cả danh mục cha và danh mục con
+        $categories = ProductCategory::whereNull('parent_id')->with('children')->get();  // `with('children')` sẽ giúp tải danh mục con
 
-        return view('admin.pages.product-category.create', compact('categorys'));
+        return view('admin.pages.product-category.create', compact('categories'));
     }
 
     // [POST] /admin/pages/product-category/create

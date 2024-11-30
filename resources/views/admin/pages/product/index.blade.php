@@ -95,7 +95,23 @@
 <!-- navigation -->
 <nav class="mt-[30px]">
     <ul class="inline-flex text-xl font-bold italic">
-        {{ $products->appends(['product_name' => $search, 'status' => request('status')])->links() }}
+        <li>
+            <span class="px-4 py-2 bg-gray-200 text-gray-600 rounded-l-lg">
+                {{ $products->previousPageUrl() ? '<' : '' }}
+            </span>
+        </li>
+        @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
+            <li>
+                <a href="{{ $url }}" class="px-4 py-2 {{ $products->currentPage() == $page ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700' }} rounded-md">
+                    {{ $page }}
+                </a>
+            </li>
+        @endforeach
+        <li>
+            <span class="px-4 py-2 bg-gray-200 text-gray-600 rounded-r-lg">
+                {{ $products->nextPageUrl() ? '>' : '' }}
+            </span>
+        </li>
     </ul>
 </nav>
 
