@@ -129,21 +129,28 @@
                                     class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
                                     NEW
                                 </div>
-                                <a href="{{ route('product.detail', ['id' => $item->product_id]) }}"
-                                    class="flex justify-center">
-                                    <img src="{{ $item->image }}" alt="{{ $item->product_name }}" class="w-[70%]">
-                                </a>
-                                <a href="{{ route('product.detail', ['id' => $item->product_id]) }}"
-                                    class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
-                                    {{ $item->product_name }} <br>
-                                </a>
-                                <a href="{{ route('product.detail', ['id' => $item->product_id]) }}"
-                                    class="text-gray-500 text-xs font-bold uppercase">
-                                    {{ $item->product_id }}
-                                </a>
-                                <p class="text-gray-900 font-bold text-base">
-                                    {{ number_format($item->price, 0, ',', '.') }} VND
-                                </p>
+                                <div>
+                                    <a href="{{ route('product.detail', ['slug' => $item->slug]) }}">
+                                        <div class="w-auto">
+                                            @if ($item->images->isNotEmpty())
+                                                <img class="w-auto" src="{{ asset('storage/' . $item->images->first()->file_image_url) }}"
+                                                    alt="{{ $item->product_name }}" class="w-auto h-40 object-cover">
+                                            @endif
+                                            <p class="mt-2 text-[17px] italic">{{ $item->product_name }}</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="mt-2">
+                                    @foreach ($categories as $category)
+                                        @if ($category->product_category_id == $item->product_category_id)
+                                            <p class="text-gray-500 text-[14px] font-bold uppercase">{{ $category->product_category_name }}</p>                             
+                                        @endif
+                                    @endforeach
+                                    
+                                    <p class="mt-1 text-gray-900 font-bold text-base">
+                                        {{ number_format($item->price, 0, ',', '.') }} VND
+                                    </p>
+                                </div>
                             </div>
                         @endif
                     @endforeach

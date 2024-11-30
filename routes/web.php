@@ -34,7 +34,8 @@ Route::get('/', [homeClientController::class, 'index'])->name('home');
 Route::get('/product', [productClientController::class, 'index'])->name('product');
 
 //Trang chi tiết sản phẩm
-Route::get('/product/{id}', [productClientController::class, 'detail'])->name('product.detail');
+Route::get('product/{slug}', [productClientController::class, 'detail'])->name('product.detail');
+
 
 //Trang bài viết
 Route::get('/baiviet', function () {
@@ -82,8 +83,6 @@ Route::get('/product/brand/{id}', [productClientController::class, 'filterByCate
 
 // Lọc theo nổi bật
 Route::get('/product/featured/{slug}', [productClientController::class, 'filterByFeatured'])->name('products.filterByFeatured');
-
-
 
 
 

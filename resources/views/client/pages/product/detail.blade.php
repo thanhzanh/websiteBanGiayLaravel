@@ -11,17 +11,28 @@
         </div>
 
         <div class="flex flex-col md:flex-row gap-8">
-            <div class="md:w-1/2 flex flex-col items-center">
-                <div class="w-full mb-4">
-                    <img class="w-full rounded-lg shadow-lg" src="{{ $product->image }}" alt="{{ $product->product_name }}">
+            <div class="md:w-1/2 flex items-center relative">
+                <!-- Các hình ảnh phụ -->
+                <div class="flex flex-col w-[125px] top-0">
+                    <div class="top-0 h-[460px]">
+                        <!-- slice(1) bỏ qua hình đầu tiên -->
+                        @foreach ($product->images->slice(1) as $image)
+                            <img class="w-full my-2 h-[140px] object-cover rounded-md shadow-md transition-transform duration-300 ease-in-out hover:scale-105"
+                                src="{{ asset('storage/' . $image->file_image_url) }}" alt="Hình phụ">
+                        @endforeach
+                    </div>
+
                 </div>
-                <div class="grid grid-cols-3 gap-2">
-                    <img src="{{ $product->image }}" alt="Hình phụ 1" class="w-24 h-24 object-cover rounded-md shadow-md">
-                    <img src="https://saigonsneaker.com/wp-content/uploads/2024/11/5-150x150.jpg.avif" alt="Hình phụ 2"
-                        class="w-24 h-24 object-cover rounded-md shadow-md">
-                    <img src="https://saigonsneaker.com/wp-content/uploads/2024/11/6-150x150.jpg.avif" alt="Hình phụ 3"
-                        class="w-24 h-24 object-cover rounded-md shadow-md">
+                <!-- Hình ảnh chính -->
+                <div class="w-[460px] h-[440px] right-2 mb-4 ml-4">
+                    @if ($product->images->isNotEmpty())
+                        <img class="w-full h-auto rounded-lg shadow-lg object-cover"
+                            src="{{ asset('storage/' . $product->images->first()->file_image_url) }}"
+                            alt="{{ $product->product_name }}">
+                    @endif
                 </div>
+
+                <!-- Label "NEW" -->
                 @if ($product->status == 1)
                     <div
                         class="bg-red-600 text-white text-xs font-bold px-2 py-1 absolute top-4 right-4 rounded-md shadow-md">
@@ -29,7 +40,6 @@
                     </div>
                 @endif
             </div>
-
 
             <div class="md:w-1/2">
                 <h1 class="text-3xl font-bold mb-4">{{ $product->product_name }}</h1>
@@ -51,25 +61,19 @@
                     @endif
                 </p>
 
-
                 <p class="text-gray-700 mb-6">{{ $product->description }}</p>
 
-                {{-- <div class="size pt-7 flex">
+                {{-- size của mỗi sản phẩm --}}
+                <div class="size pt-7 flex">
                     <div class="font-bold text-[20px] pt-[15px] pr-[12px]">Size:</div>
                     <div class="flex flex-wrap gap-3 mt-2">
-                        @php
-                            $sizes = explode(',', $product->size);
-                        @endphp
-
-                        @foreach ($sizes as $size)
-                            <a href="#"
-                                class="w-12 h-12 flex items-center justify-center bg-white border border-gray-300 rounded-full text-black font-bold hover:text-white hover:bg-black transition duration-300">
-                                {{ $size }}
+                        @foreach ($sizes as $item)
+                            <a href="#" class="w-12 h-12 flex items-center justify-center bg-white border border-gray-300 rounded-full text-black font-bold hover:text-white hover:bg-black transition duration-300">
+                                {{ $item->size_name }} 
                             </a>
                         @endforeach
                     </div>
-                </div> --}}
-
+                </div>
 
                 <a class="bg-black text-white font-bold py-3 px-6 rounded-full my-5 hover:bg-gray-800 transition duration-300 inline-block"
                     href="#">

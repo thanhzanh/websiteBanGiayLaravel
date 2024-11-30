@@ -34,7 +34,7 @@ class Product extends Model
     }
 
     // mối quan hệ
-    public function size()
+    public function sizes()
     {
         return $this->belongsToMany(Size::class, 'product_size', 'product_id', 'size_id');
     }

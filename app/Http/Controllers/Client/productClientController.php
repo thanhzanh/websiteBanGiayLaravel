@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Size;
 use Illuminate\Pagination\Paginator;
 
 class productClientController extends Controller
@@ -20,17 +21,24 @@ class productClientController extends Controller
     // }
     public function index()
     {
+        $categories = ProductCategory::all(); 
+
         $data = Product::paginate(24); 
-        return view('client.pages.product.index', compact('data'));
+
+        return view('client.pages.product.index', compact('data', 'categories'));
     }
 
 
 
     // [GET] /product/detail/{id}
-    public function detail($id)
+    public function detail($slug)
     {
-        $product = Product::where('product_id', $id)->firstOrFail();
-        return view('client.pages.product.detail', compact('product'));
+        $product = Product::where('slug', $slug)->firstOrFail();
+
+        // lấy ra size giày theo mã sản phẩm
+        $sizes = $product->sizes()->get();
+
+        return view('client.pages.product.detail', compact('product'))->with('sizes', $sizes);
     }
 
 
