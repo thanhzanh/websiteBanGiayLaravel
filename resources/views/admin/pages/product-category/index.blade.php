@@ -28,7 +28,6 @@
 
     </div>
     <div class="mt-[20px] items-center align-middle">
-        <h2 class="font-bold italic mb-6">Thêm mới danh mục</h2>
         <a href="{{ route('admin.productCategory.create') }}" title="Thêm" class="py-2 px-4 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl ml-16 hover:bg-black"><i class="fa-solid fa-plus"></i></a>
     </div>
 </div>
@@ -85,9 +84,26 @@
 <!-- navigation -->
 <nav class="mt-[30px]">
     <ul class="inline-flex text-xl font-bold italic">
-        {{ $productCategory->appends(['product_category_name' => $search, 'status' => request('status')])->links() }}
+        <li>
+            <span class="px-4 py-2 bg-gray-200 text-gray-600 rounded-l-lg">
+                {{ $productCategory->previousPageUrl() ? '<' : '' }}
+            </span>
+        </li>
+        @foreach ($productCategory->getUrlRange(1, $productCategory->lastPage()) as $page => $url)
+            <li>
+                <a href="{{ $url }}" class="px-4 py-2 {{ $productCategory->currentPage() == $page ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700' }} rounded-md">
+                    {{ $page }}
+                </a>
+            </li>
+        @endforeach
+        <li>
+            <span class="px-4 py-2 bg-gray-200 text-gray-600 rounded-r-lg">
+                {{ $productCategory->nextPageUrl() ? '>' : '' }}
+            </span>
+        </li>
     </ul>
 </nav>
+
 
 <!-- end navigation -->
 @endif

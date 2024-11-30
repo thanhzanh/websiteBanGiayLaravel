@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\accountController;
 use App\Http\Controllers\Admin\dashboardController;
+use App\Http\Controllers\Admin\forgotPasswordController;
 use App\Http\Controllers\Admin\loginController;
 use App\Http\Controllers\Admin\productCategoryController;
 use App\Http\Controllers\Admin\productController;
@@ -8,6 +10,7 @@ use App\Http\Controllers\Client\brandClientController;
 use App\Http\Controllers\Client\homeClientController;
 use App\Http\Controllers\Client\loginClientController;
 use App\Http\Controllers\Client\productClientController;
+
 
 use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Request;
@@ -88,6 +91,9 @@ Route::get('/product/featured/{slug}', [productClientController::class, 'filterB
 
 
 // ==================================== BACKEND ==========================================
+
+// ========================= login ===========================
+
 Route::get('/admin', [loginController::class, 'login'])->name('admin');
 
 Route::get('/admin/logout', [loginController::class, 'logout'])->name('admin.logout');
@@ -95,6 +101,17 @@ Route::get('/admin/logout', [loginController::class, 'logout'])->name('admin.log
 Route::post('/admin/home', [loginController::class, 'dashboard'])->name('admin.home');
 
 Route::get('/admin/home', [dashboardController::class, 'homeDashboard'])->name('admin.home');
+
+// ========================= forgot password ===========================
+Route::get('/admin/forgot-password', [forgotPasswordController::class, 'emailSend'])->name('admin.forgot-password.request');
+
+Route::post('/admin/forgot-password', [forgotPasswordController::class, 'sendResetPassLinkEmail'])->name('admin.forgot-password.linkEmail');
+
+Route::get('/admin/reset-password/{token}', [forgotPasswordController::class, 'resetPassword'])->name('admin.reset-password');
+
+Route::post('/admin/reset-password/{token}', [forgotPasswordController::class, 'checkResetPassword'])->name('admin.reset-password');
+
+
 
 // ========================= product ===========================
 
@@ -133,3 +150,23 @@ Route::patch('/admin/product-category/edit/{id}', [productCategoryController::cl
 Route::delete('/admin/product-category/delete/{id}', [productCategoryController::class, 'delete'])->name('admin.productCategory.delete');
 
 Route::patch('/admin/product-category/change-status/{id}', [productCategoryController::class, 'changeStatus'])->name('admin.productCategory.changeStatus');
+
+
+// ========================= account admin ===========================
+
+Route::get('/admin/account', [accountController::class, 'index'])->name('admin.account');
+
+Route::get('/admin/account/create', [accountController::class, 'create'])->name('admin.account.create');
+
+Route::post('/admin/account/create', [accountController::class, 'createPost'])->name('admin.account.create');
+
+Route::get('/admin/account/detail/{id}', [accountController::class, 'detail'])->name('admin.account.detail');
+
+Route::get('/admin/account/edit/{id}', [accountController::class, 'edit'])->name('admin.account.edit');
+
+Route::post('/admin/account/edit/{id}', [accountController::class, 'editPost'])->name('admin.account.edit');
+
+Route::delete('/admin/account/delete/{id}', [accountController::class, 'delete'])->name('admin.account.delete');
+
+
+

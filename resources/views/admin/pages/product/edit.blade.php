@@ -5,7 +5,7 @@
 @section('content')
 <h1 class="font-bold text-blue-800 text-2xl border-b-2 border-b-blue-800 uppercase text-center pb-3">Chỉnh sửa sản phẩm</h1>
 <div class="mt-8">
-    <form action="{{ route('admin.product.edit', ['id' => $products->product_id]) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.account.edit', ['id' => $products->product_id]) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <div class="flex justify-between">

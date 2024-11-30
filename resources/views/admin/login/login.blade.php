@@ -33,10 +33,10 @@
                 @endif
             </div>
             <div>
-                <a href="#" class="flex justify-end text-gray-500 italic">Forgot Password?</a>
+                <a href="{{ route('admin.forgot-password.request') }}" class="flex justify-end text-gray-500 italic">Forgot Password?</a>
             </div>
             <div>
-                <input type="submit" value="Login" class="pt-4 pb-4 pl-10 pr-10 mt-6 text-2xl text-white font-bold bg-indigo-600 w-full rounded-3xl hov" />
+                <input type="submit" value="Login" class="pt-2 pb-2 pl-10 pr-10 mt-6 text-2xl text-white font-bold bg-indigo-600 w-full rounded-3xl hov" />
             </div>
         </form>
     </div>

@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('admin', function (Blueprint $table) {
             $table->bigIncrements('admin_id');
             $table->string('admin_name', 255);
-            $table->string('admin_email', 100);
+            $table->string('admin_email', 100)->unique();
             $table->string('admin_password');
-            $table->string('admin_phone', 10);
-            $table->string('admin_image');
-            $table->string('admin_desc');
+            $table->string('admin_phone', 10)->nullable();
+            $table->string('admin_image')->nullable();
+            $table->string('admin_desc')->nullable();
             $table->timestamps();
         });
     }

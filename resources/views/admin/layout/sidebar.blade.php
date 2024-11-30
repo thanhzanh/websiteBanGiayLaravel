@@ -36,12 +36,6 @@
             </li>
             <li class="w-[100%] mb-4 pl-8">
                 <a href="" class="block text-xl pl-4 text-[#ffff]">
-                    <span class="text-xl pr-5"><i class="fa-solid fa-user-group"></i></span></span>
-                    <span>Customer</span>
-                </a>
-            </li>
-            <li class="w-[100%] mb-4 pl-8">
-                <a href="" class="block text-xl pl-4 text-[#ffff]">
                     <span class="text-xl pr-5"><i class="fa-solid fa-newspaper"></i></span>
                     <span>Article Category</span>
                 </a>
@@ -60,12 +54,18 @@
             </li>
             <li class="w-[100%] mb-4 pl-8">
                 <a href="" class="block text-xl pl-4 text-[#ffff]">
+                    <span class="text-xl pr-5"><i class="fa-solid fa-user-group"></i></span></span>
+                    <span>User</span>
+                </a>
+            </li>
+            <li class="w-[100%] mb-4 pl-8 {{ setActive('admin/account') }}">
+                <a href="{{ route('admin.account') }}" class="block text-xl pl-4 text-[#ffff] {{setActive(['admin/account']) }}">
                     <span class="text-xl pr-5"><i class="fa-solid fa-user"></i></span>
                     <span>Account</span>
                 </a>
             </li>
-            <li class="w-[100%] mb-4 mt-4 pl-8 {{ setActive('admin/logout') }}">
-                <a href="{{ route('admin.logout') }}" class="block text-xl pl-4 text-[#ffff]">
+            <li class="w-[100%] mb-4 mt-4 pl-8 { setActive('admin.logout') }}">
+                <a href="{{ route('admin.logout') }}" class="block text-xl pl-4 text-[#ffff] {{setActive(['admin.logout']) }}">
                     <span class="text-xl pr-5"><i class="fa-solid fa-right-from-bracket"></i></span>
                     <span>Logout</span>
                 </a>

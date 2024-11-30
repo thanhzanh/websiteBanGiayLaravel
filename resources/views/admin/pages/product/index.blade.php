@@ -27,7 +27,6 @@
 
     </div>
     <div class="mt-[20px] items-center align-middle">
-        <h2 class="font-bold italic mb-6">Thêm mới sản phẩm</h2>
         <a href="{{ route('admin.product.create') }}" title="Thêm" class="py-2 px-4 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl ml-16 hover:bg-black"><i class="fa-solid fa-plus"></i></a>
     </div>
 </div>
