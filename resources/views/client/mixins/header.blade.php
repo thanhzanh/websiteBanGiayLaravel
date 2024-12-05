@@ -7,7 +7,7 @@
                 </div>
             </div>
         </div>
-        <div class="header-general bg-[rgba(13,13,13,1)]">`
+        <div class="header-general bg-[rgba(13,13,13,1)]">
             <div class="header-general-main max-w-screen-xl mx-auto flex flex-wrap justify-between">
                 <div class="inner-logo my-auto">
                     <img src="https://saigonsneaker.com/wp-content/uploads/2022/02/new-logo-ss-2021-1-150x63.png.avif"
@@ -23,11 +23,17 @@
                     </form>
                 </div>
                 <div class="inner-user-cart text-white flex justify-end my-auto px-6 items-center">
-                    <div class="my-account h-auto p-4 mx-2">
+                    <div>
+                        <p>Nguyen Van A</p>
+                    </div>
+                    <div title="Đăng nhập & đăng ký" class="my-account h-auto p-4 mx-2">
                         <a class="text-3xl" href="{{ route('login') }}"><i class="fa-solid fa-user"></i></a>
                     </div>
-                    <div class="my-cart h-auto p-4 mx-2">
-                        <a class="text-3xl" href="{{ route('cart.index') }}"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <div title="Giỏ hàng" class="my-cart h-auto p-4 mx-2 relative">
+                        <a class="text-3xl" href="{{ route('cart.index') }}">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
+                        <p class="absolute right-0 top-0 bg-white text-black font-bold rounded-[40px] m-[-2px] px-[10px]">{{ $countProduct }}</p>
                     </div>
                 </div>
             </div>
@@ -57,7 +63,7 @@
                             @foreach ($categories as $category)
                                 <li class="relative group">
                                     <a href="{{ route('products.filterByCategory', ['id' => $category->product_category_id]) }}"
-                                       class="block px-4 py-4 text-white hover:bg-green-500 hover:text-white rounded-t-lg transition">
+                                       class="block px-4 py-4 text-white hover:bg-green-500 hover:text-white transition">
                                         {{ $category->product_category_name }}
                                     </a>
                     

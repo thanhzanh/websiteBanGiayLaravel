@@ -41,13 +41,10 @@
                 <input type="submit" value="Login"
                     class="pt-4 pb-4 pl-10 pr-10 mt-6 text-2xl text-white font-bold bg-indigo-600 w-full rounded-3xl hov" />
             </div>
-            <div>
-                <a href="{{ route('signup') }}"
-                    class="block text-center pt-4 pb-4 pl-10 pr-10 mt-6 text-2xl text-white font-bold bg-indigo-600 w-full rounded-3xl hov">
-                    Sign Up
-                </a>
-            </div>
         </form>
+        <p class="text-center text-gray-600 mt-4">
+            Nếu bạn chưa có tài khoản? <a href="{{ route('signup') }}" class="text-indigo-600 hover:underline">Đăng ký</a>
+        </p>
     </div>
 </body>
 

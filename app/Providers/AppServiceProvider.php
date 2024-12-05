@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\CartItem;
 use App\Models\ProductCategory;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,5 +30,8 @@ class AppServiceProvider extends ServiceProvider
 
         $categories = ProductCategory::all();
         View::share('categories', $categories);
+
+        $countProductInCart = DB::table('cart_items')->sum('quantity');
+        View::share('countProduct', $countProductInCart);
     }
 }

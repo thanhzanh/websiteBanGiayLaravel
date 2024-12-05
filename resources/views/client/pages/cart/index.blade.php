@@ -14,31 +14,66 @@
                         <th class="px-4 py-2 border border-gray-200 text-center">Giá</th>
                         <th class="px-4 py-2 border border-gray-200 text-center">Số Lượng</th>
                         <th class="px-4 py-2 border border-gray-200 text-center">Tạm Tính</th>
-                        <th class="px-4 py-2 border border-gray-200 text-center">Xóa</th>
+                        <th class="px-4 py-2 border border-gray-200 text-center"> Xóa </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Sản phẩm -->
-                    <tr>
-                        <td class="px-4 py-2 border border-gray-200 flex items-center">
-                            <img src="https://via.placeholder.com/80" alt="Product Image"
-                                class="w-20 h-20 object-cover rounded-lg mr-4">
-                            <span>Giày Vans Vault Knu Skool VR3 x Imran Potato Like Auth - 40</span>
-                        </td>
-                        <td class="px-4 py-2 border border-gray-200 text-center">850.000₫</td>
-                        <td class="px-4 py-2 border border-gray-200 text-center">
-                            <div class="flex items-center justify-center">
-                                <input type="number" class="w-12 text-center border border-gray-300 rounded-md mx-2"
-                                    value="2">
-                            </div>
-                        </td>
-                        <td class="px-4 py-2 border border-gray-200 text-center font-bold">1.700.000₫</td>
-                        <td class="px-4 py-2 border border-gray-200 text-center">
-                            <button class="text-gray-500 hover:text-red-600">
-                                <i class="fa-solid fa-xmark"></i>
-                            </button>
-                        </td>
-                    </tr>
+                    @foreach ($carts as $product)
+                        <!-- Sản phẩm -->
+                        <tr>
+                            <td class="px-4 py-2 border border-gray-200 flex items-center">
+                                @foreach ($products as $item)
+                                    @if ($product->product_id == $item->product_id)
+                                        {{-- hinh anh --}}
+                                        <div class="w-[120px] h-[120px] mr-8">
+                                            <a href="{{ route('product.detail', ['slug' => $item->slug]) }}">
+                                                <img class="w-auto"
+                                                src="{{ asset('storage/' . $item->images->first()->file_image_url) }}"
+                                                alt="{{ $item->product_name }}" class="w-auto h-40 object-cover">
+                                            </a>
+                                        </div>
+                                        {{-- ten san pham --}}
+                                        <span>{{ $item->product_name }} -</span>
+
+                                        {{-- size --}}
+                                        @foreach ($sizes as $size)
+                                            @if ($size->size_id == $product->size_id)
+                                                <span class="font-bold">
+                                                    {{ $size->size_name }}
+                                                </span>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                @endforeach
+                            </td>
+
+                            <td class="px-4 py-2 border border-gray-200 text-center">
+                                <span class="font-bold">{{ number_format($product->price, 0, ',', '.') }} VND</span>    
+                            </td>
+                            <td class="px-4 py-2 border border-gray-200 text-center">
+                                <div class="flex items-center justify-center">
+                                    <input name="quantity" product-id={{ $product->product_id }} type="number" class="w-12 text-center border border-gray-300 rounded-md mx-2"
+                                        min="1" value="{{ $product->quantity }}">
+                                </div>
+                            </td>
+                            <td class="px-4 py-2 border border-gray-200 text-center">
+                                <span class="font-bold">{{ number_format($product->price * $product->quantity, 0, ',', '.') }} VNĐ</span>
+                            </td>
+                            <td class="px-4 py-2 border border-gray-200 text-center">
+                                <div class="inline-block">
+                                    <form action="{{ route('cart.delete', ['id' => $product->id]) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button title="Xóa"
+                                            class="px-3 py-[0.3rem] bg-red-500 text-[1rem] font-bold text-white rounded-2xl hover:bg-black">
+                                            <i class="fa-solid fa-minus"></i>
+                                            </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+
                 </tbody>
             </table>
             <div class="flex justify-between mt-4">
