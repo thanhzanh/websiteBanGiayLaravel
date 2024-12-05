@@ -34,8 +34,8 @@
                     <span>Product</span>
                 </a>
             </li>
-            <li class="w-[100%] mb-4 pl-8">
-                <a href="" class="block text-xl pl-4 text-[#ffff]">
+            <li class="w-[100%] mb-4 pl-8" {{ setActive('admin/article-category') }}>
+                <a href="{{ route('admin.articleCategory') }}" class="block text-xl pl-4 text-[#ffff] {{setActive(['admin/article-category']) }}">
                     <span class="text-xl pr-5"><i class="fa-solid fa-newspaper"></i></span>
                     <span>Article Category</span>
                 </a>

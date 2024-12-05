@@ -27,7 +27,7 @@
                         <a class="text-3xl" href="{{ route('login') }}"><i class="fa-solid fa-user"></i></a>
                     </div>
                     <div class="my-cart h-auto p-4 mx-2">
-                        <a class="text-3xl" href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                        <a class="text-3xl" href="{{ route('cart.index') }}"><i class="fa-solid fa-cart-shopping"></i></a>
                     </div>
                 </div>
             </div>
@@ -41,58 +41,60 @@
                             Trang Chủ
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('gioithieu') }}"
+                            class="text-white font-bold text-base py-2 px-4 hover:bg-green-500 rounded-lg transition duration-300">Giới
+                            Thiệu
+                        </a>
+                    </li>
                     <li class="relative group">
                         <a href="{{ route('product') }}"
-                            class="text-white font-bold text-base py-2 px-4 hover:bg-green-500 rounded-lg transition duration-300">
+                           class="text-white font-bold text-base py-2 px-4 hover:bg-green-500 rounded-lg transition duration-300">
                             Sản Phẩm
                         </a>
-                        <!-- Menu cấp 2 -->
-                        <ul
-                            class="absolute left-0 mt-2 w-[150px] bg-gray-800 shadow-lg rounded-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity duration-300 z-10">
-                            <li><a href="{{ route('products.filterByCategory', ['id' => 4]) }}"
-                                    class="block px-4 py-4 text-white hover:bg-green-500 hover:text-white rounded-t-lg transition">
-                                    Nike
-                                </a></li>
-                            <li><a href="{{ route('products.filterByCategory', ['id' => 5]) }}"
-                                    class="block px-4 py-4 text-white hover:bg-green-500 hover:text-white transition">
-                                    Vans
-                                </a></li>
-                            <li><a href="{{ route('products.filterByCategory', ['id' => 1]) }}"
-                                    class="block px-4 py-4 text-white hover:bg-green-500 hover:text-white transition">
-                                    Adidas
-                                </a></li>
-                            <li><a href="{{ route('products.filterByCategory', ['id' => 7]) }}"
-                                    class="block px-4 py-4 text-white hover:bg-green-500 hover:text-white transition">
-                                    Converse
-                                </a></li>
-                            <li><a href="{{ route('products.filterByCategory', ['id' => 'mcqueen']) }}"
-                                    class="block px-4 py-4 text-white hover:bg-green-500 hover:text-white transition">
-                                    McQueen
-                                </a></li>
-                            <li><a href="{{ route('products.filterByCategory', ['id' => 'balenciaga']) }}"
-                                    class="block px-4 py-4 text-white hover:bg-green-500 hover:text-white rounded-b-lg transition">
-                                    Balenciaga
-                                </a></li>
+                        <!-- Menu cấp 2 (Danh mục con) -->
+                        <ul class="absolute left-0 mt-2 w-[200px] bg-gray-800 shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity duration-300 z-10">
+                            @foreach ($categories as $category)
+                                <li class="relative group">
+                                    <a href="{{ route('products.filterByCategory', ['id' => $category->product_category_id]) }}"
+                                       class="block px-4 py-4 text-white hover:bg-green-500 hover:text-white rounded-t-lg transition">
+                                        {{ $category->product_category_name }}
+                                    </a>
+                    
+                                    <!-- Nếu có danh mục con, hiển thị danh mục con -->
+                                    @if ($category->children->isNotEmpty())
+                                        <ul class="absolute left-full top-0 mt-2 w-[200px] bg-gray-800 shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity duration-300">
+                                            @foreach ($category->children as $child)
+                                                <li>
+                                                    <a href="{{ route('products.filterByCategory', ['id' => $child->product_category_id]) }}"
+                                                       class="block px-4 py-4 text-white hover:bg-green-500 hover:text-white transition">
+                                                        {{ $child->product_category_name }}
+                                                    </a>
+                                                    <!-- Nếu danh mục con có danh mục con, tiếp tục đệ quy -->
+                                                    @if ($child->children->isNotEmpty())
+                                                        @include('client.mixins.child_categories', ['category' => $child])
+                                                    @endif
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                                </li>
+                            @endforeach
                         </ul>
                     </li>
-                    <li><a href="#"
+                    
+                    <li>
+                        <a href="#"
                             class="text-white font-bold text-base py-2 px-4 hover:bg-green-500 rounded-lg transition duration-300">Bài
-                            Viết</a></li>
-                    <li><a href="#"
-                            class="text-white font-bold text-base py-2 px-4 hover:bg-green-500 rounded-lg transition duration-300">Hỗ
-                            Trợ</a></li>
-                    <li><a href="#contact"
+                            Viết
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#contact"
                             class="text-white font-bold text-base py-2 px-4 hover:bg-green-500 rounded-lg transition duration-300">Liên
-                            Hệ</a></li>
-                    <li><a href="{{ route('gioithieu') }}"
-                            class="text-white font-bold text-base py-2 px-4 hover:bg-green-500 rounded-lg transition duration-300">Giới
-                            Thiệu</a></li>
-                    <li><a href="#"
-                            class="text-white font-bold text-base py-2 px-4 hover:bg-green-500 rounded-lg transition duration-300">Khuyến
-                            Mãi</a></li>
-                    <li><a href="#"
-                            class="text-white font-bold text-base py-2 px-4 hover:bg-green-500 rounded-lg transition duration-300">Tin
-                            Tức</a></li>
+                            Hệ
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>

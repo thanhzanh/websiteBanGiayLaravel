@@ -21,6 +21,12 @@
     cursor: pointer;
 }
 
+.selected {
+    background-color: black;
+    color: white;
+    border-color: black;
+}
+
 
 
 

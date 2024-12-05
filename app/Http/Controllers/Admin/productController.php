@@ -10,6 +10,7 @@ use App\Models\Size;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -97,50 +98,88 @@ class productController extends Controller
     // [POST] /admin/pages/product/create
     public function createPost(Request $request)
     {
-        try {
-            $dataValidated = $request->only([
-                'product_name',
-                'description',
-                'price',
-                'quantity',
-                'discount',
-                'status',
-                'featured',
-                'product_category_id'
-            ]);
+        // try {
+        //     $dataValidated = $request->only([
+        //         'product_name',
+        //         'description',
+        //         'price',
+        //         'quantity',
+        //         'discount',
+        //         'status',
+        //         'featured',
+        //         'product_category_id'
+        //     ]);
 
-            $product = Product::create($dataValidated);
+        //     $product = Product::create($dataValidated);
 
-            // Lưu size
-            if ($request->has('size_id')) {
-                $sizes = $request->input('size_id');
-                $product->size()->attach($sizes); // sizes() là function quan hệ của product_id và size_id
-            }
+        //     // Lưu size
+        //     if ($request->has('size_id')) {
+        //         $sizes = $request->input('size_id');
+        //         $product->size()->attach($sizes); // sizes() là function quan hệ của product_id và size_id
+        //     }
 
-            // Lưu hình ảnh dưới dạng []
-            $images = $request->file('image_id'); // lấy tất cả mảng hình ảnh
+        //     // Lưu hình ảnh dưới dạng []
+        //     $images = $request->file('image_id'); // lấy tất cả mảng hình ảnh
 
-            if ($request->hasFile('image_id')) {
-                // duyệt qua từng ảnh trong mảng
-                foreach ($images as $image) {
-                    $path = $image->store('images', 'public'); // lưu vào public/images và lấy $path
+        //     if ($request->hasFile('image_id')) {
+        //         // duyệt qua từng ảnh trong mảng
+        //         foreach ($images as $image) {
+        //             $path = $image->store('images', 'public'); // lưu vào public/images và lấy $path
 
-                    // Lưu ảnh vào table image 
-                    Image::create([
-                        'product_id' => $product->product_id, // id sản phẩm
-                        'file_image_url' => $path // đường dẫn ảnh
-                    ]);
-                }
-            }
+        //             // Lưu ảnh vào table image 
+        //             Image::create([
+        //                 'product_id' => $product->product_id, // id sản phẩm
+        //                 'file_image_url' => $path // đường dẫn ảnh
+        //             ]);
+        //         }
+        //     }
 
-            toastr()->success('Thêm sản phẩm thành công!');
+        //     toastr()->success('Thêm sản phẩm thành công!');
 
-            return redirect()->route('admin.product');
-        } catch (Exception $exceptions) {
-            toastr()->error('Đã xảy ra lỗi khi thêm sản phẩm!');
-            Log::error($exceptions->getMessage());
-            return back();
+        //     return redirect()->route('admin.product');
+        // } catch (Exception $exceptions) {
+        //     toastr()->error('Đã xảy ra lỗi khi thêm sản phẩm!');
+        //     Log::error($exceptions->getMessage());
+        //     return back();
+        // }
+        $dataValidated = $request->only([
+            'product_name',
+            'description',
+            'price',
+            'quantity',
+            'discount',
+            'status',
+            'featured',
+            'product_category_id'
+        ]);
+
+        $product = Product::create($dataValidated);
+
+        // Lưu size
+        if ($request->has('size_id')) {
+            $sizes = $request->input('size_id');
+            $product->sizes()->attach($sizes); // sizes() là function quan hệ của product_id và size_id
         }
+
+        // Lưu hình ảnh dưới dạng []
+        $images = $request->file('image_id'); // lấy tất cả mảng hình ảnh
+
+        if ($request->hasFile('image_id')) {
+            // duyệt qua từng ảnh trong mảng
+            foreach ($images as $image) {
+                $path = $image->store('images', 'public'); // lưu vào public/images và lấy $path
+
+                // Lưu ảnh vào table image 
+                Image::create([
+                    'product_id' => $product->product_id, // id sản phẩm
+                    'file_image_url' => $path // đường dẫn ảnh
+                ]);
+            }
+        }
+
+        toastr()->success('Thêm sản phẩm thành công!');
+
+        return redirect()->route('admin.product');
     }
 
     // [GET] /admin/pages/product/detail/{id}
@@ -195,11 +234,36 @@ class productController extends Controller
     public function editPatch(Request $request, $id)
     {
         try {
+            $request->validate([
+                'product_name' => 'required|string|max:255',
+                'price' => 'required|numeric|min:0',
+                'quantity' => 'required|integer|min:0',
+                'product_category_id' => 'nullable|integer|exists:product_category,product_category_id',
+                'description' => 'nullable|string',
+                'status' => 'required|in:active,inactive',
+                'discount' => 'nullable|integer|min:0|max:100',
+                'featured' => 'required|boolean',
+                'size_id' => 'nullable|array',
+                'size_id.*' => 'integer|exists:size,size_id',
+                'image_id.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
 
             $updateSlug = Str::slug($request->input('product_name')); // update lai slug
 
             // Cập nhật chỉnh sửa lại thông tin sản phẩm tu input gui len
-            $updatedProduct = DB::table('product')->where('product_id', $id)->update([
+            // $updatedProduct = DB::table('product')->where('product_id', $id)->update([
+            //     'product_name' => $request->input('product_name'),
+            //     'description' => $request->input('description'),
+            //     'price' => $request->input('price'),
+            //     'discount' => $request->input('discount'),
+            //     'quantity' => $request->input('quantity'),
+            //     'product_category_id' => $request->input('product_category_id'),
+            //     'status' => $request->input('status'),
+            //     'slug' => $updateSlug,
+            //     'featured' => $request->input('featured'),
+            //     'updated_at' => Carbon::now()
+            // ]);
+            $productUpdated = DB::table('product')->where('product_id', $id)->update([
                 'product_name' => $request->input('product_name'),
                 'description' => $request->input('description'),
                 'price' => $request->input('price'),
@@ -209,32 +273,57 @@ class productController extends Controller
                 'status' => $request->input('status'),
                 'slug' => $updateSlug,
                 'featured' => $request->input('featured'),
-                'updated_at' => Carbon::now()
+                'updated_at' => Carbon::now(),
             ]);
 
             // ======================== update size ===================================
             // kiểm tra nếu có size_id
+            // if ($request->has('size_id')) {
+            //     $sizes = $request->input('size_id');
+
+            //     $product = Product::find($id); // tìm thông tin trong bản product về id gửi lên
+            //     // kiểm tra xem có hay không
+            //     if ($product) {
+            //         $product->sizes()->detach(); // xóa các file size cũ đi
+
+            //         $product->sizes()->attach($sizes); // sizes() là function quan hệ của product_id và size_id, thêm size mới
+            //     }
+            // }
             if ($request->has('size_id')) {
-                $sizes = $request->input('size_id');
-
-                $product = Product::find($id); // tìm thông tin trong bản product về id gửi lên
-                // kiểm tra xem có hay không
+                $product = Product::find($id);
+    
                 if ($product) {
-                    $product->size()->detach(); // xóa các file size cũ đi
-
-                    $product->size()->attach($sizes); // sizes() là function quan hệ của product_id và size_id, thêm size mới
+                    $product->sizes()->sync($request->input('size_id')); // Sử dụng `sync` để tối ưu
                 }
             }
 
             // ======================== update image ===================================
-            // $images = $request->file('image_id');
-            // $name = $images->getClientOriginalName()
-            // if ($request->hasFile('image_id')) {
-            //     foreach ($images as $image) {
-
-            //     }
-            // }
-
+            if ($request->hasFile('image_id')) {
+                // Xóa hình ảnh cũ trong DB và file vật lý
+                $oldImages = DB::table('image')->where('product_id', $id)->get();
+                foreach ($oldImages as $oldImage) {
+                    $filePath = storage_path('app/public/images/' . $oldImage->file_image_url);
+                    if (file_exists($filePath)) {
+                        unlink($filePath); // Xóa file vật lý
+                    }
+                }
+                DB::table('image')->where('product_id', $id)->delete();
+            
+                // Thêm hình ảnh mới
+                foreach ($request->file('image_id') as $image) {
+                    // Lưu file vào thư mục `storage/app/public/images`
+                    $imagePath = $image->store('images', 'public'); 
+            
+                    // Lưu thông tin hình ảnh vào DB
+                    DB::table('image')->insert([
+                        'product_id' => $id,
+                        'file_image_url' => $imagePath, // Chỉ lưu đường dẫn tương đối
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                    ]);
+                }
+            }
+            
             toastr()->success('Đã chỉnh sửa sản phẩm!');
 
             return redirect()->route('admin.product');
@@ -245,6 +334,7 @@ class productController extends Controller
         }
     }
 
+
     // [DELETE] /admin/pages/product/delete/{id}
     public function delete($id)
     {
@@ -254,7 +344,7 @@ class productController extends Controller
 
             if ($product) {
 
-                $product->size()->detach(); // detach: xóa size trong bảng product_size
+                $product->sizes()->detach(); // detach: xóa size trong bảng product_size
 
                 $product->images()->delete(); // detach: xóa size trong bảng product_size
 

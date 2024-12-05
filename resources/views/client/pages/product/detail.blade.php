@@ -3,6 +3,8 @@
 @section('title', 'Sản Phẩm')
 
 @section('main')
+    <meta name="csrf-token" content="{{{ csrf_token() }}}">
+
     <div class="content max-w-7xl mx-auto p-6 bg-white shadow-lg rounded-lg">
         <div class="breadcrumb mb-4 text-gray-600 text-sm">
             <a href="{{ route('home') }}" class="hover:underline">Trang chủ</a> /
@@ -63,22 +65,43 @@
 
                 <p class="text-gray-700 mb-6">{{ $product->description }}</p>
 
-                {{-- size của mỗi sản phẩm --}}
-                <div class="size pt-7 flex">
-                    <div class="font-bold text-[20px] pt-[15px] pr-[12px]">Size:</div>
-                    <div class="flex flex-wrap gap-3 mt-2">
-                        @foreach ($sizes as $item)
-                            <a href="#" class="w-12 h-12 flex items-center justify-center bg-white border border-gray-300 rounded-full text-black font-bold hover:text-white hover:bg-black transition duration-300">
-                                {{ $item->size_name }} 
-                            </a>
-                        @endforeach
-                    </div>
-                </div>
+                <form form-add-cart action="{{ route('cart.add', ['id' => $product->product_id]) }}" method="post">
+                    @csrf
+                    <input type="hidden" name="size" id="size-input">
+                    <input type="hidden" name="quantity" id="quantity-input" value="1">
 
-                <a class="bg-black text-white font-bold py-3 px-6 rounded-full my-5 hover:bg-gray-800 transition duration-300 inline-block"
-                    href="#">
-                    THÊM VÀO GIỎ HÀNG
-                </a>
+                    
+                    <div class="size pt-7 flex">
+                        <div class="font-bold text-[20px] pt-[15px] pr-[12px]">Size:</div>
+                        <div class="flex flex-wrap gap-3 mt-2">
+                            @foreach ($sizes as $item)
+                                <button btn-sizes class="w-12 h-12 flex items-center justify-center bg-white border border-gray-300 rounded-full text-black font-bold hover:text-white hover:bg-black transition duration-300" value="{{ $item->size_id }}">
+                                    {{ $item->size_name }} 
+                                </button>
+                            @endforeach
+                        </div>
+                    </div>
+    
+                    <div class="flex items-center justify-start mt-5">
+                        <p class="font-bold text-[20px] float-left mr-3">Số lượng: </p>
+                        <button decrease-quantity class="px-4 py-1 bg-gray-200 hover:bg-black border-gray-300 border hover:text-white">-</button>
+                        <input quantity type="text" class="w-12 py-[4px] text-center border outline-none border-gray-300" min="1" value="1">
+
+                        <button increase-quantity class="px-4 py-1 bg-gray-200 hover:bg-black border-gray-300 border hover:text-white">+</button>
+                    </div>
+    
+                    <button 
+                        type="button"
+                        btn-add-cart 
+                        class="bg-black text-white font-bold py-3 px-6 rounded-full my-5 hover:bg-gray-800 transition duration-300 inline-block"
+                        data-product-id={{ $product->product_id }}>
+                        THÊM VÀO GIỎ HÀNG
+                    </button>
+                </form>
+                
+
+                {{-- size của mỗi sản phẩm --}}
+                
 
                 <div class="delivery-info mt-8 text-gray-600 text-sm space-y-2">
                     <p>🚚 Miễn phí vận chuyển toàn quốc cho đơn hàng trên 1tr.</p>

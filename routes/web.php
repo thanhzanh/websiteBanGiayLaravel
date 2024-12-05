@@ -1,12 +1,16 @@
 <?php
 
 use App\Http\Controllers\Admin\accountController;
+use App\Http\Controllers\Admin\articleCategoryController;
+use App\Http\Controllers\Admin\articleController;
 use App\Http\Controllers\Admin\dashboardController;
 use App\Http\Controllers\Admin\forgotPasswordController;
 use App\Http\Controllers\Admin\loginController;
+use App\Http\Controllers\Admin\orderController;
 use App\Http\Controllers\Admin\productCategoryController;
 use App\Http\Controllers\Admin\productController;
 use App\Http\Controllers\Client\brandClientController;
+use App\Http\Controllers\Client\CartClientController;
 use App\Http\Controllers\Client\homeClientController;
 use App\Http\Controllers\Client\loginClientController;
 use App\Http\Controllers\Client\productClientController;
@@ -83,6 +87,13 @@ Route::get('/product/brand/{id}', [productClientController::class, 'filterByCate
 
 // Lọc theo nổi bật
 Route::get('/product/featured/{slug}', [productClientController::class, 'filterByFeatured'])->name('products.filterByFeatured');
+
+
+// ========================= order ===========================
+
+Route::get('/cart', [CartClientController::class, 'index'])->name('cart.index');
+
+Route::post('/cart/add/{id}', [CartClientController::class, 'addPost'])->name('cart.add');
 
 
 
@@ -163,9 +174,16 @@ Route::get('/admin/account/detail/{id}', [accountController::class, 'detail'])->
 
 Route::get('/admin/account/edit/{id}', [accountController::class, 'edit'])->name('admin.account.edit');
 
-Route::post('/admin/account/edit/{id}', [accountController::class, 'editPost'])->name('admin.account.edit');
+Route::patch('/admin/account/edit/{id}', [accountController::class, 'editPost'])->name('admin.account.edit');
 
 Route::delete('/admin/account/delete/{id}', [accountController::class, 'delete'])->name('admin.account.delete');
 
 
+// ========================= article-category ===========================
 
+Route::get('/admin/article-category', [articleCategoryController::class, 'index'])->name('admin.articleCategory');
+
+
+// ========================= article ===========================
+
+Route::get('/admin/article', [articleController::class, 'index'])->name('admin.article');

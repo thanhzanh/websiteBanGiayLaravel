@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\ProductCategory;
 
 class homeClientController extends Controller
 {
@@ -14,8 +15,9 @@ class homeClientController extends Controller
     public function index()
     {
         $spp = Product::with('images')->take(8)->get(); // chỉ lấy 8 sản phẩm đầu
+        $categories = ProductCategory::all(); 
 
-        return view('client.pages.home.index', compact('spp'));
+        return view('client.pages.home.index', compact('spp', 'categories'));
     }
 
 

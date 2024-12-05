@@ -70,7 +70,8 @@
                     <select class="parent_id w-full py-2 outline-none border-indigo-300 border pl-4 mt-4" name="product_category_id">
                         <option selected value="">-- Chọn danh mục --</option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->product_category_id }}">
+                                <option value="{{ $category->product_category_id }}" 
+                                    @if ($category->product_category_id == $products->product_category_id) selected @endif>
                                     {{ $category->product_category_name }}
                                 </option>
 
@@ -81,7 +82,7 @@
                                         'prefix' => '--',
                                     ])
                                 @endif
-                            @endforeach                                     
+                            @endforeach                                      
                     </select>
                 </div>
                 <div class="mt-6">

@@ -17,38 +17,42 @@
 
         <div class="grid grid-cols-4 gap-6">
             @foreach ($spp as $item)
+            @if ($item->featured == "1")
                 <div
                     class="border border-gray-200 rounded-lg p-4 shadow-md hover:shadow-lg transition-transform transform hover:-translate-y-1 bg-white">
                     <div
                         class="bg-red-500 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-3">
                         NEW
                     </div>
-                    <a href="{{ route('product.detail', ['id' => $item->product_id]) }}" class="block mb-3">
+                    <a href="{{ route('product.detail', ['slug' => $item->slug]) }}" class="block mb-3">
+
                         @if ($item->images->isNotEmpty())
-                            <img src="{{ $item->images->first()->file_image_url }}" alt="{{ $item->product_name }}"
-                                class="w-full h-[180px] object-cover rounded-md">
-                        @else
-                            <img src="default_image.jpg" alt="Default Image"
-                                class="w-full h-[180px] object-cover rounded-md">
+                        <img src="{{ asset('storage/' . $item->images->first()->file_image_url) }}" alt="{{ $item->product_name }}" class="w-full h-full object-cover">
                         @endif
                     </a>
-                    <a href="{{ route('product.detail', ['id' => $item->product_id]) }}"
+                    <a href="{{ route('product.detail', ['slug' => $item->slug]) }}"
                         class="text-gray-900 font-bold text-base hover:text-red-500">
                         {{ $item->product_name }}
                     </a>
                     <p class="text-gray-500 text-sm mt-1">
-                        Mã sản phẩm: {{ $item->product_id }}
+                        Mã sản phẩm: 
+                        @foreach ($categories as $category)
+                                        @if ($category->product_category_id == $item->product_category_id)
+                                            <p class="text-gray-500 text-[14px] font-bold uppercase">{{ $category->product_category_name }}</p>                             
+                                        @endif
+                        @endforeach
                     </p>
                     <p class="text-gray-900 font-bold text-lg mt-2">
                         {{ number_format($item->price, 0, ',', '.') }} VND
                     </p>
-                    <a href="{{ route('product.detail', ['id' => $item->product_id]) }}"
+                    <a href="{{ route('product.detail', ['slug' => $item->slug]) }}"
                         class="block text-center text-white bg-blue-600 hover:bg-blue-700 py-2 mt-3 rounded-md transition-colors">
                         Xem chi tiết
                     </a>
                 </div>
+                @endif
+
             @endforeach
-            F
         </div>
         {{-- {{ dd($spp) }} --}}
 

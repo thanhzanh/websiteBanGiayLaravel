@@ -7,7 +7,7 @@
     <div class="mt-8">
         <form action="{{ route('admin.account.edit', ['id' => $admins->admin_id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
-            @method('POST')
+            @method('PATCH')
             <div class="mt-6">
                 <label class="text-xl font-bold" for="admin_name">Tên tài khoản</label> <br>
                 <input class="w-full py-3 outline-none pl-5 border-collapse border-indigo-300 border mt-4" type="text"

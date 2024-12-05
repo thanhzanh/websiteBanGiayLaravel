@@ -42,6 +42,10 @@ class loginController extends Controller
             return back()->withInput();
         }
 
+        // lưu info vào sesion
+        // Lưu thông tin admin vào session
+        Session::put('infoAdmin', $user);
+
         toastr()->success('Đăng nhập thành công!');
         return redirect()->route('admin.home');
     }
@@ -51,7 +55,10 @@ class loginController extends Controller
     {
 
         // xóa token ra khỏi session khi đăng xuất
-        Session::forget('admin_token');
+        Session::forget('infoAdmin');
+        // Session::flush();
+
+        cookie()->forget('laravel_session');
 
         toastr()->success('Đăng xuất thành công!');
 

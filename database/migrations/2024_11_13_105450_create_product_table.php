@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('product_name', 255);
             $table->text('description')->nullable();
             $table->decimal('price', 10, 2); 
-            $table->decimal('discount', 5, 2)->default(0);
+            $table->integer('discount')->default(0);
             $table->integer('quantity', 100)->default(0);
             $table->text('image')->nullable();
             $table->string('status')->default('active');
