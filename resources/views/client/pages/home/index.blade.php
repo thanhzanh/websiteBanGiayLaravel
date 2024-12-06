@@ -15,8 +15,8 @@
             CÁC SẢN PHẨM NỔI BẬT CỦA SHOP
         </div>
 
-        <div class="grid grid-cols-4 gap-6">
-            @foreach ($spp as $item)
+        <div class="grid grid-cols-4 gap-6 max-w-screen-xl">
+            @foreach ($products as $item)
             @if ($item->featured == "1")
                 <div
                     class="border border-gray-200 rounded-lg p-4 shadow-md hover:shadow-lg transition-transform transform hover:-translate-y-1 bg-white">
@@ -35,7 +35,6 @@
                         {{ $item->product_name }}
                     </a>
                     <p class="text-gray-500 text-sm mt-1">
-                        Mã sản phẩm: 
                         @foreach ($categories as $category)
                                         @if ($category->product_category_id == $item->product_category_id)
                                             <p class="text-gray-500 text-[14px] font-bold uppercase">{{ $category->product_category_name }}</p>                             

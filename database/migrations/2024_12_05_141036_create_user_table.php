@@ -18,8 +18,6 @@ return new class extends Migration
             $table->string('user_password')->nullable(); // Nếu chỉ đăng nhập bằng Google, có thể để null
             $table->string('user_status')->default('active');
             $table->string('user_phone', 10)->nullable();
-            $table->string('user_image')->nullable();
-            $table->string('user_address');
             $table->string('google_id')->nullable(); // Lưu ID Google
             $table->string('google_avatar')->nullable(); // Lưu avatar từ Google
             $table->timestamps();

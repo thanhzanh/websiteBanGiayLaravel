@@ -70,15 +70,20 @@
                             name="product_category_id">
                             <option selected value="">-- Chọn danh mục --</option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->product_category_id }}">
-                                    {{ $category->product_category_name }}
+                                
+                                <option value="{{ $category->product_category_id }}"
+                                    
+                                    @foreach ($products as $product)
+                                        @if ($category->product_category_id == $product->product_category_id) selected @endif>
+                                        {{ $category->product_category_name }}
+                                    @endforeach
                                 </option>
 
                                 {{-- Hiển thị danh mục con nếu có --}}
                                 @if ($category->children->isNotEmpty())
                                     @include('admin.mixin.child_categories', [
                                         'category' => $category,
-                                        'prefix' => '--',
+                                        'prefix' => '--', // Tiền tố để hiển thị danh mục con
                                     ])
                                 @endif
                             @endforeach

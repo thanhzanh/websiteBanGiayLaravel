@@ -132,15 +132,19 @@
                                     class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
                                     NEW
                                 </div>
-                                <a href="{{ route('product.detail', ['id' => $item->product_id]) }}"
+                                <a href="{{ route('product.detail', ['slug' => $item->slug]) }}"
                                     class="flex justify-center">
-                                    <img src="{{ $item->image }}" alt="{{ $item->product_name }}" class="w-[70%]">
+                                    @if ($item->images->isNotEmpty())
+                                        <img class="w-auto"
+                                            src="{{ asset('storage/' . $item->images->first()->file_image_url) }}"
+                                            alt="{{ $item->product_name }}" class="w-auto h-40 object-cover">
+                                    @endif
                                 </a>
-                                <a href="{{ route('product.detail', ['id' => $item->product_id]) }}"
+                                <a href="{{ route('product.detail', ['slug' => $item->slug]) }}"
                                     class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
                                     {{ $item->product_name }} <br>
                                 </a>
-                                <a href="{{ route('product.detail', ['id' => $item->product_id]) }}"
+                                <a href="{{ route('product.detail', ['slug' => $item->slug]) }}"
                                     class="text-gray-500 text-xs font-bold uppercase">
                                     {{ $item->product_id }}
                                 </a>

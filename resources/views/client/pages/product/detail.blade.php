@@ -13,27 +13,31 @@
         </div>
 
         <div class="flex flex-col md:flex-row gap-8">
-            <div class="md:w-1/2 flex items-center relative">
+            <div class="md:w-1/2 flex relative mt-4">
                 <!-- Các hình ảnh phụ -->
                 <div class="flex flex-col w-[125px] top-0">
                     <div class="top-0 h-[460px]">
                         <!-- slice(1) bỏ qua hình đầu tiên -->
                         @foreach ($product->images->slice(1) as $image)
-                            <img class="w-full my-2 h-[140px] object-cover rounded-md shadow-md transition-transform duration-300 ease-in-out hover:scale-105"
-                                src="{{ asset('storage/' . $image->file_image_url) }}" alt="Hình phụ">
+                            <img class="w-full my-2 h-[140px] object-cover rounded-md shadow-md cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105"
+                                src="{{ asset('storage/' . $image->file_image_url) }}" 
+                                alt="Hình phụ"
+                                data-src="{{ asset('storage/' . $image->file_image_url) }}" 
+                                title="{{ $product->product_name }}">
                         @endforeach
                     </div>
-
                 </div>
+            
                 <!-- Hình ảnh chính -->
-                <div class="w-[460px] h-[440px] right-2 mb-4 ml-4">
+                <div class="w-[460px] h-[440px] right-2 mb-4 ml-4 overflow-hidden relative">
                     @if ($product->images->isNotEmpty())
-                        <img class="w-full h-auto rounded-lg shadow-lg object-cover"
+                        <img id="mainImage" class="w-full h-auto rounded-lg shadow-lg object-cover transition-transform duration-300 ease-in-out transform hover:scale-125 hover:cursor-pointer"
                             src="{{ asset('storage/' . $product->images->first()->file_image_url) }}"
-                            alt="{{ $product->product_name }}">
+                            alt="{{ $product->product_name }}"
+                            title="{{ $product->product_name }}">
                     @endif
                 </div>
-
+            
                 <!-- Label "NEW" -->
                 @if ($product->status == 1)
                     <div
@@ -42,6 +46,7 @@
                     </div>
                 @endif
             </div>
+            
 
             <div class="md:w-1/2">
                 <h1 class="text-3xl font-bold mb-4">{{ $product->product_name }}</h1>

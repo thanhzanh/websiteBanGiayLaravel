@@ -1,6 +1,6 @@
 @extends('client.layouts.detail')
 
-@section('title', 'Sản Phẩm')
+@section('title', 'Giỏ Hàng')
 
 @section('main')
     <div class="container mx-auto my-10 px-4">
@@ -28,8 +28,8 @@
                                         <div class="w-[120px] h-[120px] mr-8">
                                             <a href="{{ route('product.detail', ['slug' => $item->slug]) }}">
                                                 <img class="w-auto"
-                                                src="{{ asset('storage/' . $item->images->first()->file_image_url) }}"
-                                                alt="{{ $item->product_name }}" class="w-auto h-40 object-cover">
+                                                    src="{{ asset('storage/' . $item->images->first()->file_image_url) }}"
+                                                    alt="{{ $item->product_name }}" class="w-auto h-40 object-cover">
                                             </a>
                                         </div>
                                         {{-- ten san pham --}}
@@ -48,16 +48,19 @@
                             </td>
 
                             <td class="px-4 py-2 border border-gray-200 text-center">
-                                <span class="font-bold">{{ number_format($product->price, 0, ',', '.') }} VND</span>    
+                                <span class="font-bold">{{ number_format($product->price, 0, ',', '.') }} VND</span>
                             </td>
                             <td class="px-4 py-2 border border-gray-200 text-center">
                                 <div class="flex items-center justify-center">
-                                    <input name="quantity" product-id={{ $product->product_id }} type="number" class="w-12 text-center border border-gray-300 rounded-md mx-2"
-                                        min="1" value="{{ $product->quantity }}">
+                                    <input name="quantity" product-id={{ $product->product_id }} type="number"
+                                        class="w-12 text-center border border-gray-300 rounded-md mx-2" min="1"
+                                        value="{{ $product->quantity }}">
                                 </div>
                             </td>
                             <td class="px-4 py-2 border border-gray-200 text-center">
-                                <span class="font-bold">{{ number_format($product->price * $product->quantity, 0, ',', '.') }} VNĐ</span>
+                                <span
+                                    class="font-bold">{{ number_format($product->price * $product->quantity, 0, ',', '.') }}
+                                    VNĐ</span>
                             </td>
                             <td class="px-4 py-2 border border-gray-200 text-center">
                                 <div class="inline-block">
@@ -67,7 +70,7 @@
                                         <button title="Xóa"
                                             class="px-3 py-[0.3rem] bg-red-500 text-[1rem] font-bold text-white rounded-2xl hover:bg-black">
                                             <i class="fa-solid fa-minus"></i>
-                                            </button>
+                                        </button>
                                     </form>
                                 </div>
                             </td>
@@ -88,23 +91,54 @@
         <!-- Tổng cộng -->
         <div class="bg-white rounded-lg shadow-md p-6 mt-6">
             <h2 class="text-xl font-semibold mb-4">Cộng Giỏ Hàng</h2>
+
+
             <div class="border-b border-gray-200 pb-4 mb-4">
                 <div class="flex justify-between mb-2">
                     <span class="text-gray-600">Tạm tính</span>
-                    <span class="text-gray-900 font-bold">1.700.000₫</span>
+                    @php
+                        $total = 0;
+                    @endphp
+                    @foreach ($cartItems as $cartItem)
+                        @php
+                            $total += $cartItem->quantity * $cartItem->price;
+                        @endphp
+                    @endforeach
+
+                    <span class="text-gray-900 font-bold">{{ number_format($total, 0, ',', '.') }} VNĐ</span>
+
                 </div>
                 <div class="flex justify-between mb-2">
                     <span class="text-gray-600">Giao hàng</span>
-                    <span class="text-gray-900">30.000₫</span>
+                    <span class="text-gray-900 font-bold">0 VNĐ</span>
                 </div>
                 <div class="text-sm text-gray-500">Tùy chọn giao hàng sẽ được cập nhật trong quá trình thanh toán.</div>
             </div>
             <div class="flex justify-between text-lg font-bold mb-4">
-                <span>Tổng</span>
-                <span>1.730.000₫</span>
+                <span>Tổng thành tiền</span>
+                @php
+                    $total = 0;
+                @endphp
+                @foreach ($cartItems as $cartItem)
+                    @php
+                        $total += $cartItem->quantity * $cartItem->price;
+                    @endphp
+                @endforeach
+
+                <span class="text-gray-900 font-bold">{{ number_format($total, 0, ',', '.') }} VNĐ</span>
             </div>
+
+            {{-- @foreach ($cartItems as $cartItem)
+                
+                <div class="flex justify-between text-lg font-bold mb-4">
+                    <span>Tổng thành tiền</span>
+                    <span>1.730.000 VNĐ</span>
+                </div>
+                
+            @endforeach --}}
             <button class="w-full bg-gray-500 text-white py-3 rounded-lg hover:bg-gray-600 font-bold">
-                Tiến hành thanh toán
+                <a href="{{ route('check-out.index') }}">Tiến hành thanh toán</a>
+                
             </button>
         </div>
     </div>

@@ -80,6 +80,7 @@ const listInputQuantity = document.querySelectorAll('input[name="quantity"]');
 if (listInputQuantity.length > 0) {
   listInputQuantity.forEach(input => {
     input.addEventListener("change", (e) => {
+        e.preventDefault();
       
       const product_id = input.getAttribute('product-id');
       const quantity = input.value;
@@ -92,3 +93,16 @@ if (listInputQuantity.length > 0) {
     });
   });
 }
+
+// chuyển hình ảnh trang chi tiết sản phẩm
+const thumbnails = document.querySelectorAll('.flex img[data-src]');
+    const mainImage = document.getElementById('mainImage');
+
+    // Lặp qua các hình phụ và gắn sự kiện click
+    thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', function () {
+            // Lấy đường dẫn từ data-src và thay đổi src của hình chính
+            const newSrc = this.getAttribute('data-src');
+            mainImage.setAttribute('src', newSrc);
+        });
+    });

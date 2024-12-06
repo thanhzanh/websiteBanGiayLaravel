@@ -71,10 +71,10 @@ Route::get('/tintuc', function () {
 Route::get('product/brand', [brandClientController::class, 'index'])->name('product.brand');
 
 // Trang login
-Route::get('/login', [loginClientController::class, 'login'])->name('login');
+Route::get('/account/login', [loginClientController::class, 'login'])->name('account.login');
 
 // Trang sign up 
-Route::get('/signup', [loginClientController::class, 'signup'])->name('signup');
+Route::get('/account/signup', [loginClientController::class, 'signup'])->name('account.signup');
 
 // Tìm kiếm sản phẩm
 Route::get('/search', [productClientController::class, 'searchProduct'])->name('search');
@@ -99,6 +99,8 @@ Route::delete('/cart/delete/{id}', [CartClientController::class, 'delete'])->nam
 
 Route::get('/cart/update/{quantity}/{productId}', [CartClientController::class, 'update'])->name('cart.update');
 
+// ========================= check-out ===========================
+Route::get('/check-out', [CartClientController::class, 'checkout'])->name('check-out.index');
 
 
 

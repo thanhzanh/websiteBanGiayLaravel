@@ -23,7 +23,7 @@ class productClientController extends Controller
     {
         $categories = ProductCategory::all(); 
 
-        $data = Product::paginate(24); 
+        $data = Product::where('status', 'active')->paginate(8); 
 
         return view('client.pages.product.index', compact('data', 'categories'));
     }

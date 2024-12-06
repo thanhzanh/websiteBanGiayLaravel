@@ -14,20 +14,28 @@
                         alt="logo">
                 </div>
                 <div class="inner-search justify-center flex-1 mx-20">
-                    <form action="{{ route('search') }}" method="GET" class="my-5 flex">
-                        <input class="py-3 pl-5 rounded-3xl min-w-full relative" type="text" name="tensanpham"
-                            placeholder="Nhập từ khóa ..." value="">
-                        <button type="submit" class="text-white text-xl">
-                            <i class="text-black text-2xl px-2 fa-solid fa-magnifying-glass"></i>
+                    <form action="{{ route('search') }}" method="GET" class="my-5 flex relative">
+                        <input 
+                            class="py-3 pl-5 pr-12 rounded-3xl min-w-full relative border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500" 
+                            type="text" 
+                            name="tensanpham" 
+                            placeholder="Nhập từ khóa ..." 
+                            value="">
+                        <button 
+                            type="submit" 
+                            class="text-black text-xl absolute right-3 top-1/2 transform -translate-y-1/2">
+                            <i class="text-black text-2xl fa-solid fa-magnifying-glass"></i>
                         </button>
                     </form>
                 </div>
+                
                 <div class="inner-user-cart text-white flex justify-end my-auto px-6 items-center">
-                    <div>
-                        <p>Nguyen Van A</p>
-                    </div>
+                    {{-- <div class="flex mr-2">
+                        <p class="text-[20px] font-serif">Nguyen Van A</p>
+                        <span title="Cài đặt" class="ml-4 text-[20px]"><i class="fa-solid fa-gear"></i></span>
+                    </div> --}}
                     <div title="Đăng nhập & đăng ký" class="my-account h-auto p-4 mx-2">
-                        <a class="text-3xl" href="{{ route('login') }}"><i class="fa-solid fa-user"></i></a>
+                        <a class="text-3xl" href="{{ route('account.login') }}"><i class="fa-solid fa-user"></i></a>
                     </div>
                     <div title="Giỏ hàng" class="my-cart h-auto p-4 mx-2 relative">
                         <a class="text-3xl" href="{{ route('cart.index') }}">

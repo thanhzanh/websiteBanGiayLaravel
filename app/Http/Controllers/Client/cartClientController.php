@@ -23,13 +23,14 @@ class cartClientController extends Controller
 
         $sizes = Size::all();
 
-        return view('client.pages.cart.index', compact('carts', 'products', 'sizes'));
+        $cartItems = CartItem::all();
+
+        return view('client.pages.cart.index', compact('carts', 'products', 'sizes', 'cartItems'));
     }
 
     // [POST] /cart/add/{id}
     public function addPost(Request $request, $id)
     {
-
         // $productId = $request->product_id;
 
         $user = Auth::user();
@@ -70,6 +71,7 @@ class cartClientController extends Controller
 
         return back();
     }
+
 
     // [DELETE] /cart/delete/{id}
     public function delete($id)
@@ -116,9 +118,12 @@ class cartClientController extends Controller
         $sessionId = $request->session()->getId();
 
         // Nếu người dùng đã đăng nhập, dùng user_id, nếu không thì dùng session_id
-        $cart = Cart::firstOrCreate(
-            ['user_id' => $user ? $user->user_id : null, 'session_id' => $user ? null : $sessionId]
-        );
+        if (!$user) {
+
+            $cart = Cart::firstOrCreate(
+                ['user_id' => $user ? $user->user_id : null, 'session_id' => $user ? null : $sessionId]
+            );
+        }
 
         // kiểm tra sản phẩm tồn tại size trong giỏ hàng chưa
         $cartItem = CartItem::where('cart_id', $cart->cart_id)
@@ -130,9 +135,15 @@ class cartClientController extends Controller
                 'quantity' => $quantity,
             ]);
         }
-
-        toastr()->success('Đã cập nhật số lượng sản phẩm');
-
+        toastr()->success('Đã cập nhật số lượng sản phẩm trong giỏ hàng');
         return back();
+    }
+
+    // checkout
+    // [GET] /cart
+    public function checkout()
+    {
+
+        return view('client.pages.cart.check-out');
     }
 }

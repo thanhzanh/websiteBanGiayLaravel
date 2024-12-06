@@ -5,7 +5,7 @@
 @section('content')
 <h1 class="font-bold text-blue-800 text-2xl border-b-2 border-b-blue-800 uppercase text-center pb-3">Chỉnh sửa sản phẩm</h1>
 <div class="mt-8">
-    <form action="{{ route('admin.account.edit', ['id' => $products->product_id]) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.product.edit', ['id' => $products->product_id]) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <div class="flex justify-between">
@@ -69,21 +69,22 @@
                     <label class="text-xl font-bold" for="product_category_id ">Danh mục cha</label> <br>
                     <select class="parent_id w-full py-2 outline-none border-indigo-300 border pl-4 mt-4" name="product_category_id">
                         <option selected value="">-- Chọn danh mục --</option>
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->product_category_id }}" 
-                                    @if ($category->product_category_id == $products->product_category_id) selected @endif>
-                                    {{ $category->product_category_name }}
-                                </option>
-
-                                {{-- Hiển thị danh mục con nếu có --}}
-                                @if ($category->children->isNotEmpty())
-                                    @include('admin.mixin.child_categories', [
-                                        'category' => $category,
-                                        'prefix' => '--',
-                                    ])
-                                @endif
-                            @endforeach                                      
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->product_category_id }}" 
+                                @if ($category->product_category_id == $products->product_category_id) selected @endif>
+                                {{ $category->product_category_name }}
+                            </option>
+                    
+                            {{-- Hiển thị danh mục con nếu có --}}
+                            @if ($category->children->isNotEmpty())
+                                @include('admin.mixin.child_categories', [
+                                    'category' => $category,
+                                    'prefix' => '--', // Tiền tố để hiển thị danh mục con
+                                ])
+                            @endif
+                        @endforeach                                      
                     </select>
+                    
                 </div>
                 <div class="mt-6">
                     <label class="text-xl font-bold" for="status">Trạng thái</label>

@@ -10,12 +10,12 @@
     <title>Login</title>
 </head>
 
-<body class="bg-[#45cb9e] flex items-center justify-center min-h-screen">
+<body class="bg-[#809b92] flex items-center justify-center min-h-screen">
     <div class="w-96 p-6 shadow-lg bg-white rounded-md">
         <!-- @include('admin.mixin.flash-messages')
           -->
 
-        <h1 class="font-bold items-center text-center text-3xl mb-8">LOGIN</h1>
+        <h1 class="font-bold items-center text-center text-2xl mb-8">TRANG QUẢN TRỊ VIÊN</h1>
         <form action="{{ URL::to('/admin/home') }}" method="post">
             @csrf
             <div class="items-center">
@@ -36,7 +36,7 @@
                 <a href="{{ route('admin.forgot-password.request') }}" class="flex justify-end text-gray-500 italic">Forgot Password?</a>
             </div>
             <div>
-                <input type="submit" value="Login" class="pt-2 pb-2 pl-10 pr-10 mt-6 text-2xl text-white font-bold bg-indigo-600 w-full rounded-3xl hov" />
+                <input type="submit" value="Login" class="pt-2 pb-2 pl-10 pr-10 mt-6 text-2xl text-white font-bold bg-slate-700 hover:text-black hover:bg-slate-200 hover:cursor-pointer w-full rounded-3xl hov" />
             </div>
         </form>
     </div>

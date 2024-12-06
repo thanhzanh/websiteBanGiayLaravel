@@ -54,7 +54,7 @@
         </form>
 
         <p class="text-center text-gray-600 mt-4">
-            Nếu bạn đã có tài khoản? <a href="{{ route('login') }}" class="text-indigo-600 hover:underline">Login</a>
+            Nếu bạn đã có tài khoản? <a href="{{ route('account.login') }}" class="text-indigo-600 hover:underline">Đăng nhập</a>
         </p>
     </div>
 </body>
