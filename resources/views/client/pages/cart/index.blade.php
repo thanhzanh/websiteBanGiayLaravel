@@ -33,16 +33,19 @@
                                             </a>
                                         </div>
                                         {{-- ten san pham --}}
-                                        <span>{{ $item->product_name }} -</span>
+                                        <div class="block">
+                                            <span>{{ $item->product_name }}</span> <br>
 
-                                        {{-- size --}}
-                                        @foreach ($sizes as $size)
-                                            @if ($size->size_id == $product->size_id)
-                                                <span class="font-bold">
-                                                    {{ $size->size_name }}
-                                                </span>
-                                            @endif
-                                        @endforeach
+                                            {{-- size --}}
+                                            @foreach ($sizes as $size)
+                                                @if ($size->size_id == $product->size_id)
+                                                    <span class="font-bold">
+                                                        {{ $size->size_name }}
+                                                    </span>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                        
                                     @endif
                                 @endforeach
                             </td>
@@ -128,14 +131,6 @@
                 <span class="text-gray-900 font-bold">{{ number_format($total, 0, ',', '.') }} VNĐ</span>
             </div>
 
-            {{-- @foreach ($cartItems as $cartItem)
-                
-                <div class="flex justify-between text-lg font-bold mb-4">
-                    <span>Tổng thành tiền</span>
-                    <span>1.730.000 VNĐ</span>
-                </div>
-                
-            @endforeach --}}
             <button class="w-full bg-gray-500 text-white py-3 rounded-lg hover:bg-gray-600 font-bold">
                 <a href="{{ route('check-out.index') }}">Tiến hành thanh toán</a>
                 

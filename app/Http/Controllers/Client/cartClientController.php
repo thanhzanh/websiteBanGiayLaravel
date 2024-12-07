@@ -31,9 +31,8 @@ class cartClientController extends Controller
     // [POST] /cart/add/{id}
     public function addPost(Request $request, $id)
     {
-        // $productId = $request->product_id;
 
-        $user = Auth::user();
+        $userInfo = session('infoUser', null);
 
         $sessionId = $request->session()->getId();
 
@@ -42,9 +41,16 @@ class cartClientController extends Controller
         $priceNew = $product->price - ($product->price * ($product->discount) / 100);
 
         // Nếu người dùng đã đăng nhập, dùng user_id, nếu không thì dùng session_id
-        $cart = Cart::firstOrCreate(
-            ['user_id' => $user ? $user->user_id : null, 'session_id' => $user ? null : $sessionId]
-        );
+        if ($userInfo) {
+            $cart = Cart::firstOrCreate(
+                ['user_id' => $userInfo->user_id, 'session_id' => null]
+            );
+        } else {
+            $cart = Cart::firstOrCreate(
+                ['user_id' => null, 'session_id' => $sessionId]
+            );
+        }
+        
 
         // kiểm tra sản phẩm tồn tại size trong giỏ hàng chưa
         $cartItem = CartItem::where('cart_id', $cart->cart_id)

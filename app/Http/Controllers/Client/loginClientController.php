@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class loginClientController extends Controller
 {
+    // [GET] /account/login
     public function login()
     {
         return view('client.login.index');
@@ -17,51 +22,97 @@ class loginClientController extends Controller
         return view('client.login.signup');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    // [POST] /account/signup
+    public function signupPost(Request $request)
     {
-        //
+
+        $messages = [
+            'user_name.required' => 'Họ và tên là bắt buộc.',
+            'user_name.string' => 'Họ và tên phải là một chuỗi ký tự.',
+            'user_name.max' => 'Họ và tên không được vượt quá 255 ký tự.',
+    
+            'user_email.required' => 'Email là bắt buộc.',
+            'user_email.email' => 'Email không đúng định dạng.',
+            'user_email.regex' => 'Email không được chứa ký tự đặc biệt hoặc dấu.',
+    
+            'user_password.required' => 'Mật khẩu là bắt buộc.',
+            'user_password.min' => 'Mật khẩu phải chứa ít nhất 8 ký tự.',
+            'user_password.regex' => 'Mật khẩu phải chứa ít nhất 1 ký tự in hoa và 1 chữ số.',
+
+            'confirm_password.required' => 'Xác nhận mật khẩu là bắt buộc.',
+            'confirm_password.same' => 'Xác nhận mật khẩu không khớp với mật khẩu.',
+    
+            'user_phone.required' => 'Số điện thoại là bắt buộc.',
+            'user_phone.regex' => 'Số điện thoại phải gồm 10 chữ số.',
+        ];
+
+        $validate = $request->validate([
+            'user_name' => 'required|string|max:255',
+            'user_email' => [
+                'required',
+                'email',
+                'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
+            ],
+            'user_password' => [
+                'required',
+                'min:8',
+                'regex:/^(?=.*[A-Z])(?=.*\d).+$/', // Tối thiểu 1 ký tự in hoa và 1 số
+            ],
+            'confirm_password' => 'required|same:user_password',
+            'user_phone' => 'required|regex:/^[0-9]{10}$/',
+        ], $messages);
+
+
+        // lưu database
+        User::create([
+            'user_name' => $request->user_name,
+            'user_password' => bcrypt($request->user_password),
+            'user_email' => $request->user_email,
+            'user_phone' => $request->user_phone
+        ]);
+
+        toastr()->success('Đăng ký tài khoản thành công. Mời bạn đăng nhập');
+
+        return redirect()->route('account.login');
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    // [POST] /account/signup
+    public function loginPost(Request $request) {
+        
+        $user_email = $request->user_email;
+        $user_password = $request->user_password;
+
+        $user = DB::table('users')->where('user_email', $user_email)->first();
+
+        if (!$user) {
+            toastr()->error('Email hoặc mật khẩu không chính xác');
+            return back()->withInput();
+        }
+
+        if (!Hash::check($user_password, $user->user_password)) {
+            toastr()->error('Mật khẩu không chính xác');
+            return back()->withInput();
+        }
+
+        // lưu info vào sesion
+        // Lưu thông tin user vào session
+        Session::put('infoUser', $user);
+
+        toastr()->success('Đăng nhập thành công!');
+        return redirect()->route('home');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    // [GET] /account/logout
+    public function logout()
     {
-        //
+        Session::forget('infoUser');
+
+        // cookie()->forget('laravel_session');
+
+        toastr()->success('Đăng xuất thành công!');
+
+        return redirect()->route('home');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

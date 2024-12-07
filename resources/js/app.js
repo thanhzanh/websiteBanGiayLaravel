@@ -106,3 +106,6 @@ const thumbnails = document.querySelectorAll('.flex img[data-src]');
             mainImage.setAttribute('src', newSrc);
         });
     });
+
+
+

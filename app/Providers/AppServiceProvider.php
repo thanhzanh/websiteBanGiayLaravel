@@ -31,7 +31,14 @@ class AppServiceProvider extends ServiceProvider
         $categories = ProductCategory::all();
         View::share('categories', $categories);
 
-        $countProductInCart = DB::table('cart_items')->sum('quantity');
+        // lấy ra số lượng sản phẩm của từng giỏ hàng
+        $sessionId = session()->getId();
+        $userId = session('infoUser.user_id', null);
+
+        // nếu là khách đăng nhập
+        
+
+        $countProductInCart = DB::table('cart_items')->where('cart_id')->sum('quantity');
         View::share('countProduct', $countProductInCart);
     }
 }

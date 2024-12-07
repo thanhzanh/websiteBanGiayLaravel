@@ -29,6 +29,11 @@ function setActive($route)
     return Request::path()  == $route ? 'active' : '';
 }
 
+// Khi người dùng nhập 1 đường dẫn url không hợp lệ
+Route::fallback(function () {
+    return response()->view('client.error.404', [], 404);
+});
+
 // ==================================== FONTEND ==========================================
 
 // Trang Home
@@ -70,11 +75,6 @@ Route::get('/tintuc', function () {
 // Thương Hiệu
 Route::get('product/brand', [brandClientController::class, 'index'])->name('product.brand');
 
-// Trang login
-Route::get('/account/login', [loginClientController::class, 'login'])->name('account.login');
-
-// Trang sign up 
-Route::get('/account/signup', [loginClientController::class, 'signup'])->name('account.signup');
 
 // Tìm kiếm sản phẩm
 Route::get('/search', [productClientController::class, 'searchProduct'])->name('search');
@@ -87,6 +87,19 @@ Route::get('/product/brand/{id}', [productClientController::class, 'filterByCate
 
 // Lọc theo nổi bật
 Route::get('/product/featured/{slug}', [productClientController::class, 'filterByFeatured'])->name('products.filterByFeatured');
+
+
+// ========================= account(user) ===========================
+
+Route::get('/account/login', [loginClientController::class, 'login'])->name('account.login');
+
+Route::post('/account/login', [loginClientController::class, 'loginPost'])->name('account.login');
+
+Route::get('/account/signup', [loginClientController::class, 'signup'])->name('account.signup');
+
+Route::post('/account/signup', [loginClientController::class, 'signupPost'])->name('account.signup');
+
+Route::get('/account/logout', [loginClientController::class, 'logout'])->name('account.logout');
 
 
 // ========================= order ===========================

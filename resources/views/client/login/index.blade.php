@@ -1,51 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('client.layouts.default')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @vite('resources/css/app.css')
-    @vite('resources/css/index.css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <title>Login</title>
-</head>
+@section('title', 'Trang Chủ')
 
-<body class="bg-[#45cb9e] flex items-center justify-center min-h-screen">
-    <div class="w-96 p-6 shadow-lg bg-white rounded-md">
-        <!-- @include('client.mixins.flash-messages')
-          -->
+@section('content')
 
-        <h1 class="font-bold items-center text-center text-3xl mb-8">LOGIN</h1>
-        <form action="{{ URL::to('/home') }}" method="post">
-            @csrf
-            <div class="items-center">
-                <label for="email">Email <span class="text-red-600">*</span></label> <br>
-                <input type="text" name="email"
-                    class="w-full mt-2 mb-2 p-3 rounded-[4rem] outline-none border-solid border">
-                @if ($errors->has('email'))
-                    <span class="font-bold italic text-red-500">* {{ $errors->first('email') }}</span>
-                @endif
+    <div class="max-w-5xl mx-auto py-12">
+        <div class="grid grid-cols-2 gap-8">
+            <!-- Login Section -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-xl font-bold mb-4">ĐĂNG NHẬP TÀI KHOẢN</h2>
+                <form action="{{ route('account.login') }}" method="POST">
+                    @csrf
+                    <div class="mb-4">
+                        <label for="user_email" class="block text-sm font-bold text-gray-700">Email:</label>
+                        <input type="email" id="user_email" name="user_email" placeholder="Email"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2">
+                        @if ($errors->has('user_email'))
+                            <span class="font-bold italic text-red-500"> {{ $errors->first('user_email') }}</span>
+                        @endif
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="user_password" class="block text-sm font-bold text-gray-700">Mật khẩu:</label>
+                        <input type="password" id="user_password" name="user_password" placeholder="Mật khẩu"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2">
+                        @if ($errors->has('user_password'))
+                            <span class="font-bold italic text-red-500"> {{ $errors->first('user_password') }}</span>
+                        @endif
+                    </div>
+
+                    <button type="submit" class="bg-black mb-2 text-white px-6 py-2 rounded-md hover:bg-gray-800">ĐĂNG
+                        NHẬP
+                    </button> <br>
+                    <a href="#" class="text-sm text-right text-blue-500 hover:underline">Quên mật khẩu?</a>
+                </form>
+                <!-- Social Login -->
+                <div class="mt-6 text-center">
+                    <p class="text-sm text-gray-600">Hoặc đăng nhập bằng</p>
+                    <div class="flex justify-center gap-4 mt-2">
+                        <button class="bg-red-500 text-white px-4 py-2 rounded-md flex items-center">
+                            <span class="mr-2"><i class="fa-brands fa-google-plus-g"></i></span>
+                            Google
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="items-center">
-                <label for="password">Password <span class="text-red-600">*</span> </label> <br>
-                <input type="password" name="password"
-                    class="w-full mt-2 mb-2 p-3 rounded-[4rem] outline-none border-solid border">
-                @if ($errors->has('password'))
-                    <span class="font-bold italic text-red-500">* {{ $errors->first('password') }}</span>
-                @endif
+            <!-- Register Section -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-xl font-bold mb-4">TẠO TÀI KHOẢN MỚI</h2>
+                <p class="text-sm text-gray-700 mb-6">
+                    Đăng ký tài khoản ngay để có thể mua hàng nhanh chóng và dễ dàng hơn! Ngoài ra còn có rất nhiều
+                    chính sách và ưu đãi cho các thành viên.
+                </p>
+                <a href="{{ route('account.signup') }}"
+                    class="w-full bg-black text-white px-6 py-2 rounded-md hover:bg-gray-800 flex items-center justify-center">
+                    <span class="mr-2"><i class="fa-solid fa-user"></i></span> Tạo tài khoản
+                </a>
             </div>
-            <div>
-                <a href="#" class="flex justify-end text-gray-500 italic">Forgot Password?</a>
-            </div>
-            <div>
-                <input type="submit" value="Login"
-                    class="pt-2 pb-2 pl-10 pr-10 mt-6 text-2xl text-white font-bold bg-indigo-600 w-full rounded-3xl hov" />
-            </div>
-        </form>
-        <p class="text-center text-gray-600 mt-4">
-            Nếu bạn chưa có tài khoản? <a href="{{ route('account.signup') }}" class="text-indigo-600 hover:underline">Đăng ký</a>
-        </p>
+        </div>
     </div>
-</body>
-
-</html>
+@endsection
