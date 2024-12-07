@@ -66,7 +66,8 @@
                         </a>
                         <p
                             class="absolute right-0 top-0 bg-white text-black font-bold rounded-[40px] m-[-2px] px-[10px]">
-                            {{ $countProduct }}</p>
+                            {{ $countProduct }}
+                        </p>
                     </div>
                 </div>
             </div>

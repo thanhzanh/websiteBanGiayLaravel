@@ -17,15 +17,28 @@ class cartClientController extends Controller
     public function index()
     {
 
-        $carts = CartItem::all();
+        $infoUser = session('infoUser', null);
+        $sessionId = session()->getId();
 
-        $products = Product::all();
+        // neu khach hang dang nhap, ngc lai khac chua dang nhap
+        if ($infoUser && isset($infoUser->user_id)) {
+            $carts = DB::table('cart')->where('user_id', $infoUser->user_id)->first();
+        } else {
+            $carts = DB::table('cart')->where('session_id', $sessionId)->first();
+        }
 
+        // neu co gio hang
+        if ($carts) {
+            $cartItems = DB::table('cart_items')->where('cart_id', $carts->cart_id)->get(); // get() la lay ra san gio hang chi tiet theo cart_id
+        }
+
+        // lay ra data bang sizes
         $sizes = Size::all();
 
-        $cartItems = CartItem::all();
+        // lay ra data bang san pham
+        $products = Product::all();
 
-        return view('client.pages.cart.index', compact('carts', 'products', 'sizes', 'cartItems'));
+        return view('client.pages.cart.index', ['products' => $products, 'sizes' => $sizes, 'cartItems' => $cartItems]);
     }
 
     // [POST] /cart/add/{id}

@@ -18,7 +18,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($carts as $product)
+                    @forelse ($cartItems as $product)
                         <!-- Sản phẩm -->
                         <tr>
                             <td class="px-4 py-2 border border-gray-200 flex items-center">
@@ -45,7 +45,6 @@
                                                 @endif
                                             @endforeach
                                         </div>
-                                        
                                     @endif
                                 @endforeach
                             </td>
@@ -78,7 +77,11 @@
                                 </div>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center py-4">Giỏ hàng trống</td>
+                        </tr>
+                    @endforelse
 
                 </tbody>
             </table>
@@ -133,7 +136,7 @@
 
             <button class="w-full bg-gray-500 text-white py-3 rounded-lg hover:bg-gray-600 font-bold">
                 <a href="{{ route('check-out.index') }}">Tiến hành thanh toán</a>
-                
+
             </button>
         </div>
     </div>

@@ -14,8 +14,7 @@ use App\Http\Controllers\Client\CartClientController;
 use App\Http\Controllers\Client\homeClientController;
 use App\Http\Controllers\Client\loginClientController;
 use App\Http\Controllers\Client\productClientController;
-
-
+use App\Http\Middleware\CheckSessionMiddleware;
 use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
@@ -37,13 +36,13 @@ Route::fallback(function () {
 // ==================================== FONTEND ==========================================
 
 // Trang Home
-Route::get('/', [homeClientController::class, 'index'])->name('home');
+Route::get('/', [homeClientController::class, 'index'])->name('home')->middleware(CheckSessionMiddleware::class);
 
 //Trang Product
-Route::get('/product', [productClientController::class, 'index'])->name('product');
+Route::get('/product', [productClientController::class, 'index'])->name('product')->middleware(CheckSessionMiddleware::class);
 
 //Trang chi tiết sản phẩm
-Route::get('product/{slug}', [productClientController::class, 'detail'])->name('product.detail');
+Route::get('product/{slug}', [productClientController::class, 'detail'])->name('product.detail')->middleware(CheckSessionMiddleware::class);
 
 
 //Trang bài viết
@@ -59,17 +58,7 @@ Route::get('/lienhe', function () {
 //Trang giới thiệu
 Route::get('/gioithieu', function () {
     return view('client.pages.gioithieu.index');
-})->name('gioithieu');
-
-//Trang khuyến mãi
-Route::get('/khuyenmai', function () {
-    return view('client.pages.khuyenmai.index');
-})->name('khuyenmai');
-
-//Trang khuyến mãi
-Route::get('/tintuc', function () {
-    return view('client.pages.tintuc.index');
-})->name('tintuc');
+})->name('gioithieu')->middleware(CheckSessionMiddleware::class);
 
 
 // Thương Hiệu
@@ -102,9 +91,9 @@ Route::post('/account/signup', [loginClientController::class, 'signupPost'])->na
 Route::get('/account/logout', [loginClientController::class, 'logout'])->name('account.logout');
 
 
-// ========================= order ===========================
+// ========================= cart ===========================
 
-Route::get('/cart', [CartClientController::class, 'index'])->name('cart.index');
+Route::get('/cart', [CartClientController::class, 'index'])->name('cart.index')->middleware(CheckSessionMiddleware::class);
 
 Route::post('/cart/add/{id}', [CartClientController::class, 'addPost'])->name('cart.add');
 
