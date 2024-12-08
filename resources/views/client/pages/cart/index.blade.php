@@ -10,6 +10,9 @@
             <table class="table-auto w-full border-collapse border border-gray-200">
                 <thead>
                     <tr class="bg-gray-100">
+                        <th class="py-2 border border-gray-200 text-center">
+                            <input class="w-3 h-3" style="transform: scale(1.5)" type="checkbox" name="chooseAddCart" id="">
+                        </th>
                         <th class="px-4 py-2 border border-gray-200 text-left">Sản Phẩm</th>
                         <th class="px-4 py-2 border border-gray-200 text-center">Giá</th>
                         <th class="px-4 py-2 border border-gray-200 text-center">Số Lượng</th>
@@ -21,6 +24,9 @@
                     @forelse ($cartItems as $product)
                         <!-- Sản phẩm -->
                         <tr>
+                            <td class="px-4 py-2 border border-gray-200 text-center">
+                                <input class="w-3 h-3" style="transform: scale(1.5)" type="checkbox" name="chooseAddCart" id="">
+                            </td>
                             <td class="px-4 py-2 border border-gray-200 flex items-center">
                                 @foreach ($products as $item)
                                     @if ($product->product_id == $item->product_id)

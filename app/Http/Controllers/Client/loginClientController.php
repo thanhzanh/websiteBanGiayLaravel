@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -113,6 +114,46 @@ class loginClientController extends Controller
         toastr()->success('Đăng xuất thành công!');
 
         return redirect()->route('home');
+    }
+
+    // [GET] /account/profile
+    public function profile()
+    {
+        $user = DB::table('users')->get();
+
+        
+        return view('client.pages.account.profile', compact('user'));
+    }
+
+    // [POST] /account/profile
+    public function profilePost(Request $request, $id)
+    {
+        $validatedUser = $request->validate([
+            'user_name' => 'required',
+            'user_email' => 'required|email|unique:users,user_email',
+            'user_password' => 'nullable|min:6',  
+            'user_phone' => 'nullable|regex:/^[0-9]{10}$/', // sdt phai 10 số
+        ]);
+
+        $user = User::findOrFail($id);
+
+        // cap nhat lai mat khau
+        if ($request->has('user_password') && !empty($request->admin_password)) {
+            $validatedUser['user_password'] = bcrypt($request->user_password);
+        } else {
+            $validatedUser['user_password'] = $user->user_password; // Giữ nguyên mật khẩu cũ
+        }
+
+        $validatedUser['updated_at'] = Carbon::now();
+
+        $user->update($validatedUser);
+
+        session(['infoUser' => $user]); // cập nhật lại session mới để hiện thông tin khi chỉnh sửa
+
+        toastr()->success('Cập nhật tài khoản thành công');
+
+        return back();
+        
     }
 
 }

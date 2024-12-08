@@ -90,6 +90,12 @@ Route::post('/account/signup', [loginClientController::class, 'signupPost'])->na
 
 Route::get('/account/logout', [loginClientController::class, 'logout'])->name('account.logout');
 
+Route::get('/account/profile', [loginClientController::class, 'profile'])->name('account.profile')->middleware(CheckSessionMiddleware::class);
+
+Route::put('/account/profile/{id}', [loginClientController::class, 'profilePost'])->name('account.profile.update');
+
+
+
 
 // ========================= cart ===========================
 

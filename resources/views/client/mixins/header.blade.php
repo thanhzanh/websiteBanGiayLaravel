@@ -1,7 +1,7 @@
 <header>
     <div class="main-header">
         <div class="header-contact max-w-screen-xl mx-auto">
-            <div class="container flex justify-around">
+            <div class="container flex justify-between">
                 <div class="text-center text-[14px] py-2">
                     <strong>Hotline: 0903.150.443 Free Ship cho đơn hàng trên 1tr đồng</strong>
                 </div>
@@ -16,11 +16,17 @@
                             </div>
                             <!-- Menu thả xuống -->
                             <ul
-                                class="absolute bg-slate-50 text-black shadow-lg hidden mt-2 w-[180px] menu-dropdown transition-opacity duration-300 top-[32px] right-[-80px]">
+                                class="absolute bg-slate-50 text-black shadow-lg hidden mt-2 w-[180px] menu-dropdown transition-opacity duration-300 z-[999] top-[32px] right-0">
+                                <li>
+                                    <a href="{{ route('account.profile') }}" class="block px-4 py-2 hover:bg-gray-100">
+                                        <i class="fa-solid fa-pen"></i>
+                                        Thông tin cá nhân
+                                    </a>
+                                </li>
                                 <li>
                                     <a href="" class="block px-4 py-2 hover:bg-gray-100">
                                         <i class="fa-solid fa-circle-exclamation"></i>
-                                        Thông tin cá nhân
+                                        Đơn mua
                                     </a>
                                 </li>
                                 <li>
