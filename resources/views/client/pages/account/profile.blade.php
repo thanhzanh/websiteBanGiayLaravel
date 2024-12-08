@@ -1,6 +1,6 @@
 @extends('client.layouts.default')
 
-@section('title', 'Trang Chủ')
+@section('title', 'Hồ sơ của tôi')
 
 @section('content')
 

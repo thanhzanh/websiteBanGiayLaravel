@@ -25,34 +25,10 @@
                         <input type="email" id="email" class="w-full border border-gray-300 rounded-lg p-2"
                             placeholder="Nhập địa chỉ email">
                     </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block font-semibold mb-1" for="city">Tỉnh/Thành phố *</label>
-                            <select id="city" class="w-full border border-gray-300 rounded-lg p-2">
-                                <option>Chọn Tỉnh/Thành phố</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block font-semibold mb-1" for="district">Quận/Huyện *</label>
-                            <select id="district" class="w-full border border-gray-300 rounded-lg p-2">
-                                <option>Chọn Quận/Huyện</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block font-semibold mb-1" for="ward">Xã/Phường/Thị trấn *</label>
-                        <select id="ward" class="w-full border border-gray-300 rounded-lg p-2">
-                            <option>Chọn Xã/Phường/Thị trấn</option>
-                        </select>
-                    </div>
                     <div>
                         <label class="block font-semibold mb-1" for="address">Địa chỉ *</label>
                         <input type="text" id="address" class="w-full border border-gray-300 rounded-lg p-2"
                             placeholder="Nhập địa chỉ cụ thể">
-                    </div>
-                    <div>
-                        <input type="checkbox" id="different-address" class="mr-2">
-                        <label for="different-address">Giao hàng tới địa chỉ khác?</label>
                     </div>
                     <div>
                         <label class="block font-semibold mb-1" for="notes">Ghi chú đơn hàng (tùy chọn)</label>
@@ -65,7 +41,7 @@
             <!-- Đơn hàng của bạn -->
             <div>
                 <h2 class="text-xl font-bold mb-4">ĐƠN HÀNG CỦA BẠN</h2>
-                <div class="border border-gray-300 rounded-lg p-4 space-y-4">
+                <div class="border border-gray-500 rounded-lg p-4 space-y-4">
                     <!-- Sản phẩm -->
                     <div class="flex justify-between">
                         <div>
@@ -89,7 +65,7 @@
                     <!-- Giao hàng -->
                     <div class="flex justify-between">
                         <span class="font-semibold">Giao hàng</span>
-                        <span>30.000đ</span>
+                        <span>0đ</span>
                     </div>
                     <!-- Tổng -->
                     <div class="flex justify-between font-bold text-lg">
@@ -104,16 +80,15 @@
                         </div>
                         <div>
                             <input type="radio" id="cod" name="payment" class="mr-2">
-                            <label for="cod">Trả tiền mặt khi nhận hàng</label>
+                            <label for="cod">Thanh toán khi nhận hàng</label>
                         </div>
                     </div>
                     <!-- Đặt hàng -->
-                    <button class="w-full bg-black text-white font-bold py-2 rounded-lg hover:bg-gray-800">
+                    <button href="" class="w-full bg-black text-white font-bold py-2 rounded-lg hover:bg-gray-800">
                         ĐẶT HÀNG
                     </button>
-                    <p class="text-sm text-gray-500 mt-2">
-                        Thông tin cá nhân của bạn sẽ được sử dụng để xử lý đơn hàng...
-                    </p>
+
+
                 </div>
             </div>
         </div>

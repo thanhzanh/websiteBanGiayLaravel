@@ -3,7 +3,8 @@
         <div class="header-contact max-w-screen-xl mx-auto">
             <div class="container flex justify-between">
                 <div class="text-center text-[14px] py-2">
-                    <strong>Hotline: 0903.150.443 Free Ship cho đơn hàng trên 1tr đồng</strong>
+                    <i class="fa-solid fa-phone"></i>
+                    <strong>Hotline: 0903.150.443</strong>
                 </div>
                 @if (session('infoUser'))
                     <div class="flex mr-2 leading-[40px]">
@@ -21,6 +22,12 @@
                                     <a href="{{ route('account.profile') }}" class="block px-4 py-2 hover:bg-gray-100">
                                         <i class="fa-solid fa-pen"></i>
                                         Thông tin cá nhân
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('addresses.index') }}" class="block px-4 py-2 hover:bg-gray-100">
+                                        <i class="fa-solid fa-circle-exclamation"></i>
+                                        Địa chỉ
                                     </a>
                                 </li>
                                 <li>

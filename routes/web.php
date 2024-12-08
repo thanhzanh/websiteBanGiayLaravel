@@ -6,7 +6,6 @@ use App\Http\Controllers\Admin\articleController;
 use App\Http\Controllers\Admin\dashboardController;
 use App\Http\Controllers\Admin\forgotPasswordController;
 use App\Http\Controllers\Admin\loginController;
-use App\Http\Controllers\Admin\orderController;
 use App\Http\Controllers\Admin\productCategoryController;
 use App\Http\Controllers\Admin\productController;
 use App\Http\Controllers\Client\brandClientController;
@@ -15,6 +14,7 @@ use App\Http\Controllers\Client\homeClientController;
 use App\Http\Controllers\Client\loginClientController;
 use App\Http\Controllers\Client\paymentClientController;
 use App\Http\Controllers\Client\productClientController;
+use App\Http\Controllers\Client\userAddressClientController;
 use App\Http\Middleware\CheckSessionMiddleware;
 use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Request;
@@ -96,6 +96,22 @@ Route::get('/account/profile', [loginClientController::class, 'profile'])->name(
 Route::put('/account/profile/{id}', [loginClientController::class, 'profilePost'])->name('account.profile.update');
 
 
+// ========================= address ===========================
+
+Route::get('/addresses', [userAddressClientController::class, 'index'])->name('addresses.index')->middleware(CheckSessionMiddleware::class);
+
+Route::post('/addresses/add', [userAddressClientController::class, 'addAddress'])->name('addresses.addAddress');
+
+Route::get('/addresses/update/', [userAddressClientController::class, 'update'])->name('addresses.update');
+
+Route::patch('/addresses/update/{id}', [userAddressClientController::class, 'updatePatch'])->name('addresses.update');
+
+Route::delete('/addresses/delete/{id}', [userAddressClientController::class, 'delete'])->name('addresses.delete');
+
+
+
+
+
 // ========================= payment ===========================
 
 Route::get('/payment', [paymentClientController::class, 'createPayment'])->name('payment.create');
@@ -112,8 +128,9 @@ Route::delete('/cart/delete/{id}', [CartClientController::class, 'delete'])->nam
 
 Route::get('/cart/update/{quantity}/{productId}', [CartClientController::class, 'update'])->name('cart.update');
 
+
 // ========================= check-out ===========================
-Route::get('/check-out', [CartClientController::class, 'checkout'])->name('check-out.index');
+Route::get('/check-out', [CartClientController::class, 'checkout'])->name('check-out.index')->middleware(CheckSessionMiddleware::class);
 
 
 
