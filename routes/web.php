@@ -80,11 +80,11 @@ Route::get('/product/featured/{slug}', [productClientController::class, 'filterB
 
 // ========================= account(user) ===========================
 
-Route::get('/account/login', [loginClientController::class, 'login'])->name('account.login');
+Route::get('/account/login', [loginClientController::class, 'login'])->name('account.login')->middleware(CheckSessionMiddleware::class);
 
 Route::post('/account/login', [loginClientController::class, 'loginPost'])->name('account.login');
 
-Route::get('/account/signup', [loginClientController::class, 'signup'])->name('account.signup');
+Route::get('/account/signup', [loginClientController::class, 'signup'])->name('account.signup')->middleware(CheckSessionMiddleware::class);
 
 Route::post('/account/signup', [loginClientController::class, 'signupPost'])->name('account.signup');
 

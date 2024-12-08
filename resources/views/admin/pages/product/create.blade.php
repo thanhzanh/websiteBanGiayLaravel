@@ -65,30 +65,24 @@
                             type="number" name="discount" value="0" min='0'>
                     </div>
                     <div class="mt-6">
-                        <label class="text-xl font-bold" for="product_category_id ">Danh mục cha</label> <br>
-                        <select class="parent_id w-full py-2 outline-none border-indigo-300 border pl-4 mt-4"
-                            name="product_category_id">
+                        <label class="text-xl font-bold" for="product_category_id">Danh mục cha</label> <br>
+                        <select class="parent_id w-full py-2 outline-none border-indigo-300 border pl-4 mt-4" name="product_category_id">
                             <option selected value="">-- Chọn danh mục --</option>
                             @foreach ($categories as $category)
-                                
-                                <option value="{{ $category->product_category_id }}"
-                                    
-                                    @foreach ($products as $product)
-                                        @if ($category->product_category_id == $product->product_category_id) selected @endif>
-                                        {{ $category->product_category_name }}
-                                    @endforeach
+                                <option value="{{ $category->product_category_id }}">
+                                    {{ $category->product_category_name }}
                                 </option>
-
                                 {{-- Hiển thị danh mục con nếu có --}}
                                 @if ($category->children->isNotEmpty())
                                     @include('admin.mixin.child_categories', [
-                                        'category' => $category,
+                                        'categories' => $category->children,
                                         'prefix' => '--', // Tiền tố để hiển thị danh mục con
                                     ])
                                 @endif
                             @endforeach
                         </select>
                     </div>
+                    
                     <div class="mt-6">
                         <label class="text-xl font-bold" for="status">Trạng thái</label>
                         <div class="mt-4">

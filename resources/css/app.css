@@ -7,3 +7,21 @@
     color: white;
     border-color: black;
 }
+
+/* Màu nền và chữ đồng nhất */
+/* Mặc định ẩn menu cấp con */
+ul.hidden {
+    display: none;
+}
+
+/* Hiển thị menu cấp con khi hover vào cha */
+.group:hover > ul {
+    display: block;
+}
+
+/* Kiểu dáng menu */
+
+
+
+
+

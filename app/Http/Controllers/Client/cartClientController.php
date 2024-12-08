@@ -96,28 +96,6 @@ class cartClientController extends Controller
     public function delete($id)
     {
 
-        // $user = Auth::user();
-        // $productId = $request->id;
-        // $sessionId = $request->session()->getId();
-
-        // // tim gio hang
-        // $cart = DB::table('cart')->where('user_id', $user ? $user->user_id : null)->where('session_id', $user ? $sessionId : null)->first();
-
-        // dd($cart);
-
-        // if ($cart) {
-        //     // xoa san phan trong chi tiet gio hang
-        //     DB::table('cart_items')->where('cart_id', $cart->cart_id)->where('product_id', $productId)->delete();
-
-        //     toastr()->success('Đã xóa sản phẩm vào giỏ hàng');
-        //     return back();
-        // } else {
-
-        //     toastr()->error('Không tìm thấy giỏ hàng');
-
-        // }
-
-        // xóa sản phẩm theo cart_item là id
         $deleted = DB::table('cart_items')->where('id', $id)->delete();
 
         if ($deleted) {
@@ -132,15 +110,18 @@ class cartClientController extends Controller
     // [GET] /cart/update/{quantity}/{productId}
     public function update(Request $request, $quantity, $productId)
     {
-        $user = Auth::user();
+        $user = session('infoUser'); // nguoi dung dang nhap
 
-        $sessionId = $request->session()->getId();
+        $sessionId = $request->session()->getId(); // nguoi dung khong dang nhap
 
         // Nếu người dùng đã đăng nhập, dùng user_id, nếu không thì dùng session_id
-        if (!$user) {
-
+        if ($user) {
             $cart = Cart::firstOrCreate(
-                ['user_id' => $user ? $user->user_id : null, 'session_id' => $user ? null : $sessionId]
+                ['user_id' => $user->user_id, 'session_id' => null]
+            );
+        } else {
+            $cart = Cart::firstOrCreate(
+                ['session_id' => $sessionId, 'user_id' => null]
             );
         }
 

@@ -77,7 +77,7 @@
                     
                             {{-- Hiển thị danh mục con nếu có --}}
                             @if ($category->children->isNotEmpty())
-                                @include('admin.mixin.child_categories', [
+                                @include('admin.mixin.category_product', [
                                     'category' => $category,
                                     'prefix' => '--', // Tiền tố để hiển thị danh mục con
                                 ])

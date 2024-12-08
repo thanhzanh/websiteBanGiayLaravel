@@ -72,10 +72,13 @@ class productCategoryController extends Controller
                 $productCategoryQuery->where('status', 'inactive');
             }
         }
+
+        $products = DB::table('product')->get();
+
         // get data from database
         $productCategory = $productCategoryQuery->paginate(4);
 
-        return View::make('admin.pages.product-category.index')->with('productCategory', $productCategory)->with('listStatus', $listStatus)->with('search', $search);
+        return View::make('admin.pages.product-category.index')->with('productCategory', $productCategory)->with('listStatus', $listStatus)->with('search', $search)->with('products', $products);
     }
 
     // [GET] /admin/pages/product-category/create

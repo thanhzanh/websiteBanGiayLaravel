@@ -2,7 +2,7 @@
     <div class="main-header">
         <div class="header-contact max-w-screen-xl mx-auto">
             <div class="container flex justify-around">
-                <div class="text-center py-2">
+                <div class="text-center text-[14px] py-2">
                     <strong>Hotline: 0903.150.443 Free Ship cho đơn hàng trên 1tr đồng</strong>
                 </div>
                 @if (session('infoUser'))
@@ -16,10 +16,11 @@
                             </div>
                             <!-- Menu thả xuống -->
                             <ul
-                                class="absolute bg-slate-50 text-black shadow-lg hidden mt-2 w-[160px] menu-dropdown transition-opacity duration-300 top-[32px] right-[-53px]">
+                                class="absolute bg-slate-50 text-black shadow-lg hidden mt-2 w-[180px] menu-dropdown transition-opacity duration-300 top-[32px] right-[-80px]">
                                 <li>
                                     <a href="" class="block px-4 py-2 hover:bg-gray-100">
-                                        Xem thông tin
+                                        <i class="fa-solid fa-circle-exclamation"></i>
+                                        Thông tin cá nhân
                                     </a>
                                 </li>
                                 <li>
@@ -27,6 +28,7 @@
                                         @csrf
                                         <button type="submit"
                                             class="block w-full text-left px-4 py-2 hover:bg-gray-100">
+                                            <i class="fa-solid fa-right-from-bracket"></i>
                                             Đăng xuất
                                         </button>
                                     </form>
@@ -72,51 +74,57 @@
                 </div>
             </div>
         </div>
-        <div class="header-nav bg-slate-800 h-14 mt-3 flex items-center justify-center">
+        <div class="header-nav bg-[rgba(13,13,13,1)] h-14 flex items-center justify-center">
             <nav>
-                <ul class="flex space-x-8 px-6 py-4">
-                    <li>
+                <ul class="flex px-4 py-2">
+                    <li class="py-2 px-4">
                         <a href="{{ route('home') }}"
-                            class="text-white font-bold text-base py-2 px-4 hover:bg-green-500 rounded-lg transition duration-300">
-                            Trang Chủ
+                            class="text-white font-normal uppercase text-base rounded-lg transition duration-300">
+                            Trang chủ
                         </a>
                     </li>
-                    <li>
+                    <li class="py-2 px-4">
                         <a href="{{ route('gioithieu') }}"
-                            class="text-white font-bold text-base py-2 px-4 hover:bg-green-500 rounded-lg transition duration-300">Giới
-                            Thiệu
+                            class="text-white font-normal uppercase text-base rounded-lg transition duration-300">
+                            Giới thiệu
                         </a>
                     </li>
-                    <li class="relative group">
+                    <li class="relative group py-2 px-4">
                         <a href="{{ route('product') }}"
-                            class="text-white font-bold text-base py-2 px-4 hover:bg-green-500 rounded-lg transition duration-300">
-                            Sản Phẩm
+                            class="text-white font-normal uppercase text-base rounded-lg transition duration-300">
+                            Sản phẩm
+                            <i class="fa-solid fa-chevron-down"></i>
                         </a>
                         <!-- Menu cấp 2 (Danh mục con) -->
-                        <ul
-                            class="absolute left-0 mt-2 w-[200px] bg-gray-800 shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity duration-300 z-10">
+                        <ul class="absolute left-0 mt-[10px] w-[200px] bg-white shadow-lg z-10 border-b border-gray-300 hidden group-hover:block">
                             @foreach ($categories as $category)
                                 <li class="relative group">
                                     <a href="{{ route('products.filterByCategory', ['id' => $category->product_category_id]) }}"
-                                        class="block px-4 py-4 text-white hover:bg-green-500 hover:text-white transition">
+                                        class="block px-4 py-4 text-black bg-white hover:bg-gray-100 transition">
                                         {{ $category->product_category_name }}
+                                        <!-- Hiển thị icon nếu có danh mục con -->
+                                        @if ($category->children->isNotEmpty())
+                                            <i class="fa-solid fa-chevron-right ml-2"></i>
+                                        @endif
                                     </a>
-
-                                    <!-- Nếu có danh mục con, hiển thị danh mục con -->
+                    
+                                    <!-- Hiển thị danh mục con -->
                                     @if ($category->children->isNotEmpty())
-                                        <ul
-                                            class="absolute left-full top-0 mt-2 w-[200px] bg-gray-800 shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity duration-300">
+                                        <ul class="absolute left-full top-0 mt-0 w-[200px] bg-gray-800 shadow-lg hidden group-hover:block border-b border-gray-600">
                                             @foreach ($category->children as $child)
-                                                <li>
+                                                <li class="relative group">
                                                     <a href="{{ route('products.filterByCategory', ['id' => $child->product_category_id]) }}"
-                                                        class="block px-4 py-4 text-white hover:bg-green-500 hover:text-white transition">
+                                                        class="block px-4 py-4 text-white bg-gray-800 hover:bg-gray-700 transition">
                                                         {{ $child->product_category_name }}
+                                                        <!-- Hiển thị icon nếu có danh mục con -->
+                                                        @if ($child->children->isNotEmpty())
+                                                            <i class="fa-solid fa-chevron-right ml-2"></i>
+                                                        @endif
                                                     </a>
-                                                    <!-- Nếu danh mục con có danh mục con, tiếp tục đệ quy -->
+                    
+                                                    <!-- Đệ quy danh mục con -->
                                                     @if ($child->children->isNotEmpty())
-                                                        @include('client.mixins.child_categories', [
-                                                            'category' => $child,
-                                                        ])
+                                                        @include('client.mixins.child_categories', ['category' => $child])
                                                     @endif
                                                 </li>
                                             @endforeach
@@ -126,17 +134,22 @@
                             @endforeach
                         </ul>
                     </li>
+                    
 
-                    <li>
+
+
+
+
+                    <li class="py-2 px-4">
                         <a href="#"
-                            class="text-white font-bold text-base py-2 px-4 hover:bg-green-500 rounded-lg transition duration-300">Bài
-                            Viết
+                            class="text-white font-normal uppercase text-base rounded-lg transition duration-300">
+                            Bài viết
                         </a>
                     </li>
-                    <li>
+                    <li class="py-2 px-4">
                         <a href="#contact"
-                            class="text-white font-bold text-base py-2 px-4 hover:bg-green-500 rounded-lg transition duration-300">Liên
-                            Hệ
+                            class="text-white font-normal uppercase text-base rounded-lg transition duration-300">
+                            Liên hệ
                         </a>
                     </li>
                 </ul>
