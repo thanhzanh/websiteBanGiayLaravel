@@ -48,7 +48,7 @@ class userAddressClientController extends Controller
             }
 
             // Tạo địa chỉ mới
-            $user = UserAddress::create([
+            UserAddress::create([
                 'user_id' => $infoUser->user_id,
                 'label' => $request->label,
                 'receiver_name' => $request->receiver_name,
@@ -64,51 +64,87 @@ class userAddressClientController extends Controller
         }
     }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
 
         $infoUser = session('infoUser');
 
-            if (!$infoUser) {
-                toastr()->success('Bạn cần đăng nhập để thực hiện thao tác này.');
-                return redirect()->route('account.login');
-            }
+        if (!$infoUser) {
+            toastr()->success('Bạn cần đăng nhập để thực hiện thao tác này.');
+            return redirect()->route('account.login');
+        }
 
-            $address = UserAddress::where('user_address_id', $id)->where('user_id', $infoUser->user_id)->first();
+        $address = UserAddress::where('user_address_id', $id)->where('user_id', $infoUser->user_id)->first();
 
-            if (!$address) {
-                toastr()->error('Địa chỉ không tồn tại.');
-                return back();
-            }
-
-            $request->validate([
-                'receiver_name' => 'required|string|max:255',
-                'receiver_phone' => 'required|digits:10',
-                'address' => 'required|string',
-            ]);
-
-            $address->update($request->all());
-
-            toastr()->success('Địa chỉ đã được cập nhật.');
-
+        if (!$address) {
+            toastr()->error('Địa chỉ không tồn tại.');
             return back();
+        }
+
+        $request->validate([
+            'receiver_name' => 'required|string|max:255',
+            'receiver_phone' => 'required|digits:10',
+            'address' => 'required|string',
+        ]);
+
+        $address->update($request->all());
+
+        toastr()->success('Địa chỉ đã được cập nhật.');
+
+        return back();
     }
 
-    public function delete(Request $request, $id) {
+    public function delete($id)
+    {
         $infoUser = session('infoUser');
 
-            if (!$infoUser) {
-                toastr()->success('Bạn cần đăng nhập để thực hiện thao tác này.');
-                return redirect()->route('account.login');
-            }
+        if (!$infoUser) {
+            toastr()->success('Bạn cần đăng nhập để thực hiện thao tác này.');
+            return redirect()->route('account.login');
+        }
 
-            $address = UserAddress::where('user_address_id', $id)->where('user_id', $infoUser->user_id)->first();
+        $address = UserAddress::where('user_address_id', $id)->where('user_id', $infoUser->user_id)->first();
 
-            if (!$address) {
-                toastr()->error('Địa chỉ không tồn tại.');
-                return back();
-            }
+        if (!$address) {
+            toastr()->error('Địa chỉ không tồn tại.');
+            return back();
+        }
 
-            // không thể xóa địa chỉ mặc định
-            
+        // không thể xóa địa chỉ mặc định
+        if ($address->is_default) {
+            toastr()->error('Không thể xóa địa chỉ mặc định.');
+            return back();
+        }
+
+        $address->delete();
+
+        toastr()->success('Xóa địa chỉ thành công.');
+        return back();
+    }
+
+    public function setDefault($id)
+    {
+        $infoUser = session('infoUser');
+        if (!$infoUser) {
+            toastr()->success('Bạn cần đăng nhập để thực hiện thao tác này.');
+            return redirect()->route('account.login');
+        }
+
+        // Cập nhật các địa chỉ khác thành không mặc định
+        UserAddress::where('user_id', $infoUser->user_id)->update(['is_default' => false]);
+
+        $address = UserAddress::where('user_address_id', $id)
+            ->where('user_id', $infoUser->user_id)
+            ->first();
+
+        if (!$address) {
+            toastr()->error('Địa chỉ không tồn tại.');
+            return back();
+        }
+
+        $address->update(['is_default' => true]);
+
+        toastr()->success('Địa chỉ mặc định đã được cập nhật.');
+        return back();
     }
 }

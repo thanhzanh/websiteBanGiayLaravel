@@ -108,6 +108,9 @@ Route::patch('/addresses/update/{id}', [userAddressClientController::class, 'upd
 
 Route::delete('/addresses/delete/{id}', [userAddressClientController::class, 'delete'])->name('addresses.delete');
 
+Route::delete('/addresses/delete/{id}', [userAddressClientController::class, 'delete'])->name('addresses.delete');
+
+Route::patch('/addresses/{id}', [userAddressClientController::class, 'setDefault'])->name('addresses.setDefault');
 
 
 

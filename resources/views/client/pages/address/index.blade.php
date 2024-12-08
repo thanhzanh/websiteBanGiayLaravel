@@ -17,20 +17,19 @@
 
                     <div class="flex gap-2 mt-4">
                         <button class="bg-yellow-500 text-white px-3 py-2 rounded hover:bg-yellow-600"
-                                data-modal-toggle="addressModal">Cập nhật
-                            </button>
-                        <form action="" method="post">
+                            data-modal-toggle="addressModal">Cập nhật
+                        </button>
+                        <form action="{{ route('addresses.delete', ['id' => $item->user_address_id]) }}" method="post">
                             @csrf
                             @method('DELETE')
                             <button class="bg-red-500 text-white px-3 py-2 rounded hover:bg-red-600">Xóa</button>
                         </form>
-                        <form action="" method="post">
+                        <form action="{{ route('addresses.setDefault', $item->user_address_id) }}" method="post" class="d-inline">
                             @csrf
                             @method('PATCH')
-                            <button class="bg-green-500 text-white px-3 py-2 rounded hover:bg-green-600">Thiết lập mặc
-                                định
-                            </button>
+                            <button class="bg-green-500 text-white px-3 py-2 rounded hover:bg-green-600">Thiết lập mặc định</button>
                         </form>
+                        
                     </div>
                 </div>
             </div>
@@ -108,8 +107,5 @@
                 document.getElementById(modalId).classList.add('hidden');
             });
         });
-
-        
-
     </script>
 @endsection
