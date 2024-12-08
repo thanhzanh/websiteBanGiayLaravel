@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'vnpay' => [
+        'url' => 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html', // URL chính thức từ VNPAY hoặc sandbox
+        'terminal_code' => 'U0GXPY3J', // Thay thế với Merchant ID bạn lấy từ VNPAY
+        'hash_secret' => 'ID2R8KPS67M414TLBAITBL22XJ9YFNXY', // Thay thế với Hash Secret
+    ]
+
 ];

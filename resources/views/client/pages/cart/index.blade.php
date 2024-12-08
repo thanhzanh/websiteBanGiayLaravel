@@ -139,12 +139,14 @@
 
                 <span class="text-gray-900 font-bold">{{ number_format($total, 0, ',', '.') }} VNĐ</span>
             </div>
-
-            <button class="w-full bg-gray-500 text-white py-3 rounded-lg hover:bg-gray-600 font-bold">
-                <a href="{{ route('check-out.index') }}">Tiến hành thanh toán</a>
-
-            </button>
+            
+            <div class="flex justify-between text-lg font-bold mb-4">
+                <a href="{{ route('check-out.index') }}" class="w-full text-center bg-gray-500 text-white py-3 rounded-lg hover:bg-gray-600 font-bold">
+                    Tiến hành thanh toán
+                </a>
+            </div>
         </div>
+        
     </div>
 
 

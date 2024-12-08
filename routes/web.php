@@ -13,6 +13,7 @@ use App\Http\Controllers\Client\brandClientController;
 use App\Http\Controllers\Client\CartClientController;
 use App\Http\Controllers\Client\homeClientController;
 use App\Http\Controllers\Client\loginClientController;
+use App\Http\Controllers\Client\paymentClientController;
 use App\Http\Controllers\Client\productClientController;
 use App\Http\Middleware\CheckSessionMiddleware;
 use Faker\Guesser\Name;
@@ -95,7 +96,11 @@ Route::get('/account/profile', [loginClientController::class, 'profile'])->name(
 Route::put('/account/profile/{id}', [loginClientController::class, 'profilePost'])->name('account.profile.update');
 
 
+// ========================= payment ===========================
 
+Route::get('/payment', [paymentClientController::class, 'createPayment'])->name('payment.create');
+
+Route::get('/vnpay-return', [paymentClientController::class, 'vnpayReturn'])->name('vnpay.return');
 
 // ========================= cart ===========================
 
