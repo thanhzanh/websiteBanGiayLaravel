@@ -98,19 +98,17 @@ Route::put('/account/profile/{id}', [loginClientController::class, 'profilePost'
 
 // ========================= address ===========================
 
-Route::get('/addresses', [userAddressClientController::class, 'index'])->name('addresses.index')->middleware(CheckSessionMiddleware::class);
+Route::get('/account/addresses', [userAddressClientController::class, 'index'])->name('account.addresses.index')->middleware(CheckSessionMiddleware::class);
 
-Route::post('/addresses/add', [userAddressClientController::class, 'addAddress'])->name('addresses.addAddress');
+Route::post('/account/addresses/add', [userAddressClientController::class, 'addAddress'])->name('account.addresses.addAddress');
 
-Route::get('/addresses/update/', [userAddressClientController::class, 'update'])->name('addresses.update');
+Route::patch('/account/addresses/update/{id}', [userAddressClientController::class, 'updatePatch'])->name('account.addresses.update');
 
-Route::patch('/addresses/update/{id}', [userAddressClientController::class, 'updatePatch'])->name('addresses.update');
+Route::delete('/account/addresses/delete/{id}', [userAddressClientController::class, 'delete'])->name('account.addresses.delete');
 
-Route::delete('/addresses/delete/{id}', [userAddressClientController::class, 'delete'])->name('addresses.delete');
+Route::delete('/account/addresses/delete/{id}', [userAddressClientController::class, 'delete'])->name('account.addresses.delete');
 
-Route::delete('/addresses/delete/{id}', [userAddressClientController::class, 'delete'])->name('addresses.delete');
-
-Route::patch('/addresses/{id}', [userAddressClientController::class, 'setDefault'])->name('addresses.setDefault');
+Route::patch('/account/addresses/{id}', [userAddressClientController::class, 'setDefault'])->name('account.addresses.setDefault');
 
 
 

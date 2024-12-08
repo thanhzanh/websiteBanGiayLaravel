@@ -25,7 +25,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('addresses.index') }}" class="block px-4 py-2 hover:bg-gray-100">
+                                    <a href="{{ route('account.addresses.index') }}" class="block px-4 py-2 hover:bg-gray-100">
                                         <i class="fa-solid fa-circle-exclamation"></i>
                                         Địa chỉ
                                     </a>

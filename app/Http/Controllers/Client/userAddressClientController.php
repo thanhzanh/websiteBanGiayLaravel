@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
+use PHPUnit\Framework\Attributes\BackupGlobals;
 
 class userAddressClientController extends Controller
 {
@@ -64,7 +65,7 @@ class userAddressClientController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function updatePatch(Request $request, $id)
     {
 
         $infoUser = session('infoUser');
@@ -74,20 +75,30 @@ class userAddressClientController extends Controller
             return redirect()->route('account.login');
         }
 
-        $address = UserAddress::where('user_address_id', $id)->where('user_id', $infoUser->user_id)->first();
-
-        if (!$address) {
-            toastr()->error('Địa chỉ không tồn tại.');
-            return back();
-        }
-
         $request->validate([
             'receiver_name' => 'required|string|max:255',
             'receiver_phone' => 'required|digits:10',
             'address' => 'required|string',
         ]);
 
-        $address->update($request->all());
+        // tìm địa chỉ theo id gửi lên
+        $address = UserAddress::where('user_address_id', $id)->where('user_id', $infoUser->user_id)->first();
+
+        $isDefault = $request->has('is_default') ? 1 : 0; // nếu địa chỉ mặc định
+
+        // neu la dia chi mac dinh, cap nhat lai tat ca con lai thanh khong mac dinh
+        if($isDefault) {
+            UserAddress::where('user_id', $id)->update(['is_default' => false]);
+        }
+
+        // cap nhat lai dia chi
+        $address->update([
+            'label' => $request->label,
+            'receiver_name' => $request->receiver_name,
+            'receiver_phone' => $request->receiver_phone,
+            'address' => $request->address,
+            'is_default' => $request->is_default
+        ]);
 
         toastr()->success('Địa chỉ đã được cập nhật.');
 
