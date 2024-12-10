@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\productCategoryController;
 use App\Http\Controllers\Admin\productController;
 use App\Http\Controllers\Client\brandClientController;
 use App\Http\Controllers\Client\CartClientController;
+use App\Http\Controllers\Client\forgotPasswordClientController;
 use App\Http\Controllers\Client\homeClientController;
 use App\Http\Controllers\Client\loginClientController;
 use App\Http\Controllers\Client\paymentClientController;
@@ -95,6 +96,16 @@ Route::get('/account/profile', [loginClientController::class, 'profile'])->name(
 
 Route::put('/account/profile/{id}', [loginClientController::class, 'profilePost'])->name('account.profile.update');
 
+// ========================= account(user) forgot-password ===========================
+
+Route::get('/account/forgot-password', [forgotPasswordClientController::class, 'emailSend'])->name('account.forgot-password.request');
+
+Route::post('/account/forgot-password', [forgotPasswordClientController::class, 'sendResetPassLinkEmail'])->name('forgot-password');
+
+Route::get('/account/reset-password/{token}', [forgotPasswordClientController::class, 'resetPassword'])->name('account.reset-password');
+
+Route::post('/account/reset-password/{token}', [forgotPasswordClientController::class, 'checkResetPassword'])->name('account.reset-password');
+
 
 // ========================= address ===========================
 
@@ -110,7 +121,9 @@ Route::delete('/account/addresses/delete/{id}', [userAddressClientController::cl
 
 Route::patch('/account/addresses/{id}', [userAddressClientController::class, 'setDefault'])->name('account.addresses.setDefault');
 
+Route::post('/update-shipping-address', [userAddressClientController::class, 'updateShippingAddress'])->name('update.shipping');
 
+Route::get('/get-current-shipping-address', [userAddressClientController::class, 'getCurrentShippingAddress']);
 
 
 // ========================= payment ===========================

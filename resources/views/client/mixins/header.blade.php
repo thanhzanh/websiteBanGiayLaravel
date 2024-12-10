@@ -26,13 +26,13 @@
                                 </li>
                                 <li>
                                     <a href="{{ route('account.addresses.index') }}" class="block px-4 py-2 hover:bg-gray-100">
-                                        <i class="fa-solid fa-circle-exclamation"></i>
+                                        <i class="fa-solid fa-landmark"></i>
                                         Địa chỉ
                                     </a>
                                 </li>
                                 <li>
                                     <a href="" class="block px-4 py-2 hover:bg-gray-100">
-                                        <i class="fa-solid fa-circle-exclamation"></i>
+                                        <i class="fa-solid fa-bag-shopping"></i>
                                         Đơn mua
                                     </a>
                                 </li>
@@ -72,9 +72,16 @@
                 </div>
 
                 <div class="inner-user-cart text-white flex justify-end my-auto px-6 items-center">
-                    <div title="Đăng nhập & đăng ký" class="my-account h-auto p-4 mx-2">
-                        <a class="text-3xl" href="{{ route('account.login') }}"><i class="fa-solid fa-user"></i></a>
-                    </div>
+                    
+                    @if (session('infoUser'))
+                        <div title="Đăng nhập & đăng ký" class="my-account h-auto p-4 mx-2">
+                            <span class="text-3xl"><i class="fa-solid fa-user"></i></span>
+                        </div>
+                    @else
+                        <div title="Đăng nhập & đăng ký" class="my-account h-auto p-4 mx-2">
+                            <a class="text-3xl" href="{{ route('account.login') }}"><i class="fa-solid fa-user"></i></a>
+                        </div>
+                    @endif
                     <div title="Giỏ hàng" class="my-cart h-auto p-4 mx-2 relative">
                         <a class="text-3xl" href="{{ route('cart.index') }}">
                             <i class="fa-solid fa-cart-shopping"></i>
@@ -87,7 +94,7 @@
                 </div>
             </div>
         </div>
-        <div class="header-nav bg-[rgba(13,13,13,1)] h-14 flex items-center justify-center">
+        <div class="header-nav bg-[rgba(13,13,13,1)] h-[50px] flex items-center justify-center">
             <nav>
                 <ul class="flex px-4 py-2">
                     <li class="py-2 px-4">

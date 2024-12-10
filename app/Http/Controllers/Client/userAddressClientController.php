@@ -87,7 +87,7 @@ class userAddressClientController extends Controller
         $isDefault = $request->has('is_default') ? 1 : 0; // nếu địa chỉ mặc định
 
         // neu la dia chi mac dinh, cap nhat lai tat ca con lai thanh khong mac dinh
-        if($isDefault) {
+        if ($isDefault) {
             UserAddress::where('user_id', $id)->update(['is_default' => false]);
         }
 
@@ -157,5 +157,45 @@ class userAddressClientController extends Controller
 
         toastr()->success('Địa chỉ mặc định đã được cập nhật.');
         return back();
+    }
+
+    public function updateShippingAddress(Request $request)
+    {
+
+        $infoUser = session('infoUser');
+
+
+        try {
+            // 1. Tắt cờ địa chỉ mặc định hiện tại cho user
+            UserAddress::where('user_id', $infoUser->user_id)->update(['is_default' => false]);
+
+            // 2. Cập nhật địa chỉ mới làm địa chỉ mặc định
+            UserAddress::where('user_address_id', $request->user_address_id)
+                ->update(['is_default' => true]);
+
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
+
+    // Lấy thông tin địa chỉ mới
+    public function getCurrentShippingAddress()
+    {
+        $infoUser = session('infoUser');
+
+        $defaultAddress = UserAddress::where('user_id', $infoUser->user_id)
+            ->where('is_default', true)
+            ->first();
+
+        if ($defaultAddress) {
+            return response()->json([
+                'address' => $defaultAddress->address,
+                'receiver_name' => $defaultAddress->receiver_name,
+                'receiver_phone' => $defaultAddress->receiver_phone,
+            ]);
+        }
+
+        return response()->json(['error' => 'Không tìm thấy địa chỉ mặc định'], 404);
     }
 }

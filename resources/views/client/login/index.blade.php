@@ -1,12 +1,11 @@
 @extends('client.layouts.default')
 
-@section('title', 'Trang Chủ')
+@section('title', 'Đặt lại mật khẩu')
 
 @section('content')
 
     <div class="max-w-5xl mx-auto py-12">
         <div class="grid grid-cols-2 gap-8">
-            <!-- Login Section -->
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h2 class="text-xl font-bold mb-4">ĐĂNG NHẬP TÀI KHOẢN</h2>
                 <form action="{{ route('account.login') }}" method="POST">
@@ -32,18 +31,9 @@
                     <button type="submit" class="bg-black mb-2 text-white px-6 py-2 rounded-md hover:bg-gray-800">ĐĂNG
                         NHẬP
                     </button> <br>
-                    <a href="#" class="text-sm text-right text-blue-500 hover:underline">Quên mật khẩu?</a>
+                    <a href="{{ route('account.forgot-password.request') }}" class="text-sm text-right text-blue-500 hover:underline">Quên mật khẩu?</a>
                 </form>
-                <!-- Social Login -->
-                <div class="mt-6 text-center">
-                    <p class="text-sm text-gray-600">Hoặc đăng nhập bằng</p>
-                    <div class="flex justify-center gap-4 mt-2">
-                        <button class="bg-red-500 text-white px-4 py-2 rounded-md flex items-center">
-                            <span class="mr-2"><i class="fa-brands fa-google-plus-g"></i></span>
-                            Google
-                        </button>
-                    </div>
-                </div>
+                
             </div>
             <!-- Register Section -->
             <div class="bg-white p-6 rounded-lg shadow-md">

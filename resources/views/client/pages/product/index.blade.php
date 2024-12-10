@@ -127,14 +127,14 @@
                             <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
                                 <div
                                     class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
-                                    NEW
+                                    {{ $item->discount }} %
                                 </div>
                                 <div>
                                     <a href="{{ route('product.detail', ['slug' => $item->slug]) }}">
                                         <div class="w-auto">
                                             @if ($item->images->isNotEmpty())
                                                 <img class="w-auto" src="{{ asset('storage/' . $item->images->first()->file_image_url) }}"
-                                                    alt="{{ $item->product_name }}" class="w-auto h-40 object-cover">
+                                                    alt="{{ $item->product_name }}" class="w-auto h-40 object-cover transition-transform duration-300 ease-in-out transform hover:scale-125 hover:cursor-pointer">
                                             @endif
                                             <p class="mt-2 text-[17px] italic">{{ $item->product_name }}</p>
                                         </div>

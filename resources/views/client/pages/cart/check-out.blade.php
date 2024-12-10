@@ -5,38 +5,51 @@
 @section('main')
     <div class="container mx-auto p-8">
         <!-- Thông tin thanh toán -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Form thông tin -->
+        <div class="">
+            <!-- Thông tin giao hàng -->
             <div>
-                <h2 class="text-xl font-bold mb-4">THÔNG TIN THANH TOÁN</h2>
-                <form class="space-y-4">
-                    <div>
-                        <label class="block font-semibold mb-1" for="name">Họ và tên *</label>
-                        <input type="text" id="name" class="w-full border border-gray-300 rounded-lg p-2"
-                            placeholder="Nhập họ và tên">
+                <div class="text-xl font-bold flex mb-4">
+                    <p class="text-red-600 mr-4"><i class="fa-solid fa-location-dot"></i></p>
+                    Địa chỉ giao hàng
+                </div>
+                <div class="container mx-auto p-4">
+                    <!-- Hiện thị thông tin địa chỉ hiện tại -->
+                    <div id="currentAddress" class="space-y-4 bg-white p-4 rounded-lg shadow-md">
+                        <p class="text-lg font-semibold">Địa chỉ giao hàng hiện tại:</p>
+                        <p id="currentAddressDisplay" class="text-gray-700">{{ $defaultAddress->address }}</p>
+                        <p class="text-gray-500">{{ $defaultAddress->receiver_name }} |
+                            {{ $defaultAddress->receiver_phone }}</p>
+                        <button class="text-blue-500 hover:text-blue-700 font-medium" id="changeAddressBtn">Thay đổi địa
+                            chỉ</button>
                     </div>
-                    <div>
-                        <label class="block font-semibold mb-1" for="phone">Số điện thoại *</label>
-                        <input type="text" id="phone" class="w-full border border-gray-300 rounded-lg p-2"
-                            placeholder="Nhập số điện thoại">
+
+                    <!-- Modal cho lựa chọn địa chỉ mới -->
+                    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
+                        id="addressModal">
+                        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+                            <h3 class="text-lg font-semibold mb-4">Chọn địa chỉ mới</h3>
+                            <select id="newAddressId"
+                                class="w-full border-gray-300 border rounded-lg p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">-- Chọn địa chỉ mới --</option>
+                                @foreach ($addresses as $address)
+                                    <option value="{{ $address->user_address_id }}">
+                                        {{ $address->address }} - {{ $address->receiver_name }} -
+                                        {{ $address->receiver_phone }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <div class="flex justify-between space-x-2">
+                                <button class="flex-1 bg-gray-300 text-gray-700 py-2 px-3 rounded-lg hover:bg-gray-400"
+                                    id="cancelAddressBtn">Hủy</button>
+                                <button class="flex-1 bg-blue-500 text-white py-2 px-3 rounded-lg hover:bg-blue-600"
+                                    id="saveAddressBtn">Lưu</button>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <label class="block font-semibold mb-1" for="email">Địa chỉ email *</label>
-                        <input type="email" id="email" class="w-full border border-gray-300 rounded-lg p-2"
-                            placeholder="Nhập địa chỉ email">
-                    </div>
-                    <div>
-                        <label class="block font-semibold mb-1" for="address">Địa chỉ *</label>
-                        <input type="text" id="address" class="w-full border border-gray-300 rounded-lg p-2"
-                            placeholder="Nhập địa chỉ cụ thể">
-                    </div>
-                    <div>
-                        <label class="block font-semibold mb-1" for="notes">Ghi chú đơn hàng (tùy chọn)</label>
-                        <textarea id="notes" class="w-full border border-gray-300 rounded-lg p-2" rows="4"
-                            placeholder="Ghi chú về đơn hàng..."></textarea>
-                    </div>
-                </form>
+
+                </div>
             </div>
+
 
             <!-- Đơn hàng của bạn -->
             <div>
@@ -92,8 +105,70 @@
                 </div>
             </div>
         </div>
-    </div>
 
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const modal = document.getElementById('addressModal');
+                const changeAddressBtn = document.getElementById('changeAddressBtn');
+                const saveAddressBtn = document.getElementById('saveAddressBtn');
+                const cancelAddressBtn = document.getElementById('cancelAddressBtn');
+                const addressSelect = document.getElementById('newAddressId');
 
+                // Hiện modal
+                changeAddressBtn.addEventListener('click', function() {
+                    modal.classList.remove('hidden');
+                });
 
-@endsection
+                // Hủy thao tác
+                cancelAddressBtn.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                });
+
+                // Gọi API để lưu địa chỉ mới và cập nhật giao diện
+                saveAddressBtn.addEventListener('click', function() {
+                    const selectedAddressId = addressSelect.value;
+
+                    if (!selectedAddressId) {
+                        alert('Vui lòng chọn địa chỉ!');
+                        return;
+                    }
+
+                    fetch('/update-shipping-address', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            },
+                            body: JSON.stringify({
+                                user_address_id: selectedAddressId,
+                            }),
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert('Cập nhật địa chỉ thành công!');
+                                modal.classList.add('hidden');
+
+                                // Fetch thông tin mới và cập nhật giao diện
+                                return fetch('/get-current-shipping-address');
+                            } else {
+                                alert('Có lỗi xảy ra!');
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data && data.address) {
+                                // document.getElementById('currentAddressDisplay').innerText = data.address;
+                                // document.querySelector('#currentAddress').querySelectorAll('p')[1]
+                                //     .innerText = `${data.receiver_name} | ${data.receiver_phone}`;
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Không thể cập nhật địa chỉ');
+                        });
+                });
+            });
+        </script>
+
+    @endsection

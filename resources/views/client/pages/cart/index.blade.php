@@ -52,6 +52,7 @@
                                             </div>
                                             <div class="block">
                                                 <span>{{ $item->product_name }}</span> <br>
+                                                Size: 
                                                 @foreach ($sizes as $size)
                                                     @if ($size->size_id == $product->size_id)
                                                         <span class="font-bold">{{ $size->size_name }}</span>

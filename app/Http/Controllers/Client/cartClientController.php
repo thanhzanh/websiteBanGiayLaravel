@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Product;
 use App\Models\Size;
+use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -143,7 +144,12 @@ class cartClientController extends Controller
     // [GET] /cart
     public function checkout()
     {
+        $infoUser = session('infoUser');
+        $addresses = UserAddress::where('user_id', $infoUser->user_id)->get();
 
-        return view('client.pages.cart.check-out');
+        $defaultAddress = UserAddress::where('user_id', $infoUser->user_id)->where('is_default', true)->first(); // Lấy địa chỉ mặc định của người dùng
+
+        return view('client.pages.cart.check-out', compact('addresses', 'defaultAddress'));
     }
+
 }

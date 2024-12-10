@@ -46,7 +46,7 @@ class forgotPasswordController extends Controller
 
         }
 
-        toastr()->success("Gửi email thất bại. Vui lòng kiểm tra lại");
+        toastr()->error("Gửi email thất bại. Vui lòng kiểm tra lại");
         return redirect()->back();
 
     }
@@ -58,7 +58,7 @@ class forgotPasswordController extends Controller
 
         // dd($admin);
 
-        return view('admin.login.formResetPassword')->with('token', $token);
+        return view('admin.login.formResetPassword')->with('token', $tokeData);
     }
 
     public function checkResetPassword($token) {
@@ -83,7 +83,7 @@ class forgotPasswordController extends Controller
             return redirect()->route('admin');
         }
 
-        toastr()->success("Thay đổi mật khẩu thất bại!");
+        toastr()->error("Thay đổi mật khẩu thất bại!");
         
         return redirect()->route('admin');
     }
