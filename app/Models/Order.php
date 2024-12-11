@@ -11,10 +11,11 @@ class Order extends Model
     protected $primaryKey = "order_id";
 
     protected $fillable = [
+        'order_id',
         'code',
-        'user_id', 
+        'user_id',
         'user_address_id',
-        'total', 
+        'total',
         'status'
     ];
 
@@ -25,6 +26,6 @@ class Order extends Model
 
     public function transactions()
     {
-        return $this->hasOne(Transaction::class, 'order_id', 'order_id');
+        return $this->hasMany(Transaction::class);
     }
 }

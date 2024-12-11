@@ -129,7 +129,7 @@ Route::get('/get-current-shipping-address', [userAddressClientController::class,
 
 // ========================= payment ===========================
 
-Route::get('/payment', [paymentClientController::class, 'createPayment'])->name('payment.create');
+Route::get('/payment/{order_id}', [paymentClientController::class, 'createPayment'])->name('payment.create');
 
 Route::get('/vnpay-return', [paymentClientController::class, 'vnpayReturn'])->name('vnpay.return');
 
