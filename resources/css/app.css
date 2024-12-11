@@ -2,6 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
+/* admin */
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.inner-search form {
+    position: relative;
+}
+
+.inner-search input {
+    flex: 1;
+}
+
+.inner-search button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+/* sidebar menu */
+
+.active {
+    background-color: #1276c5; 
+    color: black; 
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 35px 0 0 35px;
+}
+
+/* end sidebar menu */
+
+
 .selected {
     background-color: black;
     color: white;

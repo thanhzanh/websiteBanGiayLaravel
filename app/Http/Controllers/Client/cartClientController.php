@@ -101,9 +101,7 @@ class cartClientController extends Controller
 
         if ($deleted) {
             toastr()->success('Sản phẩm đã được xóa khỏi giỏ hàng');
-        } else {
-            toastr()->error('Không tìm thấy sản phẩm để xóa');
-        }
+        } 
 
         return back();
     }
@@ -140,16 +138,6 @@ class cartClientController extends Controller
         return back();
     }
 
-    // checkout
-    // [GET] /cart
-    public function checkout()
-    {
-        $infoUser = session('infoUser');
-        $addresses = UserAddress::where('user_id', $infoUser->user_id)->get();
-
-        $defaultAddress = UserAddress::where('user_id', $infoUser->user_id)->where('is_default', true)->first(); // Lấy địa chỉ mặc định của người dùng
-
-        return view('client.pages.cart.check-out', compact('addresses', 'defaultAddress'));
-    }
+    
 
 }

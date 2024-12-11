@@ -96,16 +96,75 @@ if (listInputQuantity.length > 0) {
 
 // chuyển hình ảnh trang chi tiết sản phẩm
 const thumbnails = document.querySelectorAll('.flex img[data-src]');
-    const mainImage = document.getElementById('mainImage');
+const mainImage = document.getElementById('mainImage');
 
-    // Lặp qua các hình phụ và gắn sự kiện click
-    thumbnails.forEach(thumbnail => {
-        thumbnail.addEventListener('click', function () {
-            // Lấy đường dẫn từ data-src và thay đổi src của hình chính
-            const newSrc = this.getAttribute('data-src');
-            mainImage.setAttribute('src', newSrc);
+// Lặp qua các hình phụ và gắn sự kiện click
+thumbnails.forEach(thumbnail => {
+    thumbnail.addEventListener('click', function () {
+        // Lấy đường dẫn từ data-src và thay đổi src của hình chính
+        const newSrc = this.getAttribute('data-src');
+        mainImage.setAttribute('src', newSrc);
+    });
+});
+
+
+// changeStatus product-category
+const buttonChangeStatus = document.querySelectorAll('.button-change-status');
+if (buttonChangeStatus.length > 0) {
+
+    buttonChangeStatus.forEach(button => {
+        
+        button.addEventListener('click', () => {
+            const statusCurrent = button.getAttribute('data-status');
+            const idCurrent = button.getAttribute('data-id');
+
+            let statusChange = statusCurrent === "active" ? "inactive" : "active";
+
+            const formChangeStatus = button.closest('.form-change-status');
+
+            let action = formChangeStatus.getAttribute('action');
+            action = action.replace(statusChange, idCurrent, `${statusChange}/${idCurrent}`);
+
+            formChangeStatus.action = action;
+
+            formChangeStatus.submit();
+        });       
+    });
+}
+
+// end changeStatus product-category
+
+// show status: Tat ca, hoat dong, dung hoat dong
+const buttonStatus = document.querySelectorAll('[button-status]');
+console.log(buttonStatus);
+if (buttonStatus.length > 0) {
+
+    // lay ra url, them key thay doi params url
+    let url = new URL(window.location.href);
+
+    buttonStatus.forEach(button => {
+        button.addEventListener('click', () => {
+            const status = button.getAttribute('button-status');
+            console.log(status);
+
+            if(status) {
+                url.searchParams.set('status', status);
+            } else {
+                url.searchParams.delete('status');
+            }
+
+            // gan lai url
+            window.location.href = url;
         });
     });
+    
+}
+
+// end show status
+
+
+
+
 
 
 

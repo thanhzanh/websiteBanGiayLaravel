@@ -131,7 +131,7 @@
                 </div>
 
                 <div class="flex justify-between text-lg font-bold mb-4">
-                    <a href="{{ route('check-out.index') }}"
+                    <a href="{{ route('order.check-out.index') }}"
                         class="w-full text-center bg-gray-500 text-white py-3 rounded-lg hover:bg-gray-600 font-bold">
                         Tiến hành thanh toán
                     </a>

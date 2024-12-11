@@ -13,6 +13,7 @@ use App\Http\Controllers\Client\CartClientController;
 use App\Http\Controllers\Client\forgotPasswordClientController;
 use App\Http\Controllers\Client\homeClientController;
 use App\Http\Controllers\Client\loginClientController;
+use App\Http\Controllers\Client\orderClientController;
 use App\Http\Controllers\Client\paymentClientController;
 use App\Http\Controllers\Client\productClientController;
 use App\Http\Controllers\Client\userAddressClientController;
@@ -143,8 +144,10 @@ Route::delete('/cart/delete/{id}', [CartClientController::class, 'delete'])->nam
 Route::get('/cart/update/{quantity}/{productId}', [CartClientController::class, 'update'])->name('cart.update');
 
 
-// ========================= check-out ===========================
-Route::get('/check-out', [CartClientController::class, 'checkout'])->name('check-out.index')->middleware(CheckSessionMiddleware::class);
+// ========================= order ===========================
+Route::get('/order/check-out', [orderClientController::class, 'checkout'])->name('order.check-out.index')->middleware(CheckSessionMiddleware::class);
+
+Route::post('/order/create-order', [orderClientController::class, 'createOrder'])->name('order.create-order')->middleware(CheckSessionMiddleware::class);
 
 
 

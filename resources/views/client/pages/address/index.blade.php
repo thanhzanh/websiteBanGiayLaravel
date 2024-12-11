@@ -154,7 +154,8 @@
     <script>
         // Modal toggle logic
         document.querySelectorAll('[data-modal-toggle]').forEach(button => {
-            button.addEventListener('click', () => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
                 const modalId = button.getAttribute('data-modal-toggle');
                 document.getElementById(modalId).classList.remove('hidden');
             });

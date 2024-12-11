@@ -17,7 +17,6 @@
 
     @include('client.mixins.footer')
 
-    {{-- @vite('resources/js/brand.js') --}}
     @vite('resources/js/app.js')
 </body>
 

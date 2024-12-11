@@ -18,7 +18,7 @@
     @yield('content')
 
     @include('client.mixins.footer')
-
+    @vite('resources/js/app.js')
 </body>
 
 </html>
