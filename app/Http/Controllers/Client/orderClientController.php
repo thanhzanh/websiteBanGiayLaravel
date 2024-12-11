@@ -55,12 +55,18 @@ class orderClientController extends Controller
 
     public function createOrder(Request $request)
     {
-
         try {
             $user = session('infoUser');
             $userAddressesId = $request->user_address_id;
             $payment_method = $request->payment_method;
             $total = $request->total;
+
+            // check co địa chỉ chưa
+            $defaultAddress = UserAddress::where('user_id', $user->user_id)->where('is_default', true)->first(); // Lấy địa chỉ mặc định của người dùng
+            if(!$defaultAddress) {
+                toastr()->error('Vui lòng thêm địa chỉ giao hàng');
+                return back();
+            }
 
             // Tạo mã đơn hàng duy nhất
             $number = mt_rand(1000, 9999);
@@ -106,13 +112,6 @@ class orderClientController extends Controller
                 toastr()->success('Đặt đơn hàng thành công');
                 return redirect()->route('home');
             } elseif ($payment_method == 'bank') {
-
-                // Transaction::create([
-                //     'order_id' => $order->order_id,
-                //     'payment_method' => $payment_method,
-                //     'status' => 'pending',
-                //     'amount' => $total
-                // ]);
                 
                 return redirect()->route('payment.create', ['order_id' => $order->order_id]);
             }

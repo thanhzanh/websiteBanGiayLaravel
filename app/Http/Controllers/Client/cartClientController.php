@@ -28,6 +28,8 @@ class cartClientController extends Controller
             $carts = DB::table('cart')->where('session_id', $sessionId)->first();
         }
 
+        $cartItems = collect();
+
         // neu co gio hang
         if ($carts) {
             $cartItems = DB::table('cart_items')->where('cart_id', $carts->cart_id)->get(); // get() la lay ra san gio hang chi tiet theo cart_id

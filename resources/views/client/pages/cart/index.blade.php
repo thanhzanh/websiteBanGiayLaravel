@@ -35,61 +35,66 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if ($cartItems)
                         @foreach ($cartItems as $product)
-                            <tr>
-                                <td class="px-4 py-2 border border-gray-200 text-center">
-                                    <input class="w-3 h-3" style="transform: scale(1.5)" type="checkbox" name="chooseAddCart" id="">
-                                </td>
-                                <td class="px-4 py-2 border border-gray-200 flex items-center">
-                                    @foreach ($products as $item)
-                                        @if ($product->product_id == $item->product_id)
-                                            <div class="w-[120px] h-[120px] mr-8">
-                                                <a href="{{ route('product.detail', ['slug' => $item->slug]) }}">
-                                                    <img class="w-auto"
-                                                        src="{{ asset('storage/' . $item->images->first()->file_image_url) }}"
-                                                        alt="{{ $item->product_name }}" class="w-auto h-40 object-cover">
-                                                </a>
-                                            </div>
-                                            <div class="block">
-                                                <span>{{ $item->product_name }}</span> <br>
-                                                Size: 
-                                                @foreach ($sizes as $size)
-                                                    @if ($size->size_id == $product->size_id)
-                                                        <span class="font-bold">{{ $size->size_name }}</span>
-                                                    @endif
-                                                @endforeach
-                                            </div>
-                                        @endif
-                                    @endforeach
-                                </td>
-                                <td class="px-4 py-2 border border-gray-200 text-center">
-                                    <span class="font-bold">{{ number_format($product->price, 0, ',', '.') }} VND</span>
-                                </td>
-                                <td class="px-4 py-2 border border-gray-200 text-center">
-                                    <div class="flex items-center justify-center">
-                                        <input name="quantity" product-id="{{ $product->product_id }}" type="number"
-                                            class="w-12 text-center border border-gray-300 rounded-md mx-2" min="1"
-                                            value="{{ $product->quantity }}">
-                                    </div>
-                                </td>
-                                <td class="px-4 py-2 border border-gray-200 text-center">
-                                    <span
-                                        class="font-bold">{{ number_format($product->price * $product->quantity, 0, ',', '.') }} VND</span>
-                                </td>
-                                <td class="px-4 py-2 border border-gray-200 text-center">
-                                    <div class="inline-block">
-                                        <form action="{{ route('cart.delete', ['id' => $product->id]) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button title="Xóa"
-                                                class="px-3 py-[0.3rem] bg-red-500 text-[1rem] font-bold text-white rounded-2xl hover:bg-black">
-                                                <i class="fa-solid fa-minus"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
+                        <tr>
+                            <td class="px-4 py-2 border border-gray-200 text-center">
+                                <input class="w-3 h-3" style="transform: scale(1.5)" type="checkbox" name="chooseAddCart" id="">
+                            </td>
+                            <td class="px-4 py-2 border border-gray-200 flex items-center">
+                                @foreach ($products as $item)
+                                    @if ($product->product_id == $item->product_id)
+                                        <div class="w-[120px] h-[120px] mr-8">
+                                            <a href="{{ route('product.detail', ['slug' => $item->slug]) }}">
+                                                <img class="w-auto"
+                                                    src="{{ asset('storage/' . $item->images->first()->file_image_url) }}"
+                                                    alt="{{ $item->product_name }}" class="w-auto h-40 object-cover">
+                                            </a>
+                                        </div>
+                                        <div class="block">
+                                            <span>{{ $item->product_name }}</span> <br>
+                                            Size: 
+                                            @foreach ($sizes as $size)
+                                                @if ($size->size_id == $product->size_id)
+                                                    <span class="font-bold">{{ $size->size_name }}</span>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </td>
+                            <td class="px-4 py-2 border border-gray-200 text-center">
+                                <span class="font-bold">{{ number_format($product->price, 0, ',', '.') }} VND</span>
+                            </td>
+                            <td class="px-4 py-2 border border-gray-200 text-center">
+                                <div class="flex items-center justify-center">
+                                    <input name="quantity" product-id="{{ $product->product_id }}" type="number"
+                                        class="w-12 text-center border border-gray-300 rounded-md mx-2" min="1"
+                                        value="{{ $product->quantity }}">
+                                </div>
+                            </td>
+                            <td class="px-4 py-2 border border-gray-200 text-center">
+                                <span
+                                    class="font-bold">{{ number_format($product->price * $product->quantity, 0, ',', '.') }} VND</span>
+                            </td>
+                            <td class="px-4 py-2 border border-gray-200 text-center">
+                                <div class="inline-block">
+                                    <form action="{{ route('cart.delete', ['id' => $product->id]) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button title="Xóa"
+                                            class="px-3 py-[0.3rem] bg-red-500 text-[1rem] font-bold text-white rounded-2xl hover:bg-black">
+                                            <i class="fa-solid fa-minus"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                        @else
+                            <h1>Chua co san pham trong gio hang</h1>
+                        @endif
+                        
                     </tbody>
                 </table>
                 <div class="flex justify-between mt-4">

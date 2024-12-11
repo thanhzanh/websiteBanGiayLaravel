@@ -18,9 +18,15 @@
                         <!-- Hiện thị thông tin địa chỉ hiện tại -->
                         <div id="currentAddress" class="space-y-4 bg-white p-4 rounded-lg shadow-md">
                             <p class="text-lg font-semibold">Địa chỉ giao hàng hiện tại:</p>
-                            <p id="currentAddressDisplay" class="text-gray-700">{{ $defaultAddress->address }}</p>
-                            <p class="text-gray-500">{{ $defaultAddress->receiver_name }} |
-                                {{ $defaultAddress->receiver_phone }}</p>
+                            @if ($defaultAddress)
+                                <p id="currentAddressDisplay" class="text-gray-700">{{ $defaultAddress->address }}</p>
+                                <p class="text-gray-500">{{ $defaultAddress->receiver_name }} |
+                                    {{ $defaultAddress->receiver_phone }}</p>
+                            @else
+                                <p class="text-gray-700 text-red-500">Bạn chưa có địa chỉ giao hàng. Vui lòng <a class="hover:underline text-black italic font-bold hover:text-blue-700" href="{{ route('account.addresses.index') }}">thêm địa chỉ</a>
+                                </p>
+                            @endif
+
                             <button class="text-blue-500 hover:text-blue-700 font-medium" id="changeAddressBtn">Thay đổi địa
                                 chỉ</button>
                         </div>
@@ -88,7 +94,9 @@
                         </div>
 
                         {{-- input ẩn gửi lên serv --}}
-                        <input type="hidden" name="user_address_id" value="{{ $defaultAddress->user_address_id }}">
+                        @if ($defaultAddress)
+                            <input type="hidden" name="user_address_id" value="{{ $defaultAddress->user_address_id }}">                       
+                        @endif
                         <input type="hidden" name="cartItem" value="{{ json_encode($cartItem) }}">
                         <input type="hidden" name="total" value="{{ $total }}">
 
@@ -96,7 +104,8 @@
                         <!-- Phương thức thanh toán -->
                         <div class="space-y-2">
                             <div>
-                                <input type="radio" id="cod" name="payment_method" value="cod" class="mr-2" checked>
+                                <input type="radio" id="cod" name="payment_method" value="cod" class="mr-2"
+                                    checked>
                                 <label for="cod">Thanh toán khi nhận hàng</label>
                             </div>
                             <div>
