@@ -140,4 +140,27 @@ class orderClientController extends Controller
 
         return view('client.pages.order.index', compact('orders','orderItems', 'products'));
     }
+
+    public function detail($id) {
+
+        $user = session('infoUser');
+        
+        $order = Order::with(['items', 'items.product', 'items.product.images'])
+                ->where('user_id', $user->user_id)
+                ->where('order_id', $id)
+                ->first();
+
+        // dd($order);
+
+        $userAddress = UserAddress::where('user_id', $user->user_id)->get();
+        // dd($userAddress);
+
+        $products = Product::all();
+
+        $transaction = DB::table('transaction')->where('order_id', $order->order_id)->get();
+
+        // dd($transactions);
+
+        return view('client.pages.order.detail', compact('order', 'products', 'transaction', 'userAddress'));
+    }
 }

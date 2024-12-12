@@ -152,6 +152,7 @@ Route::post('/order/create-order', [orderClientController::class, 'createOrder']
 
 Route::get('/order', [orderClientController::class, 'orderIndex'])->name('order.index')->middleware(CheckSessionMiddleware::class);
 
+Route::get('/order/detail/{id}', [orderClientController::class, 'detail'])->name('order.detail')->middleware(CheckSessionMiddleware::class);
 
 
 

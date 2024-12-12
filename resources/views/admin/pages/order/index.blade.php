@@ -40,7 +40,7 @@
             @foreach ($orders as $index => $order)
                 <tr class="text-center text-black border-b-2 h-[157px] duration-300">
                     <td class="italic">{{ $index+1 }}</td>
-                    <td class="w-52 font-bold">{{ $order->code }}</td>
+                    <td class="w-52 font-bold text-blue-700">{{ $order->code }}</td>
                     @foreach ($users as $user)
                     @if ($order->user_id == $user->user_id)
                         <td class="italic">{{ $user->user_name }}</td>                   

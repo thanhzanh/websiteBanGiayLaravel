@@ -19,13 +19,17 @@ class Order extends Model
         'status'
     ];
 
-    public function orderDetails()
-    {
-        return $this->hasMany(OrderDetail::class, 'order_id', 'order_id');
-    }
+    // public function orderDetails()
+    // {
+    //     return $this->hasMany(OrderDetail::class, 'order_id', 'order_id');
+    // }
 
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function items() {
+        return $this->hasMany(OrderDetail::class, 'order_id', 'order_id');
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class ordersController extends Controller
 {
@@ -27,6 +28,8 @@ class ordersController extends Controller
         $order = Order::findOrFail($id);
 
         $order->status = $request->input('status');
+
+        $order->updated_at = Carbon::now();
 
         $order->save();
 
