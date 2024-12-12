@@ -120,4 +120,24 @@ class orderClientController extends Controller
             return redirect()->route('home');
         }
     }
+
+    public function orderIndex() {
+
+        $user = session('infoUser');
+        
+        $orders = DB::table('orders')->where('user_id', $user->user_id)->get();
+
+        // lay tat ca don hang
+        $orderItems = [];
+        foreach($orders as $order) {
+            $order->items = DB::table('orders_detail')->where('order_id', $order->order_id)->get();
+            $orderItems[] = $order;
+
+
+        }
+
+        $products = Product::all();
+
+        return view('client.pages.order.index', compact('orders','orderItems', 'products'));
+    }
 }

@@ -31,7 +31,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="" class="block px-4 py-2 hover:bg-gray-100">
+                                    <a href="{{ route('order.index') }}" class="block px-4 py-2 hover:bg-gray-100">
                                         <i class="fa-solid fa-bag-shopping"></i>
                                         Đơn mua
                                     </a>
@@ -74,9 +74,7 @@
                 <div class="inner-user-cart text-white flex justify-end my-auto px-6 items-center">
                     
                     @if (session('infoUser'))
-                        <div title="Đăng nhập & đăng ký" class="my-account h-auto p-4 mx-2">
-                            <span class="text-3xl"><i class="fa-solid fa-user"></i></span>
-                        </div>
+                        
                     @else
                         <div title="Đăng nhập & đăng ký" class="my-account h-auto p-4 mx-2">
                             <a class="text-3xl" href="{{ route('account.login') }}"><i class="fa-solid fa-user"></i></a>

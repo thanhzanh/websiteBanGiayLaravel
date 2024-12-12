@@ -149,7 +149,7 @@ Route::get('/order/check-out', [orderClientController::class, 'checkout'])->name
 
 Route::post('/order/create-order', [orderClientController::class, 'createOrder'])->name('order.create-order')->middleware(CheckSessionMiddleware::class);
 
-Route::post('/order/create-order', [orderClientController::class, 'createOrder'])->name('order.create-order')->middleware(CheckSessionMiddleware::class);
+Route::get('/order', [orderClientController::class, 'orderIndex'])->name('order.index')->middleware(CheckSessionMiddleware::class);
 
 
 

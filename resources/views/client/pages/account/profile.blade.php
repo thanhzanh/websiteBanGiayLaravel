@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="max-w-5xl mx-auto py-12">
-        <h2 class="text-2xl font-bold mb-6">Hồ sơ của tôi</h2>
+        <h2 class="text-xl font-bold mb-6 uppercase text-gray-500 bg-slate-100 pt-2 pb-2 pl-2">Hồ sơ của tôi</h2>
         <form action="{{ route('account.profile.update', ['id' => session('infoUser')->user_id]) }}" method="POST" class="grid grid-cols-2 gap-6 bg-white p-8 rounded-lg shadow">
             @csrf
             @method('PUT')

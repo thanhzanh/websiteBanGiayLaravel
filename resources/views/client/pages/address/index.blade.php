@@ -3,10 +3,13 @@
 @section('title', 'Địa chỉ')
 
 @section('content')
-    <div class="container mx-auto p-6">
-        <h1 class="text-2xl font-bold mb-4">Quản Lý Địa Chỉ</h1>
-        <button class="bg-black text-white right-0 px-4 py-2 rounded hover:bg-white hover:text-black mb-4"
-            data-modal-toggle="addressModal">+ Thêm địa chỉ mới</button>
+    <div class="max-w-[1280px] mx-auto p-6 mt-6 mb-6">
+        <div class="flex justify-between">
+            <h1 class="text-2xl font-bold mb-4">Quản Lý Địa Chỉ</h1>
+            <button class="bg-black text-white right-0 px-4 py-2 rounded hover:bg-white hover:text-black mb-4"
+                data-modal-toggle="addressModal">+ Thêm địa chỉ mới</button>
+        </div>
+        
         @foreach ($addresses as $item)
             <div>
                 <div class="bg-white shadow-md rounded-lg p-4 mb-4">
