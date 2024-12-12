@@ -16,12 +16,6 @@
                     <span>Home</span>
                 </a>
             </li>
-            <li class="w-[100%] mb-4 pl-8">
-                <a href="{{ route('admin.home') }}" class="block text-xl pl-4 text-[#ffff] ">
-                    <span class="text-xl pr-5"><i class="fa-solid fa-sliders"></i></span>
-                    <span>Slideshow</span>
-                </a>
-            </li>
             <li class="w-[100%] mb-4 pl-8 {{ setActive('admin/product-category') }}">
                 <a href="{{ route('admin.productCategory') }}" class="block text-xl pl-4 text-[#ffff] {{setActive(['admin/product-category']) }}">
                     <span class="text-xl pr-5"><i class="fa-brands fa-product-hunt"></i></span>
@@ -34,20 +28,8 @@
                     <span>Product</span>
                 </a>
             </li>
-            <li class="w-[100%] mb-4 pl-8" {{ setActive('admin/article-category') }}>
-                <a href="{{ route('admin.articleCategory') }}" class="block text-xl pl-4 text-[#ffff] {{setActive(['admin/article-category']) }}">
-                    <span class="text-xl pr-5"><i class="fa-solid fa-newspaper"></i></span>
-                    <span>Article Category</span>
-                </a>
-            </li>
-            <li class="w-[100%] mb-4 pl-8">
-                <a href="" class="block text-xl pl-4 text-[#ffff]">
-                    <span class="text-xl pr-5"><i class="fa-solid fa-newspaper"></i></span>
-                    <span>Article</span>
-                </a>
-            </li>
-            <li class="w-[100%] mb-4 pl-8">
-                <a href="" class="block text-xl pl-4 text-[#ffff]">
+            <li class="w-[100%] mb-4 pl-8 {{ setActive('admin/order') }}">
+                <a href="{{ route('admin.order.index') }}" class="block text-xl pl-4 text-[#ffff] {{setActive(['admin/order']) }}">
                     <span class="text-xl pr-5"><i class="fa-solid fa-bag-shopping"></i></span>
                     <span>Order</span>
                 </a>

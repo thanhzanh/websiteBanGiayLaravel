@@ -104,7 +104,6 @@ class productController extends Controller
             'price',
             'quantity',
             'discount',
-            'size_id',
             'status',
             'featured',
             'product_category_id'

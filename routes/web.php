@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\articleController;
 use App\Http\Controllers\Admin\dashboardController;
 use App\Http\Controllers\Admin\forgotPasswordController;
 use App\Http\Controllers\Admin\loginController;
+use App\Http\Controllers\Admin\ordersController;
 use App\Http\Controllers\Admin\productCategoryController;
 use App\Http\Controllers\Admin\productController;
 use App\Http\Controllers\Client\brandClientController;
@@ -233,11 +234,11 @@ Route::patch('/admin/account/edit/{id}', [accountController::class, 'editPost'])
 Route::delete('/admin/account/delete/{id}', [accountController::class, 'delete'])->name('admin.account.delete');
 
 
-// ========================= article-category ===========================
+// ========================= orders ===========================
 
-Route::get('/admin/article-category', [articleCategoryController::class, 'index'])->name('admin.articleCategory');
+Route::get('/admin/order', [ordersController::class, 'index'])->name('admin.order.index');
+
+Route::post('/admin/order/updateStatus/{id}', [ordersController::class, 'updateStatus'])->name('admin.order.updateStatus');
 
 
-// ========================= article ===========================
 
-Route::get('/admin/article', [articleController::class, 'index'])->name('admin.article');

@@ -116,14 +116,7 @@ class paymentClientController extends Controller
             $orderId = $inputData['vnp_TxnRef'];
             $order = Order::where('order_id', $orderId)->first();
     
-            // if ($order) {
-                
-            // } else {
-            //     toastr()->error('Không tìm thấy đơn hàng');
-            //     return redirect()->route('home');
-            // }
             if ($request->vnp_ResponseCode == '00') { // Thanh toán thành công
-                $order->update(['status' => 'completed']);
                 Transaction::create([
                     'order_id' => $order->order_id,
                     'payment_method' => 'bank',
