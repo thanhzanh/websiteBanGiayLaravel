@@ -241,5 +241,6 @@ Route::get('/admin/order', [ordersController::class, 'index'])->name('admin.orde
 
 Route::post('/admin/order/updateStatus/{id}', [ordersController::class, 'updateStatus'])->name('admin.order.updateStatus');
 
+Route::get('/admin/order/detail/{id}', [ordersController::class, 'detail'])->name('admin.order.detail');
 
 

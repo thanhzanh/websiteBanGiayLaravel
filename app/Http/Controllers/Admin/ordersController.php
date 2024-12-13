@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Product;
+use App\Models\Transaction;
 use App\Models\User;
+use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -89,5 +92,28 @@ class ordersController extends Controller
 
         toastr()->success('Đã cập nhật trạng thái đơn hàng');
         return back();
+    }
+
+    public function detail(Request $request, $id) {
+
+        $user = session('infoUser');
+
+        $order = DB::table('orders')
+                ->where('order_id', $id)
+                ->first();
+
+        if ($order) {
+            $orderItem = DB::table('orders_detail')->where('order_id', $order->order_id)->get();
+        }
+
+        // lay dia chi giao hang
+        $userAddress = DB::table('user_addresss')->where('user_address_id', $order->user_address_id)->first();
+
+        $products = Product::all();
+
+        // phuong thuc giao dich
+        $transaction = Transaction::where('order_id', $order->order_id)->first();
+
+        return view('admin.pages.order.detail', compact('orderItem', 'order', 'userAddress', 'products', 'transaction'));
     }
 }

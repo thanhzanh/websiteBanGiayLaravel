@@ -3,7 +3,7 @@
 @section('title', 'Đơn hàng')
 
 @section('content')
-<h1 class="font-bold text-blue-800 text-2xl border-b-2 border-b-blue-800 uppercase text-center pb-3">ORDER</h1>
+<h1 class="font-bold text-blue-800 text-2xl border-b-2 border-b-blue-800 uppercase text-center pb-3">ĐƠN HÀNG</h1>
 <div class="search-wrapper mt-5 border-cyan-600 bg-[#f1f5f9] border h-[50px] rounded-[30px] flex items-center overflow-x-hidden">
     <form action="" myethod="get" class="w-full flex">
         <button type="button" id="btn-search" class="inline-block text-[1.6rem] pl-4 pr-4"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -62,7 +62,7 @@
                     <td>{{ $order->created_at }}</td>
                     <td>{{ $order->updated_at }}</td>
                     <td>
-                        <a href="" title="Chi tiết đơn hàng" class="px-3 py-2 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-eye"></i></a>
+                        <a href="{{ route('admin.order.detail', ['id' => $order->order_id]) }}" title="Chi tiết đơn hàng" class="px-3 py-2 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-eye"></i></a>
                         <div class="inline-block">
                     </td>
                 </tr>
