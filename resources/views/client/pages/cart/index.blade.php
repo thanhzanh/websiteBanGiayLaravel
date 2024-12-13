@@ -68,7 +68,7 @@
                             </td>
                             <td class="px-4 py-2 border border-gray-200 text-center">
                                 <div class="flex items-center justify-center">
-                                    <input name="quantity" product-id="{{ $product->product_id }}" type="number"
+                                    <input name="quantityCart" product-id="{{ $product->product_id }}" type="number"
                                         class="w-12 text-center border border-gray-300 rounded-md mx-2" min="1"
                                         value="{{ $product->quantity }}">
                                 </div>

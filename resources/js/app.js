@@ -3,15 +3,15 @@ import tinymce from "tinymce/tinymce";
 import "tinymce/themes/silver/theme";
 import "tinymce/icons/default/icons";
 
-tinymce.init({
-    selector: "textarea#myeditorinstance",
-    plugins:
-        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-    toolbar:
-        "undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table",
-    height: 500, // Đặt chiều cao cho trình soạn thảo
-    menubar: false, // Tùy chọn để ẩn thanh menu nếu không cần thiết
-});
+// tinymce.init({
+//     selector: "textarea#myeditorinstance",
+//     plugins:
+//         "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+//     toolbar:
+//         "undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table",
+//     height: 500, // Đặt chiều cao cho trình soạn thảo
+//     menubar: false, // Tùy chọn để ẩn thanh menu nếu không cần thiết
+// });
 
 
 // thêm sản phẩm vào giỏ hàng
@@ -75,21 +75,18 @@ if (btnAddCart) {
   
 }
 
-// Cập nhật số lượng sản phẩm
-const listInputQuantity = document.querySelectorAll('input[name="quantity"]');
+// Cập nhật số lượng sản phẩm client
+const listInputQuantity = document.querySelectorAll('input[name="quantityCart"]');
 if (listInputQuantity.length > 0) {
   listInputQuantity.forEach(input => {
     input.addEventListener("change", (e) => {
         e.preventDefault();
       
       const product_id = input.getAttribute('product-id');
-      const quantity = input.value;
-
-      console.log(product_id);
-      console.log(quantity);
+      const quantityCart = input.value;
       
       // gui len duong dan product_id va quantity de cap nhat
-      window.location.href = `/cart/update/${quantity}/${product_id}`;
+      window.location.href = `/cart/update/${quantityCart}/${product_id}`;
     });
   });
 }
@@ -145,7 +142,6 @@ if (buttonStatus.length > 0) {
     buttonStatus.forEach(button => {
         button.addEventListener('click', () => {
             const status = button.getAttribute('button-status');
-            console.log(status);
 
             if(status) {
                 url.searchParams.set('status', status);

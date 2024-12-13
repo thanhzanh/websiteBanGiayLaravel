@@ -109,7 +109,7 @@ class cartClientController extends Controller
     }
 
     // [GET] /cart/update/{quantity}/{productId}
-    public function update(Request $request, $quantity, $productId)
+    public function update(Request $request, $quantityCart, $productId)
     {
         $user = session('infoUser'); // nguoi dung dang nhap
 
@@ -133,7 +133,7 @@ class cartClientController extends Controller
         // neu co san pham voi size do roi thi cap nhat lai so luong
         if ($cartItem) {
             $cartItem->update([
-                'quantity' => $quantity,
+                'quantity' => $quantityCart,
             ]);
         }
         toastr()->success('Đã cập nhật số lượng sản phẩm trong giỏ hàng');

@@ -142,7 +142,7 @@ Route::post('/cart/add/{id}', [CartClientController::class, 'addPost'])->name('c
 
 Route::delete('/cart/delete/{id}', [CartClientController::class, 'delete'])->name('cart.delete');
 
-Route::get('/cart/update/{quantity}/{productId}', [CartClientController::class, 'update'])->name('cart.update');
+Route::get('/cart/update/{quantityCart}/{productId}', [CartClientController::class, 'update'])->name('cart.update');
 
 
 // ========================= order ===========================

@@ -120,7 +120,7 @@ class paymentClientController extends Controller
                 Transaction::create([
                     'order_id' => $order->order_id,
                     'payment_method' => 'bank',
-                    'status' => 'completed',
+                    'status' => 'pending',
                     'amount' => $order->total,
                 ]);
                 toastr()->success('Thanh toán thành công');

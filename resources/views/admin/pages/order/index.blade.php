@@ -7,18 +7,19 @@
 <div class="search-wrapper mt-5 border-cyan-600 bg-[#f1f5f9] border h-[50px] rounded-[30px] flex items-center overflow-x-hidden">
     <form action="" myethod="get" class="w-full flex">
         <button type="button" id="btn-search" class="inline-block text-[1.6rem] pl-4 pr-4"><i class="fa-solid fa-magnifying-glass"></i></button>
-        <input class="h-[100%] w-full bg-[#f1f5f9] border-none outline-none p-[.5rem]" type="search" id="search-product" name="product_name" placeholder="Search here">
+        <input class="h-[100%] w-full bg-[#f1f5f9] border-none outline-none p-[.5rem]" type="search" id="search-product" name="code" placeholder="Search here">
     </form>
 </div>
 <!-- nếu không có kết quả tìm kiếm -->
 
 <div class="mt-[20px] flex align-middle justify-around">
-    <h2 class="font-bold italic ">Trạng thái</h2>
+    <h2 class="font-bold italic leading-[40x]">Trạng thái đơn hàng</h2>
     <div class="flex-1 ml-8">
-        <button class="rounded-xl px-2 py-2 " type="button">
-            Tất cả
+        @foreach ($listStatusOrder as $item)
+        <button class="rounded-xl px-2 py-2 {{ $item['class'] }}" button-status="{{ $item['status'] }}" type="button">
+            {{ $item['name'] }}
         </button>
-
+        @endforeach
     </div>
 </div>
 
@@ -61,14 +62,8 @@
                     <td>{{ $order->created_at }}</td>
                     <td>{{ $order->updated_at }}</td>
                     <td>
-                        <a href="" title="Chi tiết" class="px-3 py-2 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-eye"></i></a>
+                        <a href="" title="Chi tiết đơn hàng" class="px-3 py-2 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-eye"></i></a>
                         <div class="inline-block">
-                            <form action="" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button title="Xóa" class="px-3 py-[0.68rem] bg-red-500 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-minus"></i></button>
-                            </form>
-                        </div>
                     </td>
                 </tr>
             @endforeach
