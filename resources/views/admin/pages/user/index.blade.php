@@ -44,7 +44,17 @@
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $item->user_name }}</td>
                         <td>{{ $item->user_email }}</td>
-                        <td>{{ $item->user_status }}</td>
+                        <td>
+                            <form class="form-change-status" action="{{ route('admin.user.changeStatus',['id' => $item->user_id]) }}" method="post">
+                                @csrf
+                                @method('PATCH')
+                                <?php if ($item->user_status === "active") { ?>
+                                    <button class="button-change-status p-2 bg-green-500 rounded-xl text-white" type="submit">{{$item->user_status}}</button>
+                                <?php } elseif ($item->user_status === "inactive") { ?>
+                                    <button data-id="{{ $item->user_id }}" data-status="{{ $item->user_status }}" class="button-change-status p-2 bg-red-500 rounded-xl text-white" type="submit">{{$item->user_status}}</button>
+                                <?php } ?>
+                            </form>
+                        </td>
                         <td>{{ $item->created_at }}</td>
                         <td>{{ $item->updated_at }}</td>
                         <td class="h-20">
@@ -55,7 +65,7 @@
                                 class="px-3 py-2 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i
                                     class="fa-solid fa-pen-to-square"></i></a>
                             <div class="inline-block">
-                                <form action="" method="post">
+                                <form action="{{ route('admin.user.delete', ['user_id' => $item->user_id]) }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button title="Xóa"

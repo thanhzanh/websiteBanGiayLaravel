@@ -273,3 +273,9 @@ Route::get('/admin/user', [userController::class, 'index'])->name('admin.user.in
 
 Route::get('/admin/user/detail/{user_id}', [userController::class, 'detail'])->name('admin.user.detail');
 
+Route::delete('/admin/user/delete/{user_id}', [userController::class, 'delete'])->name('admin.user.delete');
+
+Route::patch('/admin/user/change-status/{id}', [userController::class, 'changeStatus'])->name('admin.user.changeStatus');
+
+
+
