@@ -95,6 +95,9 @@ class orderClientController extends Controller
                 ]);
 
                 DB::table('cart_items')->where('cart_id', $cartItem['cart_id'])->delete();
+
+                DB::table('product')->where('product_id', $cartItem['product_id'])->decrement('quantity', $cartItem['quantity']);
+
             }
 
             // Xử lý trạng thái thanh toán

@@ -1,6 +1,7 @@
+{{-- {{ dd($sp) } --}}
 @extends('client.layouts.default')
 
-@section('title', 'Sản Phẩm')
+@section('title', 'Trang Sản Phẩm')
 
 @section('content')
     <div class="container pt-[20px]">
@@ -48,6 +49,7 @@
                         </div>
                     </div>
                 </div>
+
                 <br>
                 <hr class="mx-auto pb-5 w-1/2 border-t border-gray-300">
 
@@ -94,9 +96,10 @@ class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 fl
                     </div>
                 </div>
 
+
             </div>
 
-            <div class="w-2/3 p-4 ">
+            <div class="w-2/3 p-4">
                 <div class="flex">
                     <div class="w-1/2 px-4">
                         <a href="{{ route('home') }}">Trang Chủ /</a>
@@ -121,50 +124,47 @@ class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 fl
 
                 <br>
 
-                @if ($brands->count() > 0)
-                    <div class="grid grid-cols-4 gap-4">
-                        @foreach ($brands as $item)
-                            @if ($item->status == 'active')
-                                <!-- Dùng $data để lấy sản phẩm -->
-                                <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
-                                    <div
-class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
-                                        NEW
-                                    </div>
-                                    <div>
-                                        <a href="{{ route('product.detail', ['id' => $item->slug]) }}">
-                                            <div class="w-auto">
-                                                @if ($item->images->isNotEmpty())
-                                                    <img class="w-auto"
-                                                        src="{{ asset('storage/' . $item->images->first()->file_image_url) }}"
-                                                        alt="{{ $item->product_name }}" class="w-auto h-40 object-cover">
-                                                @endif
-                                                <p class="mt-2 text-[17px] italic">{{ $item->product_name }}</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="mt-2">
-                                        @foreach ($categories as $category)
-                                            @if ($category->product_category_id == $item->product_category_id)
-                                                <p class="text-gray-500 text-[14px] font-bold uppercase">
-                                                    {{ $category->product_category_name }}</p>
+                <div class="grid grid-cols-4 gap-4">
+                    @foreach ($products as $item)
+                        @if ($item->status == 'active')
+                            <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
+                                <div
+                                    class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
+                                    NEW
+</div>
+                                <div>
+                                    <a href="{{ route('product.detail', ['id' => $item->slug]) }}">
+                                        <div class="w-auto">
+                                            @if ($item->images->isNotEmpty())
+                                                <img class="w-auto"
+                                                    src="{{ asset('storage/' . $item->images->first()->file_image_url) }}"
+                                                    alt="{{ $item->product_name }}" class="w-auto h-40 object-cover">
                                             @endif
-                                        @endforeach
-
-                                        <span class="line-through text-gray-500">
-                                            {{ number_format($item->price, 0, ',', '.') }}đ
-                                        </span>
-                                        <span class="font-bold ml-2">
-                                            {{ number_format($item->price * (1 - $item->discount / 100), 0, ',', '.') }}đ
-                                        </span>
-                                    </div>
+                                            <p class="mt-2 text-[17px] italic">{{ $item->product_name }}</p>
+                                        </div>
+                                    </a>
                                 </div>
-                            @endif
-                        @endforeach
-                    </div>
-                @else
-                    <p class="text-center">Không có sản phẩm nào thuộc danh mục này.</p>
-                @endif
+                                <div class="mt-2">
+                                    @foreach ($categories as $category)
+                                        @if ($category->product_category_id == $item->product_category_id)
+                                            <p class="text-gray-500 text-[14px] font-bold uppercase">
+                                                {{ $category->product_category_name }}</p>
+                                        @endif
+                                    @endforeach
+
+                                    <span class="line-through text-gray-500">
+                                        {{ number_format($item->price, 0, ',', '.') }}đ
+                                    </span>
+                                    <span class="font-bold ml-2">
+                                        {{ number_format($item->price * (1 - $item->discount / 100), 0, ',', '.') }}đ
+                                    </span>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+
+                {{ $products->appends(['sort' => $sort])->links() }}
 
             </div>
 
@@ -173,15 +173,59 @@ class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl
                     window.location.href = "{{ route('product.filterByPriceSort') }}?sort=" + value;
                 }
             </script>
+
+            <br>
+
+            {{-- <div class="grid grid-cols-4 gap-4">
+                @foreach ($products as $item)
+                    @if ($item->status == 'active')
+                        <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
+                            <div
+                                class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
+                                NEW
+                            </div>
+                            <div>
+                                <a href="{{ route('product.detail', ['id' => $item->slug]) }}">
+<div class="w-auto">
+                                        @if ($item->images->isNotEmpty())
+                                            <img class="w-auto"
+                                                src="{{ asset('storage/' . $item->images->first()->file_image_url) }}"
+                                                alt="{{ $item->product_name }}" class="w-auto h-40 object-cover">
+                                        @endif
+                                        <p class="mt-2 text-[17px] italic">{{ $item->product_name }}</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="mt-2">
+                                @foreach ($categories as $category)
+                                    @if ($category->product_category_id == $item->product_category_id)
+                                        <p class="text-gray-500 text-[14px] font-bold uppercase">
+                                            {{ $category->product_category_name }}</p>
+                                    @endif
+                                @endforeach
+
+                                <p class="mt-1 text-gray-900 font-bold text-base">
+                                    {{ number_format($item->price, 0, ',', '.') }} VND
+                                </p>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+            </div> --}}
+
+            <br>
+
         </div>
     </div>
+    </div>
+
     <button id="scrollButton"
         class="fixed bottom-10 right-10 w-14 h-14 bg-slate-300 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-800 transition-all">
         <i class="fa-solid fa-up-long text-xl"></i>
     </button>
 
     <script>
-document.getElementById('scrollButton').addEventListener('click', function() {
+        document.getElementById('scrollButton').addEventListener('click', function() {
             // Cuộn trang lên đầu một cách mượt mà
             window.scrollTo({
                 top: 0,

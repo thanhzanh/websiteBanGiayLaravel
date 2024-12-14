@@ -117,7 +117,7 @@
                         <ul class="absolute left-0 mt-[10px] w-[200px] bg-white shadow-lg z-10 border-b border-gray-300 hidden group-hover:block">
                             @foreach ($categories as $category)
                                 <li class="relative group">
-                                    <a href="{{ route('products.filterByCategory', ['id' => $category->product_category_id]) }}"
+                                    <a href=""
                                         class="block px-4 py-4 text-black bg-white hover:bg-gray-100 transition">
                                         {{ $category->product_category_name }}
                                         <!-- Hiển thị icon nếu có danh mục con -->
@@ -131,7 +131,7 @@
                                         <ul class="absolute left-full top-0 mt-0 w-[200px] bg-gray-800 shadow-lg hidden group-hover:block border-b border-gray-600">
                                             @foreach ($category->children as $child)
                                                 <li class="relative group">
-                                                    <a href="{{ route('products.filterByCategory', ['id' => $child->product_category_id]) }}"
+                                                    <a href=""
                                                         class="block px-4 py-4 text-white bg-gray-800 hover:bg-gray-700 transition">
                                                         {{ $child->product_category_name }}
                                                         <!-- Hiển thị icon nếu có danh mục con -->

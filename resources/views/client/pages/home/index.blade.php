@@ -7,7 +7,9 @@
 
         <div class="banner">
             <div>
-                <a href="#"><img src="https://xamsneaker.com/wp-content/uploads/bannerxam.jpg" alt=""></a>
+                <a href="{{ route('product') }}"><img
+                        src="https://media.istockphoto.com/id/1150765714/vi/vec-to/bi%E1%BB%83u-ng%E1%BB%AF-vector-b%C3%A1n-h%C3%A0ng-gi%C3%A0y-sneaker.jpg?s=1024x1024&w=is&k=20&c=hQyJDlYzdO9zVqvCyRU2tXa4O0DtEZp5k883OaOQKJY="
+                        alt="" class="w-[2000px] h-[700px]"></a>
             </div>
         </div>
 
@@ -15,42 +17,39 @@
             CÁC SẢN PHẨM NỔI BẬT CỦA SHOP
         </div>
 
-        <div class="grid grid-cols-4 gap-6 max-w-screen-xl">
-            @foreach ($products as $item)
-            @if ($item->featured == "1")
-                <div
-                    class="border border-gray-200 rounded-lg p-4 shadow-md hover:shadow-lg transition-transform transform hover:-translate-y-1 bg-white">
+        <div class="grid grid-cols-4 gap-x-4 gap-y-4 w-[1192px] ">
+            @foreach ($spp as $item)
+                @if ($item->featured == '1')
                     <div
-                        class="bg-red-500 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-3">
-                        NEW
+                        class="border border-gray-200 rounded-lg p-4 shadow-md hover:shadow-lg transition-transform transform hover:-translate-y-1 bg-white">
+                        <div
+                            class="bg-red-500 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-3">
+                            {{ $item->discount }} %
+                        </div>
+                        <a href="{{ route('product.detail', ['id' => $item->slug]) }}" class="block mb-3">
+
+                            @if ($item->images->isNotEmpty())
+                                <img src="{{ asset('storage/' . $item->images->first()->file_image_url) }}"
+                                    alt="{{ $item->product_name }}" class="w-full h-full object-cover">
+                            @endif
+                        </a>
+                        <a href="{{ route('product.detail', ['id' => $item->slug]) }}"
+                            class="text-gray-900 font-bold hover:text-red-500">
+                            {{ $item->product_name }}
+                        </a>
+                        <p class="text-gray-500 text-sm mt-1">
+                            @foreach ($categories as $category)
+                                @if ($category->product_category_id == $item->product_category_id)
+                                    <p class="text-gray-500 text-[14px] font-bold uppercase">
+                                        {{ $category->product_category_name }}</p>
+                                @endif
+                            @endforeach
+                        </p>
+                        <p class="text-gray-900 font-bold text-lg mt-2">
+                            {{ number_format($item->price, 0, ',', '.') }} VND
+                        </p>
                     </div>
-                    <a href="{{ route('product.detail', ['slug' => $item->slug]) }}" class="block mb-3">
-
-                        @if ($item->images->isNotEmpty())
-                        <img src="{{ asset('storage/' . $item->images->first()->file_image_url) }}" alt="{{ $item->product_name }}" class="w-full h-full object-cover">
-                        @endif
-                    </a>
-                    <a href="{{ route('product.detail', ['slug' => $item->slug]) }}"
-                        class="text-gray-900 font-bold text-base hover:text-red-500">
-                        {{ $item->product_name }}
-                    </a>
-                    <p class="text-gray-500 text-sm mt-1">
-                        @foreach ($categories as $category)
-                                        @if ($category->product_category_id == $item->product_category_id)
-                                            <p class="text-gray-500 text-[14px] font-bold uppercase">{{ $category->product_category_name }}</p>                             
-                                        @endif
-                        @endforeach
-                    </p>
-                    <p class="text-gray-900 font-bold text-lg mt-2">
-                        {{ number_format($item->price, 0, ',', '.') }} VND
-                    </p>
-                    <a href="{{ route('product.detail', ['slug' => $item->slug]) }}"
-                        class="block text-center text-white bg-blue-600 hover:bg-blue-700 py-2 mt-3 rounded-md transition-colors">
-                        Xem chi tiết
-                    </a>
-                </div>
                 @endif
-
             @endforeach
         </div>
         {{-- {{ dd($spp) }} --}}
@@ -112,13 +111,13 @@
         <div class="grid grid-cols-2 gap-4 w-[1192px] mt-8">
             <div class="relative bg-gray-200 text-center rounded-lg overflow-hidden">
                 <a href="{{ route('product') }}"><img
-                        src="https://saigonsneaker.com/wp-content/uploads/2021/07/banner-july-3.png.avif" alt=""
-                        class="w-full h-[574px] object-cover"></a>
+                        src="https://drake.vn/image/catalog/H%C3%ACnh%20content/gi%C3%A0y-sneaker-converse/giay-sneaker-converse-09.jpg"
+                        alt="" class="w-full h-[574px] object-cover"></a>
             </div>
 
             <div class="relative bg-gray-300 text-center rounded-lg overflow-hidden">
                 <a href="{{ route('product') }}"><img
-                        src="https://saigonsneaker.com/wp-content/uploads/2022/03/classichoodie-localbrand-xem-ngay-40-localbrand-1.jpg.avif"
+                        src="https://bizweb.dktcdn.net/100/479/837/files/giay-sneaker-catsofa-love-mau-hong-3.jpg?v=1683458967345"
                         alt="" class="w-full h-[574px] object-cover"></a>
             </div>
         </div>
@@ -128,32 +127,32 @@
         </div>
         <div class="brand">
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                <a href="{{ route('products.filterByCategory', ['id' => 1]) }}"
+                <a href="{{ route('products.filterByCategory', ['slug' => 1]) }}"
                     class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
                     <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/Adidas-Saigon-Sneaker.png" alt="Adidas"
                         class="max-w-[150px] h-auto">
                 </a>
-                <a href="{{ route('products.filterByCategory', ['id' => 4]) }}"
+                <a href="{{ route('products.filterByCategory', ['slug' => 4]) }}"
                     class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
                     <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/Nike-Saigon-Sneaker.png" alt="Nike"
                         class="max-w-[150px] h-auto">
                 </a>
-                <a href="{{ route('products.filterByCategory', ['id' => 5]) }}"
+                <a href="{{ route('products.filterByCategory', ['slug' => 5]) }}"
                     class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
                     <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/Vans-Saigon-Sneaker.png.webp"
                         alt="Vans" class="max-w-[150px] h-auto">
                 </a>
-                <a href="{{ route('products.filterByCategory', ['id' => 7]) }}"
+                <a href="{{ route('products.filterByCategory', ['slug' => 7]) }}"
                     class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
                     <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/Converse-Saigon-Sneaker.png.webp"
                         alt="Converse" class="max-w-[150px] h-auto">
                 </a>
-                <a href="{{ route('products.filterByCategory', ['id' => 6]) }}"
+                <a href="{{ route('products.filterByCategory', ['slug' => 6]) }}"
                     class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
                     <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/McQueen-Saigon-Sneaker.png.webp"
                         alt="McQueen" class="max-w-[150px] h-auto">
                 </a>
-                <a href="{{ route('products.filterByCategory', ['id' => 2]) }}"
+                <a href="{{ route('products.filterByCategory', ['slug' => 2]) }}"
                     class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
                     <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/Balenciaga-Saigon-Sneaker.png.webp"
                         alt="Balenciaga" class="max-w-[150px] h-auto">
@@ -162,4 +161,18 @@
         </div>
 
     </div>
+    <button id="scrollButton"
+        class="fixed bottom-10 right-10 w-14 h-14 bg-slate-300 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-800 transition-all">
+        <i class="fa-solid fa-up-long text-xl"></i>
+    </button>
+
+    <script>
+        document.getElementById('scrollButton').addEventListener('click', function() {
+            // Cuộn trang lên đầu một cách mượt mà
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
 @endsection

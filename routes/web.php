@@ -40,18 +40,18 @@ Route::fallback(function () {
 // ==================================== FONTEND ==========================================
 
 // Trang Home
-Route::get('/', [homeClientController::class, 'index'])->name('home')->middleware(CheckSessionMiddleware::class);
+Route::get('/', [homeClientController::class, 'index'])->name('home');
 
 //Trang Product
-Route::get('/product', [productClientController::class, 'index'])->name('product')->middleware(CheckSessionMiddleware::class);
+Route::get('/product', [productClientController::class, 'index'])->name('product');
 
 //Trang chi tiết sản phẩm
-Route::get('product/{slug}', [productClientController::class, 'detail'])->name('product.detail')->middleware(CheckSessionMiddleware::class);
+Route::get('product/{id}', [productClientController::class, 'detail'])->name('product.detail');
 
 
 //Trang bài viết
 Route::get('/baiviet', function () {
-    return view('client.pages.baiviet.index');
+    return view('client.pages.artice.index');
 })->name('baiviet');
 
 //Trang liên hệ
@@ -62,12 +62,27 @@ Route::get('/lienhe', function () {
 //Trang giới thiệu
 Route::get('/gioithieu', function () {
     return view('client.pages.gioithieu.index');
-})->name('gioithieu')->middleware(CheckSessionMiddleware::class);
+})->name('gioithieu');
+
+//Trang khuyến mãi
+Route::get('/khuyenmai', function () {
+    return view('client.pages.khuyenmai.index');
+})->name('khuyenmai');
+
+//Trang khuyến mãi
+Route::get('/tintuc', function () {
+    return view('client.pages.tintuc.index');
+})->name('tintuc');
 
 
 // Thương Hiệu
 Route::get('product/brand', [brandClientController::class, 'index'])->name('product.brand');
 
+// Trang login
+Route::get('/login', [loginClientController::class, 'login'])->name('login');
+
+// Trang sign up 
+Route::get('/signup', [loginClientController::class, 'signup'])->name('signup');
 
 // Tìm kiếm sản phẩm
 Route::get('/search', [productClientController::class, 'searchProduct'])->name('search');
@@ -76,10 +91,17 @@ Route::get('/search', [productClientController::class, 'searchProduct'])->name('
 Route::get('/products/price/{min}/{max}', [ProductClientController::class, 'filterByPrice'])->name('products.filterByPrice');
 
 // Lọc theo Brand
-Route::get('/product/brand/{id}', [productClientController::class, 'filterByCategory'])->name('products.filterByCategory');
+Route::get('/product/brand/{slug}', [productClientController::class, 'filterByCategory'])->name('products.filterByCategory');
 
 // Lọc theo nổi bật
 Route::get('/product/featured/{slug}', [productClientController::class, 'filterByFeatured'])->name('products.filterByFeatured');
+
+
+Route::get('/products/featuredprice', [productClientController::class, 'filterByPriceSort'])->name('product.filterByPriceSort');
+
+Route::get('/products/filter', [ProductClientController::class, 'filterByCategoryAndPrice'])->name('products.filterByCategoryAndPrice');
+
+Route::get('/api/users', [ProductClientController::class, 'fetchUsers']);
 
 
 // ========================= account(user) ===========================

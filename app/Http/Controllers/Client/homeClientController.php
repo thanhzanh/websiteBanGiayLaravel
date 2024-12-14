@@ -14,12 +14,11 @@ class homeClientController extends Controller
      */
     public function index()
     {
-        $products = Product::where('status', 'active')->get(); // lay san pham co status la active
-        $categories = ProductCategory::all(); 
+        $spp = Product::with('images')->take(8)->get(); // chỉ lấy 8 sản phẩm đầu
+        $categories = ProductCategory::all();
 
-        return view('client.pages.home.index', compact('products', 'categories'));
+        return view('client.pages.home.index', compact('spp', 'categories'));
     }
-
 
    
     /**

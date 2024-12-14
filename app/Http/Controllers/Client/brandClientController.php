@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 use League\CommonMark\Node\Block\Document;
 use App\Models\Brand;
@@ -22,10 +23,12 @@ class brandClientController extends Controller
     {
         $brand = Brand::where('brand_id', $id)->firstOrFail(); // Tìm thương hiệu dựa trên brand_id
         $products = Product::where('brand_id', $id)->get(); // Lấy tất cả sản phẩm thuộc thương hiệu này
+        $categories = ProductCategory::all();
 
         return view('client.pages.brand.index', [
             'brand' => $brand,
             'products' => $products,
+            'categories'=> $categories
         ]);
     }
 

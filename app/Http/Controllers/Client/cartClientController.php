@@ -73,6 +73,15 @@ class cartClientController extends Controller
             ->where('product_id', $id)
             ->where('size_id', $request->size)->first();
 
+        // số lượng hiện tại trong kho
+        $quantityProductCurrent = DB::table('product')->where('product_id', $id)->value('quantity');
+        
+        if ($request->quantity > $quantityProductCurrent) {
+            // toastr()->error('Số lượng bạn đặt vượt quá số lượng trong cửa hàng');
+            toastr()->error("Sản phầm này chỉ còn $quantityProductCurrent sản phẩm trong kho");
+            return back();
+        }
+
         // neu co san pham voi size do roi thi cap nhat lai so luong
         if ($cartItem) {
             $cartItem->update([
