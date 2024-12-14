@@ -34,8 +34,8 @@
                     <span>Order</span>
                 </a>
             </li>
-            <li class="w-[100%] mb-4 pl-8">
-                <a href="" class="block text-xl pl-4 text-[#ffff]">
+            <li class="w-[100%] mb-4 pl-8 {{ setActive('admin/user') }}">
+                <a href="{{ route('admin.user.index') }}" class="block text-xl pl-4 text-[#ffff] {{setActive(['admin/user']) }}">
                     <span class="text-xl pr-5"><i class="fa-solid fa-user-group"></i></span></span>
                     <span>User</span>
                 </a>

@@ -129,22 +129,24 @@
                         @if ($item->status == 'active')
                             <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
                                 <div
-                                    class="bg-red-500 text-white text-xs font-bold px-2 inline-block mb-2 justify-between">
-                                    <span class="text-white text-lg ml-2">{{ $item->discount }}%</span>
+                                    class="bg-red-500 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2 justify-between">
+                                    <span>{{ $item->discount }}%</span>
                                 </div>
                                 <div>
                                     <a href="{{ route('product.detail', ['id' => $item->slug]) }}">
-                                        <div class="w-auto">
+                                        <div class="w-auto h-[186px]">
                                             @if ($item->images->isNotEmpty())
-                                                <img class="w-auto"
+                                                <img class="w-auto "
                                                     src="{{ asset('storage/' . $item->images->first()->file_image_url) }}"
-                                                    alt="{{ $item->product_name }}" class="w-auto h-40 object-cover">
+                                                    alt="{{ $item->product_name }}" class="w-auto h-[186px] object-cover">
                                             @endif
-                                            <p class="mt-2 text-[17px] italic">{{ $item->product_name }}</p>
+                                        </div>
+                                        <div class="h-[60px]">
+                                            <p class="mt-2 leading-[1.4] text-[17px] italic">{{ $item->product_name }}</p>
                                         </div>
                                     </a>
                                 </div>
-                                <div class="mt-2">
+                                <div class="mt-3">
                                     @foreach ($categories as $category)
                                         @if ($category->product_category_id == $item->product_category_id)
                                             <p class="text-gray-500 text-[14px] font-bold uppercase">

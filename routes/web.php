@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\loginController;
 use App\Http\Controllers\Admin\ordersController;
 use App\Http\Controllers\Admin\productCategoryController;
 use App\Http\Controllers\Admin\productController;
+use App\Http\Controllers\Admin\userController;
 use App\Http\Controllers\Client\brandClientController;
 use App\Http\Controllers\Client\CartClientController;
 use App\Http\Controllers\Client\forgotPasswordClientController;
@@ -265,4 +266,10 @@ Route::post('/admin/order/updateStatus/{id}', [ordersController::class, 'updateS
 
 Route::get('/admin/order/detail/{id}', [ordersController::class, 'detail'])->name('admin.order.detail');
 
+
+// ========================= user ===========================
+
+Route::get('/admin/user', [userController::class, 'index'])->name('admin.user.index');
+
+Route::get('/admin/user/detail/{user_id}', [userController::class, 'detail'])->name('admin.user.detail');
 

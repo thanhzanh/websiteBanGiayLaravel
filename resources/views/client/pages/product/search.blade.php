@@ -37,7 +37,7 @@
                         <div class="align-middle flex justify-center">
                             <a href="{{ route('products.filterByCategory', ['slug' => 6]) }}"
                                 class="bg-white rounded-lg m-1 shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
-<img src="https://saigonsneaker.com/wp-content/uploads/2020/05/McQueen-Saigon-Sneaker.png.webp"
+                                <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/McQueen-Saigon-Sneaker.png.webp"
                                     alt="McQueen" class="max-w-[70px] h-auto">
                             </a>
                             <a href="{{ route('products.filterByCategory', ['slug' => 1]) }}"
@@ -79,7 +79,7 @@
                             <span class="font-bold text-center">200 - 500</span>
                         </a>
                         <a href="{{ route('products.filterByPrice', ['min' => 500, 'max' => 1000]) }}"
-class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center w-[50%] h-[80px]">
+                            class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center w-[50%] h-[80px]">
                             <span class="font-bold text-center">500 - 1tr</span>
                         </a>
                         <a href="{{ route('products.filterByPrice', ['min' => 1000, 'max' => 2000]) }}"
@@ -119,47 +119,14 @@ class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 fl
 
                 <br>
 
-                {{-- <div>
-                    <div class="grid grid-cols-4 gap-4">
-                        @foreach ($product as $item)
-                            <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
-                                <div
-                                    class="bg-red-600 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2">
-                                    NEW
-</div>
-                                <a href="{{ route('product.detail', ['id' => $item->slug]) }}" class="flex justify-center">
-                                    @if ($item->images->isNotEmpty())
-                                        <img class="w-auto"
-                                            src="{{ asset('storage/' . $item->images->first()->file_image_url) }}"
-                                            alt="{{ $item->product_name }}" class="w-auto h-40 object-cover">
-                                    @endif
-                                </a>
-                                <a href="{{ route('product.detail', ['id' => $item->slug]) }}"
-                                    class="text-gray-800 font-bold text-base pt-[20px] flex justify-center">
-                                    {{ $item->product_name }} <br>
-                                </a>
-                                <a href="{{ route('product.detail', ['id' => $item->slug]) }}"
-                                    class="text-gray-500 text-xs font-bold uppercase">
-                                    {{ $item->product_id }}
-                                </a>
-                                <span class="line-through text-gray-500">
-                                    {{ number_format($item->price, 0, ',', '.') }}đ
-                                </span>
-                                <span class="font-bold ml-2">
-                                    {{ number_format($item->price * (1 - $item->discount / 100), 0, ',', '.') }}đ
-                                </span>
-                            </div>
-                        @endforeach
-                    </div>
-                </div> --}}
+            
                 <div class="grid grid-cols-4 gap-4">
                     @foreach ($product as $item)
                         @if ($item->status == 'active')
                             <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
                                 <div
-                                    class="bg-red-700 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2 justify-between">
-                                    {{-- <span class="text-red-500 text-lg ml-2">(-{{ $item->discount }}%)</span> --}}
-                                    <span>NEW</span>
+                                    class="bg-red-500 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2 justify-between">
+                                    <span>{{ $item->discount }}%</span>
                                 </div>
                                 <div>
                                     <a href="{{ route('product.detail', ['id' => $item->slug]) }}">
@@ -168,7 +135,7 @@ class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 fl
                                                 <img class="w-auto"
                                                     src="{{ asset('storage/' . $item->images->first()->file_image_url) }}"
                                                     alt="{{ $item->product_name }}" class="w-auto h-40 object-cover">
-@endif
+                                            @endif
                                             <p class="mt-2 text-[17px] italic">{{ $item->product_name }}</p>
                                         </div>
                                     </a>
@@ -191,7 +158,7 @@ class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 fl
                             </div>
                         @endif
                     @endforeach
-                </div </div>
+                </div>
 
                 <script>
                     function handleSortChange(value) {
