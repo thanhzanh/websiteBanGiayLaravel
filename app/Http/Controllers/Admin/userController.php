@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -111,5 +112,51 @@ class userController extends Controller
             Log::error($exceptions->getMessage());
             return back();
         }
+    }
+
+    public function edit($user_id) {
+
+        // lay ra admin theo id
+        $user = User::find($user_id);
+
+        if (!$user) {
+            toastr()->error('Không tìm thấy tài khoản');
+
+            return redirect()->route('admin.user.index');
+        }
+
+        $user['user_password'] = '';
+
+        return view('admin.pages.user.edit', compact('user'));
+    }
+
+    public function editPatch($user_id, Request $request) {
+
+        $validatedUser = $request->validate([
+            'user_name' => 'required',
+            'user_email' => 'required|email|unique:users,user_email,' . $user_id . ',user_id',
+            'user_password' => 'required|min:6',  // Tối thiểu 6 ký tự
+            'user_phone' => 'nullable|regex:/^[0-9]{10}$/',
+            'user_status' => 'required'
+        ]);
+
+        $user = User::find($user_id);
+
+        // Nếu thay đổi mật khẩu và không thay đổi sẽ giữ nguyên
+        if ($request->has('user_password') && !empty($request->user_password)) {
+            $validatedUser['user_password'] = bcrypt($request->user_password);
+        } else {
+            $validatedUser['user_password'] = $user->user_password;
+        }
+
+        // Cập nhật thời gian sửa đổi
+        $validatedUser['updated_at'] = Carbon::now();
+
+        // Cập nhật thông tin admin trong database
+        $user->update($validatedUser);
+
+        // Hiển thị thông báo thành công
+        toastr()->success('Cập nhật tài khoản thành công!');
+        return redirect()->route('admin.user.index');
     }
 }

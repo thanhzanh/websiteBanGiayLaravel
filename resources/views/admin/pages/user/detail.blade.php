@@ -24,7 +24,7 @@
     </p>
 
     <div class="text-right">
-        <a href="" title="Sửa" class="text-right px-3 py-2 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-pen-to-square"></i></a>
+        <a href="{{ route('admin.user.edit', ['user_id' => $userDetailInfo->user_id]) }}" title="Sửa" class="text-right px-3 py-2 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i class="fa-solid fa-pen-to-square"></i></a>
     </div>
 
     @else

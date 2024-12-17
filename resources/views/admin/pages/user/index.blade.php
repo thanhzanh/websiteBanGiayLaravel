@@ -61,7 +61,7 @@
                             <a href="{{ route('admin.user.detail', ['user_id' => $item->user_id]) }}" title="Chi tiết"
                                 class="px-3 py-2 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i
                                     class="fa-solid fa-eye"></i></a>
-                            <a href="" title="Sửa"
+                            <a href="{{ route('admin.user.edit', ['user_id' => $item->user_id]) }}" title="Sửa"
                                 class="px-3 py-2 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl hover:bg-black"><i
                                     class="fa-solid fa-pen-to-square"></i></a>
                             <div class="inline-block">

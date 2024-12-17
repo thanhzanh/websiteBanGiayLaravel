@@ -290,6 +290,10 @@ Route::middleware(AdminMiddleware::class)->group(function () {
 
     Route::post('/admin/user/add/', [userController::class, 'addPost'])->name('admin.user.add');
 
+    Route::get('/admin/user/edit/{user_id}', [userController::class, 'edit'])->name('admin.user.edit');
+
+    Route::patch('/admin/user/edit/{user_id}', [userController::class, 'editPatch'])->name('admin.user.edit');
+
     Route::delete('/admin/user/delete/{user_id}', [userController::class, 'delete'])->name('admin.user.delete');
 
     Route::patch('/admin/user/change-status/{id}', [userController::class, 'changeStatus'])->name('admin.user.changeStatus');
