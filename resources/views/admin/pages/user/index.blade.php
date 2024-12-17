@@ -17,7 +17,7 @@
 
     <div class="mt-[20px] flex align-middle justify-end">
         <div class="mt-[20px] items-center align-middle">
-            <a href="" title="Thêm"
+            <a href="{{ route('admin.user.add') }}" title="Thêm"
                 class="py-2 px-4 bg-blue-700 text-[1rem] font-bold text-white rounded-2xl ml-16 hover:bg-black"><i
                     class="fa-solid fa-plus"></i></a>
         </div>

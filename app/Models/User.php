@@ -17,7 +17,8 @@ class User extends Model
         'user_name',
         'user_email',
         'user_password',
-        'user_phone'
+        'user_phone',
+        'user_status'
     ];
 
     public function addresses()

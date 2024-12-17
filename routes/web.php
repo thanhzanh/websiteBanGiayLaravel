@@ -286,6 +286,10 @@ Route::middleware(AdminMiddleware::class)->group(function () {
 
     Route::get('/admin/user/detail/{user_id}', [userController::class, 'detail'])->name('admin.user.detail');
 
+    Route::get('/admin/user/add/', [userController::class, 'add'])->name('admin.user.add');
+
+    Route::post('/admin/user/add/', [userController::class, 'addPost'])->name('admin.user.add');
+
     Route::delete('/admin/user/delete/{user_id}', [userController::class, 'delete'])->name('admin.user.delete');
 
     Route::patch('/admin/user/change-status/{id}', [userController::class, 'changeStatus'])->name('admin.user.changeStatus');
