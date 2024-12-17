@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\Authenticated;
 use App\Http\Middleware\CheckSessionMiddleware;
 use Illuminate\Foundation\Application;
@@ -16,7 +17,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
 
         $middleware->append(CheckSessionMiddleware::class);
-        
+        $middleware->append(AdminMiddleware::class);
+ 
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

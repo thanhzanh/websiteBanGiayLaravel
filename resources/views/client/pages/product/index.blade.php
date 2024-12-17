@@ -133,7 +133,7 @@
                                     <span>{{ $item->discount }}%</span>
                                 </div>
                                 <div>
-                                    <a href="{{ route('product.detail', ['id' => $item->slug]) }}">
+                                    <a href="{{ route('product.detail', ['slug' => $item->slug]) }}">
                                         <div class="w-auto h-[186px]">
                                             @if ($item->images->isNotEmpty())
                                                 <img class="w-auto "

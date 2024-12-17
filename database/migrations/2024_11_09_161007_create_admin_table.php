@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('admin_phone', 10)->nullable();
             $table->string('admin_image')->nullable();
             $table->string('admin_desc')->nullable();
+            $table->boolean('is_fixed')->default(false);
             $table->timestamps();
         });
     }

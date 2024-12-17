@@ -45,7 +45,7 @@
                                 @foreach ($products as $item)
                                     @if ($product->product_id == $item->product_id)
                                         <div class="w-[120px] h-[120px] mr-8">
-                                            <a href="{{ route('product.detail', ['id' => $item->product_id]) }}">
+                                            <a href="{{ route('product.detail', ['slug' => $item->slug]) }}">
                                                 <img class="w-auto"
                                                     src="{{ asset('storage/' . $item->images->first()->file_image_url) }}"
                                                     alt="{{ $item->product_name }}" class="w-auto h-40 object-cover">

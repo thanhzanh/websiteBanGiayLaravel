@@ -14,7 +14,7 @@ class homeClientController extends Controller
      */
     public function index()
     {
-        $spp = Product::with('images')->take(8)->get(); // chỉ lấy 8 sản phẩm đầu
+        $spp = Product::with('images')->take(24)->get(); // chỉ lấy 8 sản phẩm đầu
         $categories = ProductCategory::all();
 
         return view('client.pages.home.index', compact('spp', 'categories'));

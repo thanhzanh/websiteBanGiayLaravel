@@ -158,25 +158,22 @@ class accountController extends Controller
     // [DELETE] /admin/pages/account/delete/{id}
     public function delete($id)
     {
-        try {
-            // lấy id gửi lên
-            $admin = Admin::find($id);
-
-            if ($admin) {
-
-                $admin->delete();
-
-                toastr()->success('Đã xóa tài khoản!');
-
-                return redirect()->route('admin.account');
-            } else {
-                toastr()->error('Không thể xóa tài khoản!');
-                return redirect()->route('admin.account');
-            }
-        } catch (Exception $exceptions) {
-            Log::error($exceptions->getMessage());
-
-            return redirect()->route('admin.account');
+        // lấy id gửi lên
+        $admin = Admin::find($id);
+        
+        if (!$admin) {
+            toastr()->error('Không có tài khoản');
+            return back();
         }
+        if ($admin->is_fixed == '1') {
+            toastr()->error('Không thể xóa tài khoản cố định');
+            return back();
+        }
+
+        $admin->delete();
+
+        toastr()->success('Đã xóa tài khoản!');
+
+        return redirect()->route('admin.account');
     }
 }

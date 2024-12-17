@@ -23,6 +23,8 @@ class cartClientController extends Controller
 
         // neu khach hang dang nhap, ngc lai khac chua dang nhap
         if ($infoUser && isset($infoUser->user_id)) {
+            $this->transferSessionCartToUser($sessionId, $infoUser->user_id);
+
             $carts = DB::table('cart')->where('user_id', $infoUser->user_id)->first();
         } else {
             $carts = DB::table('cart')->where('session_id', $sessionId)->first();
@@ -44,10 +46,50 @@ class cartClientController extends Controller
         return view('client.pages.cart.index', ['products' => $products, 'sizes' => $sizes, 'cartItems' => $cartItems]);
     }
 
+    public function transferSessionCartToUser($sessionId, $userId) {
+        // tìm giỏ hàng
+        $sessionIdCart = Cart::where('session_id', $sessionId)->first();
+
+        if ($sessionIdCart) {
+
+            // tìm giỏ hàng
+            $cart = Cart::firstOrCreate(['user_id' => $userId, 'session_id' => null]);
+
+            // chuyển sang phẩm từ session cart sang user cart
+            $sessionCartItems = CartItem::where('cart_id', $sessionIdCart->cart_id)->get();
+
+            // dd($cart, $sessionIdCart, $cartItems);
+
+            foreach ($sessionCartItems as $item)
+            {
+                // $priceNew = $product->price - ($product->price * ($product->discount) / 100);
+
+                $productExistingItem = CartItem::where('cart_id', $cart->cart_id)
+                                                ->where('product_id', $item->product_id)
+                                                ->where('size_id', $item->size_id)->first();
+
+                if ($productExistingItem) {
+                    $productExistingItem->quantity += $item->quantity;
+                    $productExistingItem->save();
+                } else {
+                    // Tạo mới CartDetail
+                    CartItem::create([
+                        'cart_id' => $cart->cart_id,
+                        'product_id' => $item->product_id,
+                        'size_id' => is_object($item->size) ? $item->size->size_id : $item->size,
+                        'quantity' => $item->quantity,
+                        'price' => $item->price
+                    ]);
+                }
+            }
+            // xóa session sau khi chuyển
+            $sessionIdCart->delete();
+        }
+    }
+
     // [POST] /cart/add/{id}
     public function addPost(Request $request, $id)
     {
-
         $userInfo = session('infoUser', null);
 
         $sessionId = $request->session()->getId();
@@ -63,7 +105,7 @@ class cartClientController extends Controller
             );
         } else {
             $cart = Cart::firstOrCreate(
-                ['user_id' => null, 'session_id' => $sessionId]
+                ['session_id' => $sessionId]
             );
         }
         

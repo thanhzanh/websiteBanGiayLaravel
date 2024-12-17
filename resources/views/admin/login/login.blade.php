@@ -16,7 +16,7 @@
           -->
 
         <h1 class="font-bold items-center text-center text-2xl mb-8">TRANG QUẢN TRỊ VIÊN</h1>
-        <form action="{{ URL::to('/admin/home') }}" method="post">
+        <form action="{{ route('admin.home') }}" method="post">
             @csrf
             <div class="items-center">
                 <label for="email">Email*</label> <br>

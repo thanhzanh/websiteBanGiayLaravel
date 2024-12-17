@@ -56,9 +56,6 @@ class loginController extends Controller
 
         // xóa token ra khỏi session khi đăng xuất
         Session::forget('infoAdmin');
-        // Session::flush();
-
-        cookie()->forget('laravel_session');
 
         toastr()->success('Đăng xuất thành công!');
 

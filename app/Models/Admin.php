@@ -16,6 +16,7 @@ class Admin extends Model
         'admin_password',
         'admin_phone',
         'admin_image',
-        'admin_desc'
+        'admin_desc',
+        'is_fixed'
     ];
 }

@@ -4,7 +4,7 @@
     <div class="sidebar-brand h-[90px] pt-4 pr-0 pb-4 pl-8 text-white">
         <h2 class="inline-block text-xl font-bold pr-4">
             <span class="text-2xl"><i class="fa-brands fa-shoelace"></i></span>
-            KDSNEAKER
+            SAIGONSNEAKER
         </h2>
     </div>
 

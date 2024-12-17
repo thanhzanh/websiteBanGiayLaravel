@@ -13,27 +13,29 @@
             </div>
         </div>
 
-        <div class="font-bold text-[25px] bg-red-600 w-full grid place-items-center text-white mb-[20px] my-4">
-            CÁC SẢN PHẨM NỔI BẬT CỦA SHOP
+        <div class="font-bold text-[22px] bg-red-600 w-full flex justify-center text-white mb-[20px] my-4">         
+            <span class="pr-2"><i class="fa-solid fa-heart"></i></span>
+            CÁC SẢN PHẨM NỔI BẬT CỦA SHOP          
+            <span class="pl-2"><i class="fa-solid fa-heart"></i></span>
         </div>
 
         <div class="grid grid-cols-4 gap-x-4 gap-y-4 w-[1192px] ">
             @foreach ($spp as $item)
-                @if ($item->featured == '1')
+                @if ($item->featured == "1")
                     <div
                         class="border border-gray-200 rounded-lg p-4 shadow-md hover:shadow-lg transition-transform transform hover:-translate-y-1 bg-white">
                         <div
                             class="bg-red-500 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-3">
                             {{ $item->discount }} %
                         </div>
-                        <a href="{{ route('product.detail', ['id' => $item->slug]) }}" class="block mb-3">
+                        <a href="{{ route('product.detail', ['slug' => $item->slug]) }}" class="block mb-3">
 
                             @if ($item->images->isNotEmpty())
                                 <img src="{{ asset('storage/' . $item->images->first()->file_image_url) }}"
                                     alt="{{ $item->product_name }}" class="w-full h-full object-cover">
                             @endif
                         </a>
-                        <a href="{{ route('product.detail', ['id' => $item->slug]) }}"
+                        <a href="{{ route('product.detail', ['slug' => $item->slug]) }}"
                             class="text-gray-900 font-bold hover:text-red-500">
                             {{ $item->product_name }}
                         </a>
@@ -45,9 +47,12 @@
                                 @endif
                             @endforeach
                         </p>
-                        <p class="text-gray-900 font-bold text-lg mt-2">
-                            {{ number_format($item->price, 0, ',', '.') }} VND
-                        </p>
+                        <span class="line-through text-gray-500">
+                            {{ number_format($item->price, 0, ',', '.') }}đ
+                        </span>
+                        <span class="font-bold ml-2">
+                            {{ number_format($item->price * (1 - $item->discount / 100), 0, ',', '.') }}đ
+                        </span>
                     </div>
                 @endif
             @endforeach
@@ -122,8 +127,10 @@
             </div>
         </div>
 
-        <div class="font-bold text-[25px] bg-red-600 w-full grid place-items-center text-white mb-[20px] my-4">
-            THƯƠNG HIỆU
+        <div class="font-bold text-[22px] bg-red-600 w-full flex justify-center text-white mb-[20px] my-4">         
+            <span class="pr-2"><i class="fa-solid fa-heart"></i></span>
+            THƯƠNG HIỆU          
+            <span class="pl-2"><i class="fa-solid fa-heart"></i></span>
         </div>
         <div class="brand">
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">

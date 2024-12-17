@@ -88,12 +88,17 @@ class loginClientController extends Controller
 
         if (!$user) {
             toastr()->error('Email hoặc mật khẩu không chính xác');
-            return back()->withInput();
+            return back();
+        }
+
+        if ($user->user_status == 'inactive') {
+            toastr()->error('Tài khoản đã bị khóa');
+            return back();
         }
 
         if (!Hash::check($user_password, $user->user_password)) {
             toastr()->error('Mật khẩu không chính xác');
-            return back()->withInput();
+            return back();
         }
 
         // lưu info vào sesion

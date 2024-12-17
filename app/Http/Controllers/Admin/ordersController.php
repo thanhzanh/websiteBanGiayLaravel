@@ -112,7 +112,8 @@ class ordersController extends Controller
         $products = Product::all();
 
         // phuong thuc giao dich
-        $transaction = Transaction::where('order_id', $order->order_id)->first();
+        $transaction = DB::table('transaction')->where('order_id', $order->order_id)->first();
+        // dd($transaction);
 
         return view('admin.pages.order.detail', compact('orderItem', 'order', 'userAddress', 'products', 'transaction'));
     }

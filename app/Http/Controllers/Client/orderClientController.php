@@ -24,18 +24,34 @@ class orderClientController extends Controller
     public function checkout(Request $request)
     {
         $infoUser = session('infoUser');
-        $addresses = UserAddress::where('user_id', $infoUser->user_id)->get();
-
-        $defaultAddress = UserAddress::where('user_id', $infoUser->user_id)->where('is_default', true)->first(); // Lấy địa chỉ mặc định của người dùng
 
         $sessionId = $request->session()->getId();
 
         // lấy sản phẩm giỏ hàng để thanh toán
-        if ($infoUser) {
-            $cart = Cart::where(['user_id' => $infoUser->user_id, 'session_id' => null])->first();
-        } else {
-            $cart = Cart::where(['user_id' => null, 'session_id' => $sessionId])->first();
+        if (!$infoUser) {
+            
+            $cart = Cart::where(['session_id' => $sessionId])->first();
+            // nếu giỏ hàng không có sản phẩm
+            if (!$cart) {
+                toastr()->info('Giỏ hàng trống. Vui lòng thêm sản phẩm');
+                return redirect()->route('product');
+            }
+            toastr()->info('Bạn cần phải đăng nhập để tiến hành thanh toán');
+            return redirect()->route('account.login');
+            
         }
+
+        // chuyển sản phẩm từ giỏ hàng có session sang user
+        $this->transferSessionCartToUser($sessionId, $infoUser->user_id);
+        // end
+
+        $addresses = UserAddress::where('user_id', $infoUser->user_id)->get();
+
+        $defaultAddress = UserAddress::where('user_id', $infoUser->user_id)->where('is_default', true)->first(); // Lấy địa chỉ mặc định của người dùng
+
+        // giỏ hàng gắn với user_id người dùng
+        $cart = Cart::where('user_id', $infoUser->user_id)->first();
+
         $cartItem = CartItem::where('cart_id', $cart->cart_id)->get();
 
         $products = Product::all();
@@ -51,6 +67,47 @@ class orderClientController extends Controller
         }
 
         return view('client.pages.cart.check-out', compact('addresses', 'defaultAddress', 'cartItem', 'products', 'total'));
+    }
+
+    public function transferSessionCartToUser($sessionId, $userId) {
+        // tìm giỏ hàng
+        $sessionIdCart = Cart::where('session_id', $sessionId)->first();
+
+        if ($sessionIdCart) {
+
+            // tìm giỏ hàng
+            $cart = Cart::firstOrCreate(['user_id' => $userId, 'session_id' => null]);
+
+            // chuyển sang phẩm từ session cart sang user cart
+            $sessionCartItems = CartItem::where('cart_id', $sessionIdCart->cart_id)->get();
+
+            // dd($cart, $sessionIdCart, $cartItems);
+
+            foreach ($sessionCartItems as $item)
+            {
+                // $priceNew = $product->price - ($product->price * ($product->discount) / 100);
+
+                $productExistingItem = CartItem::where('cart_id', $cart->cart_id)
+                                                ->where('product_id', $item->product_id)
+                                                ->where('size_id', $item->size_id)->first();
+
+                if ($productExistingItem) {
+                    $productExistingItem->quantity += $item->quantity;
+                    $productExistingItem->save();
+                } else {
+                    // Tạo mới CartDetail
+                    CartItem::create([
+                        'cart_id' => $cart->cart_id,
+                        'product_id' => $item->product_id,
+                        'size_id' => is_object($item->size) ? $item->size->size_id : $item->size,
+                        'quantity' => $item->quantity,
+                        'price' => $item->price
+                    ]);
+                }
+            }
+            // xóa session sau khi chuyển
+            $sessionIdCart->delete();
+        }
     }
 
     public function createOrder(Request $request)
@@ -102,7 +159,6 @@ class orderClientController extends Controller
 
             // Xử lý trạng thái thanh toán
             if ($payment_method === 'cod') {
-                $order->update(['status' => 'completed']);
                 $order->updated_at = now();
 
                 Transaction::create([
@@ -161,8 +217,6 @@ class orderClientController extends Controller
         $products = Product::all();
 
         $transaction = DB::table('transaction')->where('order_id', $order->order_id)->get();
-
-        // dd($transactions);
 
         return view('client.pages.order.detail', compact('order', 'products', 'transaction', 'userAddress'));
     }

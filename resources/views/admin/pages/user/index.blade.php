@@ -49,9 +49,9 @@
                                 @csrf
                                 @method('PATCH')
                                 <?php if ($item->user_status === "active") { ?>
-                                    <button class="button-change-status p-2 bg-green-500 rounded-xl text-white" type="submit">{{$item->user_status}}</button>
+                                    <button class="button-change-status p-2 bg-green-500 rounded-xl text-white" type="submit">{{$item->user_status == 'active' ? 'Hoạt động' : 'Dừng hoạt động'}}</button>
                                 <?php } elseif ($item->user_status === "inactive") { ?>
-                                    <button data-id="{{ $item->user_id }}" data-status="{{ $item->user_status }}" class="button-change-status p-2 bg-red-500 rounded-xl text-white" type="submit">{{$item->user_status}}</button>
+                                    <button data-id="{{ $item->user_id }}" data-status="{{ $item->user_status }}" class="button-change-status p-2 bg-red-500 rounded-xl text-white" type="submit">{{$item->user_status == 'inactive' ? 'Dừng hoạt động' : 'Hoạt động'}}</button>
                                 <?php } ?>
                             </form>
                         </td>

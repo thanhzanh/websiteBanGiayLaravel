@@ -4,7 +4,7 @@
             <div class="container flex justify-between">
                 <div class="text-center text-[14px] py-2">
                     <i class="fa-solid fa-phone"></i>
-                    <strong>Hotline: 0903.150.443</strong>
+                    <strong>Hotline: 0903.555.444</strong>
                 </div>
                 @if (session('infoUser'))
                     <div class="flex mr-2 leading-[40px]">
