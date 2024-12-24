@@ -4,9 +4,10 @@
 @section('title', 'Trang Sản Phẩm')
 
 @section('content')
-    <div class="container pt-[20px]">
+    <div class="pt-[20px]">
         <div class="align-middle text-[30px] text-blue-900 font-bold flex justify-center">Sản Phẩm</div>
         <div class="flex">
+            
             <div class="w-1/3 p-4">
                 <div>
                     <div class="align-middle flex justify-center font-bold mb-4 text-[25px]">Thương Hiệu</div>
@@ -17,14 +18,14 @@
                                 <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/Adidas-Saigon-Sneaker.png"
                                     alt="Adidas" class="max-w-[70px] h-auto">
                             </a>
-                            <a href="{{ route('products.filterByCategory', ['slug' => 4]) }}"
+                            <a href="{{ route('products.filterByCategory', ['slug' => 3]) }}"
                                 class="bg-white rounded-lg m-1 shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
                                 <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/Nike-Saigon-Sneaker.png"
                                     alt="Nike" class="max-w-[70px] h-auto">
                             </a>
                         </div>
                         <div class="align-middle flex justify-center">
-                            <a href="{{ route('products.filterByCategory', ['slug' => 5]) }}"
+                            <a href="{{ route('products.filterByCategory', ['slug' => 17]) }}"
                                 class="bg-white rounded-lg m-1 shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
                                 <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/Vans-Saigon-Sneaker.png.webp"
                                     alt="Vans" class="max-w-[70px] h-auto">
@@ -36,12 +37,12 @@
                             </a>
                         </div>
                         <div class="align-middle flex justify-center">
-                            <a href="{{ route('products.filterByCategory', ['slug' => 6]) }}"
+                            <a href="{{ route('products.filterByCategory', ['slug' => 18]) }}"
                                 class="bg-white rounded-lg m-1 shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
-<img src="https://saigonsneaker.com/wp-content/uploads/2020/05/McQueen-Saigon-Sneaker.png.webp"
+                                <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/McQueen-Saigon-Sneaker.png.webp"
                                     alt="McQueen" class="max-w-[70px] h-auto">
                             </a>
-                            <a href="{{ route('products.filterByCategory', ['slug' => 2]) }}"
+                            <a href="{{ route('products.filterByCategory', ['slug' => 8]) }}"
                                 class="bg-white rounded-lg m-1 shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
                                 <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/Balenciaga-Saigon-Sneaker.png.webp"
                                     alt="Balenciaga" class="max-w-[70px] h-auto">
@@ -82,7 +83,7 @@
                             <span class="font-bold text-center">200 - 500</span>
                         </a>
                         <a href="{{ route('products.filterByPrice', ['min' => 500, 'max' => 1000]) }}"
-class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center w-[50%] h-[80px]">
+                            class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center w-[50%] h-[80px]">
                             <span class="font-bold text-center">500 - 1tr</span>
                         </a>
                         <a href="{{ route('products.filterByPrice', ['min' => 1000, 'max' => 2000]) }}"
@@ -131,7 +132,7 @@ class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 fl
                         <select name="brand" id="brand">
                             <option value="">Tất cả</option>
                             @foreach ($brands as $brand)
-<option value="{{ $brand->id }}"
+                                <option value="{{ $brand->id }}"
                                     {{ request('brand') == $brand->id ? 'selected' : '' }}>
                                     {{ $brand->name }}
                                 </option>
@@ -181,7 +182,7 @@ class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 fl
                 <!-- Hiển thị sản phẩm -->
                 <div class="grid grid-cols-4 gap-4">
                     @foreach ($products as $item)
-<div class="product-item">
+                        <div class="product-item">
                             <!-- Hiển thị thông tin sản phẩm -->
                             <p>{{ $item->product_name }}</p>
                             <p>{{ number_format($item->price, 0, ',', '.') }} VND</p>
@@ -234,7 +235,7 @@ class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 fl
                         @endif
                     @endforeach
                 </div>
-</div>
+            </div>
 
             <script>
                 function handleSortChange(value) {
@@ -250,6 +251,30 @@ class="bg-white rounded-lg shadow hover:shadow-lg transition duration-300 p-4 fl
 
 
         </div>
+    </div>
+    <div class="mt-4 flex justify-center items-center space-x-4 my-5">
+        @if ($data->onFirstPage())
+            <button disabled class="bg-gray-300 text-gray-600 px-4 py-2 rounded-lg">Trước</button>
+        @else
+            <a href="{{ $data->previousPageUrl() }}"
+                class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300">Trước</a>
+        @endif
+
+        @for ($i = 1; $i <= $data->lastPage(); $i++)
+            @if ($i == $data->currentPage())
+                <button class="bg-blue-500 text-white px-4 py-2 rounded-lg">{{ $i }}</button>
+            @else
+                <a href="{{ $data->url($i) }}"
+                    class="bg-gray-300 text-gray-600 px-4 py-2 rounded-lg hover:bg-gray-400 transition duration-300">{{ $i }}</a>
+            @endif
+        @endfor
+
+        @if ($data->hasMorePages())
+            <a href="{{ $data->nextPageUrl() }}"
+                class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300">Sau</a>
+        @else
+            <button disabled class="bg-gray-300 text-gray-600 px-4 py-2 rounded-lg">Sau</button>
+        @endif
     </div>
     </div>
     <button id="scrollButton"

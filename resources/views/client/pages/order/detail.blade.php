@@ -4,11 +4,11 @@
 
 @section('content')
 
-    <div class="max-w-[1280px] mx-auto p-6 mt-8 mb-8">
+    <div class="max-w-[1280px] mx-auto p-6 mt-8 mb-8 inner-order">
         <h2 class="text-xl font-bold mb-6 uppercase text-gray-500 bg-slate-100 pt-2 pb-2 pl-2">Chi tiết đơn hàng</h2>
         @if ($order)
             <div class="bg-white shadow rounded-lg mt-10">
-                <div class="flex justify-between mt-4 border">
+                <div class="flex justify-between mt-4 border inner-order-code">
                     <p class="pr-4 pt-4 pb-2 pl-6">Mã đơn hàng: <span class="text-[18px] font-bold">{{ $order->code }}</span>
                     </p>
                     @if ($order->status == 'pending')
@@ -33,11 +33,11 @@
 
                 </div>
 
-                <div class="flex border-b mt-6 mb-6 pt-6 pb-6">
+                <div class="flex border-b mt-6 mb-6 pt-6 pb-6 inner-order-info">
                     @foreach ($order->items as $item)
                         @foreach ($products as $product)
                             @if ($product->product_id == $item->product_id)
-                                <div class="w-[120px] h-[120px] mr-8 border ml-6">
+                                <div class="w-[120px] h-[120px] mr-8 border ml-6 inner-order-info-img">
                                     <a href="{{ route('order.detail', ['id' => $order->order_id]) }}">
                                         <img class="w-auto"
                                             src="{{ asset('storage/' . $product->images->first()->file_image_url) }}"
@@ -58,7 +58,7 @@
                         @endforeach
                     @endforeach
                 </div>
-                <div class="flex justify-between pb-2 pr-4 text-[16px]">
+                <div class="flex justify-between pb-2 pr-4 text-[16px] inner-order-date">
                     <div class="pl-6">
                         <p>Ngày đặt hàng: {{ $order->created_at }}</p>
                     </div>
@@ -68,7 +68,7 @@
                             {{ number_format($item->total, 0, ',', '.') }}đ</span>
                     </div>
                 </div>
-                <div class="flex pb-4 pr-4 text-[16px]">
+                <div class="flex pb-4 pr-4 text-[16px] inner-order-date">
                     <div class="pl-6">
                         <p>Phương thức thanh toán:</p>
                     </div>
@@ -80,9 +80,6 @@
                                 {{ $item->payment_method == 'cod' ? 'Thanh toán khi nhận hàng' : 'Chuyển khoản ngân hàng' }}</span>
                         @endif
                     </div>
-                </div>
-                <div class="flex justify-end">
-                    <button class="px-5 py-3 text-white hover:bg-gray-300 hover:text-black bg-red-600 mr-4 mb-4 text-[18px]" type="submit">Hủy đơn hàng</button>
                 </div>
             </div>
         @else

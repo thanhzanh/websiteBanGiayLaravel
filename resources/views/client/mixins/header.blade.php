@@ -1,13 +1,13 @@
 <header>
     <div class="main-header">
         <div class="header-contact max-w-screen-xl mx-auto">
-            <div class="container flex justify-between">
-                <div class="text-center text-[14px] py-2">
+            <div class="flex justify-between inner-contact">
+                <div class="text-center text-[14px] py-2 inner-contact-item1">
                     <i class="fa-solid fa-phone"></i>
                     <strong>Hotline: 0903.555.444</strong>
                 </div>
                 @if (session('infoUser'))
-                    <div class="flex mr-2 leading-[40px]">
+                    <div class="flex mr-2 leading-[40px] inner-contact-item2">
                         <div class="relative">
                             <div class="flex items-center cursor-pointer toggle-menu">
                                 <p class="text-[18px] font-serif">{{ session('infoUser')->user_name }}</p>
@@ -17,7 +17,7 @@
                             </div>
                             <!-- Menu thả xuống -->
                             <ul
-                                class="absolute bg-slate-50 text-black shadow-lg hidden mt-2 w-[180px] menu-dropdown transition-opacity duration-300 z-[999] top-[32px] right-0">
+                                class="absolute bg-slate-50 text-black shadow-lg hidden mt-2 w-[180px] transition-opacity duration-300 z-[999] top-[32px] right-0 menu-dropdown">
                                 <li>
                                     <a href="{{ route('account.profile') }}" class="block px-4 py-2 hover:bg-gray-100">
                                         <i class="fa-solid fa-pen"></i>
@@ -25,7 +25,8 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('account.addresses.index') }}" class="block px-4 py-2 hover:bg-gray-100">
+                                    <a href="{{ route('account.addresses.index') }}"
+                                        class="block px-4 py-2 hover:bg-gray-100">
                                         <i class="fa-solid fa-landmark"></i>
                                         Địa chỉ
                                     </a>
@@ -55,7 +56,10 @@
         </div>
         <div class="header-general bg-[rgba(13,13,13,1)]">
             <div class="header-general-main max-w-screen-xl mx-auto flex flex-wrap justify-between">
-                <div class="inner-logo my-auto">
+                <div class="lg:hidden text-center basis-1/6 inner-menu-bar">
+                    <p class="text-white text-[24px]"><i class="fa-solid fa-bars"></i></p>
+                </div>
+                <div class="inner-logo my-auto md:pl-6">
                     <img src="https://saigonsneaker.com/wp-content/uploads/2022/02/new-logo-ss-2021-1-150x63.png.avif"
                         alt="logo">
                 </div>
@@ -72,9 +76,8 @@
                 </div>
 
                 <div class="inner-user-cart text-white flex justify-end my-auto px-6 items-center">
-                    
+
                     @if (session('infoUser'))
-                        
                     @else
                         <div title="Đăng nhập & đăng ký" class="my-account h-auto p-4 mx-2">
                             <a class="text-3xl" href="{{ route('account.login') }}"><i class="fa-solid fa-user"></i></a>
@@ -84,37 +87,36 @@
                         <a class="text-3xl" href="{{ route('cart.index') }}">
                             <i class="fa-solid fa-cart-shopping"></i>
                         </a>
-                        <p
-                            class="absolute right-0 top-0 bg-white text-black font-bold rounded-[40px] m-[-2px] px-[10px]">
+                        <p class="absolute right-0 top-0 bg-white text-black font-bold rounded-[40px] px-[10px]">
                             {{ $countProduct }}
                         </p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="header-nav bg-[rgba(13,13,13,1)] h-[50px] flex items-center justify-center">
-            <nav>
-                <ul class="flex px-4 py-2">
+        <div class="header-nav bg-[rgba(13,13,13,1)] h-[50px]">
+            <nav class="">
+                <ul class="flex px-4 py-2 items-center justify-center lg:flex-wrap inner-menu-dropdown">
                     <li class="py-2 px-4">
                         <a href="{{ route('home') }}"
-                            class="text-white font-normal uppercase text-base rounded-lg transition duration-300">
+                            class="text-white font-bold uppercase text-base rounded-lg transition duration-300">
                             Trang chủ
                         </a>
                     </li>
                     <li class="py-2 px-4">
                         <a href="{{ route('gioithieu') }}"
-                            class="text-white font-normal uppercase text-base rounded-lg transition duration-300">
+                            class="text-white font-bold uppercase text-base rounded-lg transition duration-300">
                             Giới thiệu
                         </a>
                     </li>
                     <li class="relative group py-2 px-4">
                         <a href="{{ route('product') }}"
-                            class="text-white font-normal uppercase text-base rounded-lg transition duration-300">
+                            class="text-white font-bold uppercase text-base rounded-lg transition duration-300">
                             Sản phẩm
                             <i class="fa-solid fa-chevron-down"></i>
                         </a>
                         <!-- Menu cấp 2 (Danh mục con) -->
-                        <ul class="absolute left-0 mt-[10px] w-[200px] bg-white shadow-lg z-10 border-b border-gray-300 hidden group-hover:block">
+                        {{-- <ul class="absolute left-0 mt-[10px] w-[200px] bg-white shadow-lg z-10 border-b border-gray-300 hidden group-hover:block">
                             @foreach ($categories as $category)
                                 <li class="relative group">
                                     <a href=""
@@ -150,29 +152,64 @@
                                     @endif
                                 </li>
                             @endforeach
+                        </ul> --}}
+                        <ul
+                            class="child-product absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-lg z-10 border border-gray-300 hidden group-hover:block">
+                            <li class="relative">
+                                <a href="{{ route('products.filterByCategory', ['slug' => 1]) }}"
+                                    class="block px-4 py-2 text-gray-800 font-semibold hover:bg-gray-100 rounded-lg transition duration-200">
+                                    Adidas
+                                </a>
+                            </li>
+                            <li class="relative">
+                                <a href="{{ route('products.filterByCategory', ['slug' => 3]) }}"
+                                    class="block px-4 py-2 text-gray-800 font-semibold hover:bg-gray-100 rounded-lg transition duration-200">
+                                    Nike
+                                </a>
+                            </li>
+                            <li class="relative">
+                                <a href="{{ route('products.filterByCategory', ['slug' => 17]) }}"
+                                    class="block px-4 py-2 text-gray-800 font-semibold hover:bg-gray-100 rounded-lg transition duration-200">
+                                    Vans
+                                </a>
+                            </li>
+                            <li class="relative">
+                                <a href="{{ route('products.filterByCategory', ['slug' => 7]) }}"
+                                    class="block px-4 py-2 text-gray-800 font-semibold hover:bg-gray-100 rounded-lg transition duration-200">
+                                    Converse
+                                </a>
+                            </li>
+                            <li class="relative">
+                                <a href="{{ route('products.filterByCategory', ['slug' => 18]) }}"
+                                    class="block px-4 py-2 text-gray-800 font-semibold hover:bg-gray-100 rounded-lg transition duration-200">
+                                    Alexander McQueen
+                                </a>
+                            </li>
+                            <li class="relative">
+                                <a href="{{ route('products.filterByCategory', ['slug' => 8]) }}"
+                                    class="block px-4 py-2 text-gray-800 font-semibold hover:bg-gray-100 rounded-lg transition duration-200">
+                                    Balenciaga
+                                </a>
+                            </li>
                         </ul>
                     </li>
-                    
-
-
-
-
-
                     <li class="py-2 px-4">
                         <a href="#"
-                            class="text-white font-normal uppercase text-base rounded-lg transition duration-300">
+                            class="text-white font-bold uppercase text-base rounded-lg transition duration-300">
                             Bài viết
                         </a>
                     </li>
                     <li class="py-2 px-4">
                         <a href="#contact"
-                            class="text-white font-normal uppercase text-base rounded-lg transition duration-300">
+                            class="text-white font-bold uppercase text-base rounded-lg transition duration-300">
                             Liên hệ
                         </a>
                     </li>
                 </ul>
             </nav>
         </div>
+        <div class="menu-overlay hidden fixed inset-0 bg-black bg-opacity-50 z-[998]"></div>
+
     </div>
 </header>
 
@@ -193,5 +230,45 @@
                 dropdownMenu.classList.add('hidden');
             });
         }
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Lấy các phần tử
+        const menuToggle = document.querySelector(".inner-menu-bar");
+        const headerNav = document.querySelector(".header-nav");
+
+        // Xử lý nhấn vào biểu tượng menu
+        menuToggle.addEventListener("click", function() {
+            headerNav.classList.toggle("active");
+        });
+
+        // Đóng menu khi nhấn bên ngoài
+        document.addEventListener("click", function(event) {
+            if (!headerNav.contains(event.target) && !menuToggle.contains(event.target)) {
+                headerNav.classList.remove("active");
+            }
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const dropdownToggles = document.querySelectorAll('.header-nav .relative > a');
+
+        dropdownToggles.forEach(toggle => {
+            toggle.addEventListener('click', function(e) {
+                
+
+                // Đóng tất cả các menu khác
+                const openMenus = document.querySelectorAll('.header-nav .relative.active');
+                openMenus.forEach(menu => {
+                    if (menu !== this.parentElement) {
+                        menu.classList.remove('active');
+                    }
+                });
+
+                // Mở hoặc đóng menu hiện tại
+                const parentLi = this.parentElement;
+                parentLi.classList.toggle('active');
+            });
+        });
     });
 </script>

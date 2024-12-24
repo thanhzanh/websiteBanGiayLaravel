@@ -63,11 +63,14 @@ Route::fallback(function () {
 // Trang Home
 Route::get('/', [homeClientController::class, 'index'])->name('home')->middleware(CheckSessionMiddleware::class);
 
+// //Menu 
+Route::get('/product/category/{slug}', [homeClientController::class, 'filterByCategory'])->name('products.filterByCategory');
+
 //Trang Product
 Route::get('/product', [productClientController::class, 'index'])->name('product')->middleware(CheckSessionMiddleware::class);
 
 //Trang chi tiết sản phẩm
-Route::get('product/{slug}', [productClientController::class, 'detail'])->name('product.detail')->middleware(CheckSessionMiddleware::class);
+Route::get('product/{id}', [productClientController::class, 'detail'])->name('product.detail')->middleware(CheckSessionMiddleware::class);
 
 
 //Trang bài viết
@@ -112,8 +115,7 @@ Route::get('/products/featuredprice', [productClientController::class, 'filterBy
 
 Route::get('/products/filter', [productClientController::class, 'filterByCategoryAndPrice'])->name('products.filterByCategoryAndPrice')->middleware(CheckSessionMiddleware::class);
 
-Route::get('/api/users', [productClientController::class, 'fetchUsers'])->middleware(CheckSessionMiddleware::class);
-
+// Route::get('/api/users', [productClientController::class, 'fetchUsers'])->middleware(CheckSessionMiddleware::class);
 
 // ========================= account(user) ===========================
 

@@ -3,10 +3,16 @@
 @section('title', 'Trang Sản Phẩm')
 
 @section('content')
-    <div class="container pt-[20px]">
+    <div class="pt-[20px] inner-product-container">
         <div class="align-middle text-[30px] text-blue-900 font-bold flex justify-center">Sản Phẩm</div>
         <div class="flex">
-            <div class="w-1/3 p-4">
+            <!-- Icon mở menu -->
+            <div class="filter-toggle">
+                Bộ lọc
+                <i class="fa-solid fa-filter"></i>
+            </div>
+
+            <div class="w-1/3 p-4 inner-filter">
                 <div>
                     <div class="align-middle flex justify-center font-bold mb-4 text-[25px]">Thương Hiệu</div>
                     <div class="img">
@@ -16,14 +22,14 @@
                                 <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/Adidas-Saigon-Sneaker.png"
                                     alt="Adidas" class="max-w-[70px] h-auto">
                             </a>
-                            <a href="{{ route('products.filterByCategory', ['slug' => 4]) }}"
+                            <a href="{{ route('products.filterByCategory', ['slug' => 3]) }}"
                                 class="bg-white rounded-lg m-1 shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
                                 <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/Nike-Saigon-Sneaker.png"
                                     alt="Nike" class="max-w-[70px] h-auto">
                             </a>
                         </div>
                         <div class="align-middle flex justify-center">
-                            <a href="{{ route('products.filterByCategory', ['slug' => 5]) }}"
+                            <a href="{{ route('products.filterByCategory', ['slug' => 17]) }}"
                                 class="bg-white rounded-lg m-1 shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
                                 <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/Vans-Saigon-Sneaker.png.webp"
                                     alt="Vans" class="max-w-[70px] h-auto">
@@ -35,12 +41,12 @@
                             </a>
                         </div>
                         <div class="align-middle flex justify-center">
-                            <a href="{{ route('products.filterByCategory', ['slug' => 6]) }}"
+                            <a href="{{ route('products.filterByCategory', ['slug' => 18]) }}"
                                 class="bg-white rounded-lg m-1 shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
                                 <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/McQueen-Saigon-Sneaker.png.webp"
                                     alt="McQueen" class="max-w-[70px] h-auto">
                             </a>
-                            <a href="{{ route('products.filterByCategory', ['slug' => 2]) }}"
+                            <a href="{{ route('products.filterByCategory', ['slug' => 8]) }}"
                                 class="bg-white rounded-lg m-1 shadow hover:shadow-lg transition duration-300 p-4 flex items-center justify-center">
                                 <img src="https://saigonsneaker.com/wp-content/uploads/2020/05/Balenciaga-Saigon-Sneaker.png.webp"
                                     alt="Balenciaga" class="max-w-[70px] h-auto">
@@ -95,16 +101,15 @@
                     </div>
                 </div>
 
-
             </div>
 
-            <div class="w-2/3 p-4">
+            <div class="w-2/3 p-4 inner-product-main">
                 <div class="flex">
-                    <div class="w-1/2 px-4">
+                    <div class="w-1/2 px-4 inner-product-link">
                         <a href="{{ route('home') }}">Trang Chủ /</a>
                         <a href="{{ route('product') }}">Sản Phẩm</a>
                     </div>
-                    <div class="w-1/2 justify-end flex pr-[90px]">
+                    <div class="w-1/2 justify-end flex pr-[90px] inner-product-filter-status">
                         <div class="relative inline-block">
                             <select id="sort"
                                 class="mt-1 block w-[150px] h-[30px] bg-white border text-[20px] border-gray-300 font-bold rounded focus:outline-none focus:ring focus:ring-gray-400"
@@ -121,19 +126,19 @@
                     </div>
                 </div>
 
-
                 <br>
 
-                <div class="grid grid-cols-4 gap-4">
+                <div class="grid grid-cols-4 gap-4 inner-product">
                     @foreach ($data as $item)
                         @if ($item->status == 'active')
-                            <div class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4">
+                            <div
+                                class="max-w-[220px] max-h-[400px] border border-gray-300 rounded-lg p-4 inner-product-item">
                                 <div
                                     class="bg-red-500 text-white text-xs font-bold px-2 py-1 inline-block rounded-tl-md rounded-br-md mb-2 justify-between">
                                     <span>{{ $item->discount }}%</span>
                                 </div>
                                 <div>
-                                    <a href="{{ route('product.detail', ['slug' => $item->slug]) }}">
+                                    <a href="{{ route('product.detail', ['id' => $item->slug]) }}">
                                         <div class="w-auto h-[186px]">
                                             @if ($item->images->isNotEmpty())
                                                 <img class="w-auto "
@@ -205,10 +210,6 @@
         </div>
 
 
-
-
-
-
     </div>
 
     <button id="scrollButton"
@@ -225,33 +226,33 @@
             });
         });
 
+        document.addEventListener("DOMContentLoaded", function() {
+            // Lấy icon toggle và menu
+            const filterToggle = document.querySelector(".filter-toggle");
+            const innerFilter = document.querySelector(".inner-filter");
 
+            // Kiểm tra nếu các phần tử tồn tại
+            if (filterToggle && innerFilter) {
+                // Thêm sự kiện click vào icon toggle
+                filterToggle.addEventListener("click", function() {
+                    // Kiểm tra trạng thái và hiển thị/hủy hiển thị menu
+                    if (innerFilter.classList.contains("active")) {
+                        innerFilter.classList.remove("active");
+                        setTimeout(() => {
+                            innerFilter.style.display = "none"; // Ẩn sau khi chuyển động xong
+                        }, 300); // Thời gian khớp với transition
+                    } else {
+                        innerFilter.style.display = "block"; // Hiển thị trước khi thêm hiệu ứng
+                        setTimeout(() => {
+                            innerFilter.classList.add("active");
+                        }, 10); // Chờ một chút để CSS áp dụng
+                    }
 
-        async function fetchProducts(page = 1) {
-            const response = await fetch(`/api/products?page=${page}`);
-            const data = await response.json();
-
-            // Render sản phẩm
-            const productList = document.getElementById('product-list');
-            productList.innerHTML = data.data.map(item => `
-            <div class="max-w-[220px] border border-gray-300 rounded-lg p-4">
-                <img src="/storage/${item.image}" alt="${item.product_name}" class="w-auto h-40 object-cover">
-                <p class="mt-2 text-[17px] italic">${item.product_name}</p>
-                <span>${item.price}đ</span>
-            </div>
-        `).join('');
-
-            // Render phân trang
-            const pagination = document.getElementById('pagination');
-            pagination.innerHTML = `
-            <button ${!data.prev_page_url ? 'disabled' : ''} onclick="fetchProducts(${data.current_page - 1})">Lùi</button>
-            <span>Trang ${data.current_page} / ${data.last_page}</span>
-            <button ${!data.next_page_url ? 'disabled' : ''} onclick="fetchProducts(${data.current_page + 1})">Tới</button>
-        `;
-        }
-
-        // Gọi hàm khi trang tải
-        fetchProducts();
+                    // Đổi trạng thái icon toggle
+                    filterToggle.classList.toggle("open");
+                });
+            }
+        });
     </script>
 
 

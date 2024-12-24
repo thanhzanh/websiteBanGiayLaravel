@@ -21,83 +21,71 @@
             <!-- Khi giỏ hàng có sản phẩm -->
             <div class="bg-white rounded-lg shadow-md p-6">
                 <h2 class="text-xl font-semibold mb-4">Giỏ Hàng</h2>
-                <table class="table-auto w-full border-collapse border border-gray-200">
-                    <thead>
+                <table class="table-auto w-full border-collapse border border-gray-200 inner-table">
+                    <thead class="inner-cart-title">
                         <tr class="bg-gray-100">
-                            <th class="py-2 border border-gray-200 text-center">
-                                <input class="w-3 h-3" style="transform: scale(1.5)" type="checkbox" name="chooseAddCart" id="">
-                            </th>
-                            <th class="px-4 py-2 border border-gray-200 text-left">Sản Phẩm</th>
-                            <th class="px-4 py-2 border border-gray-200 text-center">Giá</th>
-                            <th class="px-4 py-2 border border-gray-200 text-center">Số Lượng</th>
-                            <th class="px-4 py-2 border border-gray-200 text-center">Tạm Tính</th>
-                            <th class="px-4 py-2 border border-gray-200 text-center"> Xóa </th>
+                            <th class="inner-cart-title-item px-4 py-2 border border-gray-200 text-left">Sản Phẩm</th>
+                            <th class="inner-cart-title-item px-4 py-2 border border-gray-200 text-center">Giá</th>
+                            <th class="inner-cart-title-item px-4 py-2 border border-gray-200 text-center">Số Lượng</th>
+                            <th class="inner-cart-title-item px-4 py-2 border border-gray-200 text-center">Tạm Tính</th>
+                            <th class="inner-cart-title-item px-4 py-2 border border-gray-200 text-center"> Xóa </th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @if ($cartItems)
+                    <tbody class="inner-cart-info">
                         @foreach ($cartItems as $product)
-                        <tr>
-                            <td class="px-4 py-2 border border-gray-200 text-center">
-                                <input class="w-3 h-3" style="transform: scale(1.5)" type="checkbox" name="chooseAddCart" id="">
-                            </td>
-                            <td class="px-4 py-2 border border-gray-200 flex items-center">
-                                @foreach ($products as $item)
-                                    @if ($product->product_id == $item->product_id)
-                                        <div class="w-[120px] h-[120px] mr-8">
-                                            <a href="{{ route('product.detail', ['slug' => $item->slug]) }}">
-                                                <img class="w-auto"
-                                                    src="{{ asset('storage/' . $item->images->first()->file_image_url) }}"
-                                                    alt="{{ $item->product_name }}" class="w-auto h-40 object-cover">
-                                            </a>
-                                        </div>
-                                        <div class="block">
-                                            <span>{{ $item->product_name }}</span> <br>
-                                            Size: 
-                                            @foreach ($sizes as $size)
-                                                @if ($size->size_id == $product->size_id)
-                                                    <span class="font-bold">{{ $size->size_name }}</span>
-                                                @endif
-                                            @endforeach
-                                        </div>
-                                    @endif
-                                @endforeach
-                            </td>
-                            <td class="px-4 py-2 border border-gray-200 text-center">
-                                <span class="font-bold">{{ number_format($product->price, 0, ',', '.') }} VND</span>
-                            </td>
-                            <td class="px-4 py-2 border border-gray-200 text-center">
-                                <div class="flex items-center justify-center">
+                            <tr>
+                                <td>
+                                    <div class="flex items-center">
+                                        @foreach ($products as $item)
+                                            @if ($product->product_id == $item->product_id)
+                                                <div class="w-[120px] h-[120px] mr-4 inner-cart-img">
+                                                    <a href="{{ route('product.detail', ['id' => $item->slug]) }}">
+                                                        <img src="{{ asset('storage/' . $item->images->first()->file_image_url) }}"
+                                                            alt="{{ $item->product_name }}">
+                                                    </a>
+                                                </div>
+                                                <div>
+                                                    <span>{{ $item->product_name }}</span><br>
+                                                    Size:
+                                                    @foreach ($sizes as $size)
+                                                        @if ($size->size_id == $product->size_id)
+                                                            <span class="font-bold">{{ $size->size_name }}</span>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </td>
+                                <td data-label="Giá">
+                                    <span class="font-bold">{{ number_format($product->price, 0, ',', '.') }} VND</span>
+                                </td>
+                                <td data-label="Số Lượng">
                                     <input name="quantityCart" product-id="{{ $product->product_id }}" type="number"
                                         class="w-12 text-center border border-gray-300 rounded-md mx-2" min="1"
                                         value="{{ $product->quantity }}">
-                                </div>
-                            </td>
-                            <td class="px-4 py-2 border border-gray-200 text-center">
-                                <span
-                                    class="font-bold">{{ number_format($product->price * $product->quantity, 0, ',', '.') }} VND</span>
-                            </td>
-                            <td class="px-4 py-2 border border-gray-200 text-center">
-                                <div class="inline-block">
+                                </td>
+                                <td data-label="Tạm Tính">
+                                    <span
+                                        class="font-bold">{{ number_format($product->price * $product->quantity, 0, ',', '.') }}
+                                        VND</span>
+                                </td>
+                                <td data-label="Xóa">
                                     <form action="{{ route('cart.delete', ['id' => $product->id]) }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button title="Xóa"
+                                        <button
                                             class="px-3 py-[0.3rem] bg-red-500 text-[1rem] font-bold text-white rounded-2xl hover:bg-black">
                                             <i class="fa-solid fa-minus"></i>
                                         </button>
                                     </form>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
-                        @else
-                            <h1>Chua co san pham trong gio hang</h1>
-                        @endif
-                        
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
+
                 </table>
-                <div class="flex justify-between mt-4">
+                <div class="flex justify-between mt-4 inner-button-tam-tinh">
                     <button
                         class="text-gray-700 border border-gray-400 px-4 py-2 rounded-lg hover:bg-black hover:text-white">
                         <a href="{{ route('product') }}">

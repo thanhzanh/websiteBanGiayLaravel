@@ -3,8 +3,8 @@
 @section('title', 'Địa chỉ')
 
 @section('content')
-    <div class="max-w-[1280px] mx-auto p-6 mt-6 mb-6">
-        <div class="flex justify-between">
+    <div class="max-w-[1280px] mx-auto p-6 mt-6 mb-6 inner-address">
+        <div class="flex justify-between inner-title-address">
             <h1 class="text-2xl font-bold mb-4">Quản Lý Địa Chỉ</h1>
             <button class="bg-black text-white right-0 px-4 py-2 rounded hover:bg-white hover:text-black mb-4"
                 data-modal-toggle="addressModal">+ Thêm địa chỉ mới</button>

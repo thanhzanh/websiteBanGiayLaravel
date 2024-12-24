@@ -1,5 +1,5 @@
 <footer id="contact" class="bg-gray-100">
-    <div class="flex space-x-4">
+    <div class="flex space-x-4 footer-info">
         <div class="flex-1 px-5 text-center">
             <div class="font-bold text-[20px] py-[20px] ">SAIGONSNEAKER.COM</div>
             <div class="text-[18px] pb-1 text-slate-500">Address: 180 Cao Lỗ, Phường 4, Q8, Hồ Chí Minh.</div>
@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <div>
+    <div class="footer-social">
         <div class="justify-center flex space-x-4 pt-9 mb-9">
             <div><a href="#"><i class="fa-brands fa-facebook text-[30px]"></i></a></div>
             <div><a href="#"><i class="fa-brands fa-instagram text-[30px]"></i></a></div>

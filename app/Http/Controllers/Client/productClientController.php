@@ -46,7 +46,9 @@ class productClientController extends Controller
         $tensanpham = $r->tensanpham;
         $sort = $r->input('sort', 'best-seller');
         $data = Product::where('product_name', 'like', "%$tensanpham%")->get();
-        return view('client.pages.product.search', ['product' => $data, 'tensanpham' =>  $r->tensanpham, 'sort' => $sort]);
+        $dta = Product::where('status', 'active')->paginate(12);
+
+        return view('client.pages.product.search', ['product' => $data, 'tensanpham' =>  $r->tensanpham, 'sort' => $sort, 'dta' => $dta]);
     }
 
 
@@ -55,8 +57,11 @@ class productClientController extends Controller
     {
         $sort = $r->input('sort', 'best-seller');
         $categories = ProductCategory::all();
-        $brands = Product::where('product_category_id', $slug)->get();
-        return view('client.pages.Filter.brand', compact('brands', 'categories', 'sort'));
+        // $data = Product::where('status', 'active')->paginate(12);
+        // $brands = Product::where('product_category_id', $slug)->get();
+        $brands = Product::where('product_category_id', $slug)->paginate(12);
+        $data = $brands;
+        return view('client.pages.Filter.brand', compact('brands', 'categories', 'sort', 'data'));
     }
 
 
@@ -65,7 +70,7 @@ class productClientController extends Controller
     {
         $sort = $r->input('sort', 'best-seller');
         $categories = ProductCategory::all();
-        $data = Product::whereBetween('price', [(int)$min * 1000, (int)$max * 1000])->paginate(24);
+        $data = Product::whereBetween('price', [(int)$min * 1000, (int)$max * 1000])->paginate(12);
         return view('client.pages.product.index', compact('data', 'categories', 'sort'));
     }
 
@@ -75,14 +80,17 @@ class productClientController extends Controller
     {
         $sort = $r->input('sort', 'best-seller');
         $categories = ProductCategory::all();
-        $featured = Product::where('featured', $id)->get();
-        return view('client.pages.Filter.featured', compact('featured', 'sort', 'categories'));
+        // $featured = Product::where('featured', $id)->get();
+        // $data = Product::where('status', 'active')->paginate(12);
+        $featured = Product::where('featured', $id)->paginate(12);
+        $data = $featured;
+        return view('client.pages.Filter.featured', compact('featured', 'sort', 'categories', 'data'));
     }
 
 
     public function filterByPriceSort(Request $request)
     {
-        $data = Product::paginate(24);
+        $data = Product::paginate(12);
 
         $sort = $request->input('sort', 'best-seller');
 
@@ -92,19 +100,24 @@ class productClientController extends Controller
 
         switch ($sort) {
             case 'price-asc':
-                $products->orderBy('price', 'asc');
+                $products->selectRaw('*, price * (1 - discount / 100) as final_price')
+                    ->orderBy('final_price', 'asc');
                 break;
+
             case 'price-desc':
-                $products->orderBy('price', 'desc');
+                $products->selectRaw('*, price * (1 - discount / 100) as final_price')
+                    ->orderBy('final_price', 'desc');
                 break;
+
             case 'newest':
                 $products->orderBy('created_at', 'desc');
                 break;
+
             default:
                 $products->orderBy('discount', 'desc');
                 break;
         }
-        $products = $products->paginate(24);
+        $products = $products->paginate(12);
         return view('client.pages.Filter.sort', compact('data', 'products', 'sort', 'categories'));
     }
 
@@ -114,5 +127,41 @@ class productClientController extends Controller
     {
         $products = Product::where('status', 'active')->paginate(12);
         return response()->json($products);
+    }
+
+    public function showCategory(Request $request, $id, $slug)
+    {
+        $category = ProductCategory::findOrFail($id);
+        $categories = ProductCategory::all();
+        $brands = Product::where('product_category_id', $slug)->get();
+        $sort = $request->input('sort', 'best-seller');
+
+        // Truy vấn sản phẩm dựa trên điều kiện
+        $query = Product::where('product_category_id', $id)->with('images');
+
+        switch ($sort) {
+            case 'price-asc':
+                $query->selectRaw('*, price * (1 - discount / 100) as final_price')
+                    ->orderBy('final_price', 'asc');
+                break;
+
+            case 'price-desc':
+                $query->selectRaw('*, price * (1 - discount / 100) as final_price')
+                    ->orderBy('final_price', 'desc');
+                break;
+
+            case 'newest':
+                $query->orderBy('created_at', 'desc');
+                break;
+
+            default:
+                $query->orderBy('discount', 'desc');
+                break;
+        }
+
+        // Lấy dữ liệu sản phẩm sau khi sắp xếp
+        $products = $query->paginate(12);
+
+        return view('client.pages.Filter.brand', compact('products', 'categories', 'category', 'sort', 'brand'));
     }
 }
